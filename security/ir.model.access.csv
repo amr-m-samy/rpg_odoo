@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_game_assets_manager_admin,game.assets.manager.admin,model_game_assets_manager,base.group_user,1,1,1,1
+

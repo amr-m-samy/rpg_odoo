@@ -1,0 +1,641 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="game_asset_01" model="game.assets.manager">
+            <field name="name_key">tiles</field>
+            <field name="asset_type">image</field>
+            <field name="file_path">maps/tilesets/Overworld.png</field>
+            <field name="file"></field>
+        </record>
+
+        <record id="game_asset_02" model="game.assets.manager">
+            <field name="name_key">tiles_overworld</field>
+            <field name="asset_type">image</field>
+            <field name="file_path">maps/tilesets/Overworld-extruded.png</field>
+            <field name="file"></field>
+        </record>
+        
+        <record id="game_asset_03" model="game.assets.manager">
+            <field name="name_key">tutorial_tileset</field>
+            <field name="asset_type">image</field>
+            <field name="file_path">maps/tilesets/tutorial_tileset_extruded.png</field>
+            <field name="file"></field>
+        </record>
+        <record id="game_asset_04" model="game.assets.manager">
+            <field name="name_key">inner</field>
+            <field name="asset_type">image</field>
+            <field name="file_path">maps/tilesets/Inner-extruded.png</field>
+            <field name="file"></field>
+          </record>
+        <record id="game_asset_05" model="game.assets.manager">
+            <field name="name_key">collision_tiles</field>
+            <field name="asset_type">image</field>
+            <field name="file_path">maps/tilesets/collision.png</field>
+            <field name="file"></field>
+        </record>
+        <record id="game_asset_06" model="game.assets.manager">
+            <field name="name_key">player</field>
+            <field name="asset_type">image</field>
+            <field name="file_path">sprites/player.png</field>
+            <field name="file"></field>
+        </record>
+        <record id="game_asset_07" model="game.assets.manager">
+            <field name="name_key">dialog</field>
+            <field name="asset_type">image</field>
+            <field name="file_path">sprites/dialog_paper.png</field>
+            <field name="file"></field>
+        </record>
+        <record id="game_asset_08" model="game.assets.manager">
+            <field name="name_key">space</field>
+            <field name="asset_type">image</field>
+            <field name="file_path">sprites/space.png</field>
+            <field name="file"></field>
+          </record>
+        <record id="game_asset_09" model="game.assets.manager">
+            <field name="name_key">buttonA</field>
+            <field name="asset_type">image</field>
+            <field name="file_path">sprites/buttonA.png</field>
+            <field name="file"></field>
+          </record>
+        
+        <record id="game_asset_10" model="game.assets.manager">
+            <field name="name_key">buttonB</field>
+            <field name="asset_type">image</field>
+            <field name="file_path">sprites/buttonB.png</field>
+            <field name="file"></field>
+          </record>
+        <record id="game_asset_11" model="game.assets.manager">
+            <field name="name_key">question_mark</field>
+            <field name="asset_type">image</field>
+            <field name="file_path">sprites/question_mark.png</field>
+            <field name="file"></field>
+          </record>
+        <record id="game_asset_12" model="game.assets.manager">
+            <field name="name_key">spread</field>
+            <field name="asset_type">image</field>
+            <field name="file_path">sprites/spread.png</field>
+            <field name="file"></field>
+
+
+          </record>
+        <record id="game_asset_13" model="game.assets.manager">
+            <field name="name_key">maximize</field>
+            <field name="asset_type">image</field>
+            <field name="file_path">sprites/maximize.png</field>
+            <field name="file"></field>
+          </record>
+        <record id="game_asset_14" model="game.assets.manager">
+            <field name="name_key">close_button</field>
+            <field name="asset_type">image</field>
+            <field name="file_path">sprites/close_button.png</field>
+            <field name="file"></field>
+          </record>
+        <record id="game_asset_15" model="game.assets.manager">
+            <field name="name_key">logo_phaser</field>
+            <field name="asset_type">image</field>
+            <field name="file_path">sprites/logo.png</field>
+            <field name="file"></field>
+          </record>
+        <record id="game_asset_16" model="game.assets.manager">
+            <field name="name_key">luminus_candle</field>
+            <field name="asset_type">image</field>
+            <field name="file_path">sprites/candle.png</field>
+            <field name="file"></field>
+          </record>
+        <record id="game_asset_17" model="game.assets.manager">
+            <field name="name_key">cog_settings</field>
+            <field name="asset_type">image</field>
+            <field name="file_path">sprites/cog_settings.png</field>
+            <field name="file"></field>
+          </record>
+        <record id="game_asset_18" model="game.assets.manager">
+            <field name="name_key">settings_background</field>
+            <field name="asset_type">image</field>
+            <field name="file_path">sprites/settings_background.png</field>
+            <field name="file"></field>
+          </record>
+        <record id="game_asset_19" model="game.assets.manager">
+            <field name="name_key">landscape_mobile</field>
+            <field name="asset_type">image</field>
+            <field name="file_path">sprites/landscape.png</field>
+            <field name="file"></field>
+          </record>
+        <record id="game_asset_20" model="game.assets.manager">
+            <field name="name_key">walk_dust</field>
+            <field name="asset_type">image</field>
+            <field name="file_path">sprites/walk_dust.png</field>
+            <field name="file"></field>
+          </record>
+        <record id="game_asset_21" model="game.assets.manager">
+            <field name="name_key">fog_mask</field>
+            <field name="asset_type">image</field>
+            <field name="file_path">sprites/mask.png</field>
+            <field name="file"></field>
+          </record>
+        <record id="game_asset_22" model="game.assets.manager">
+            <field name="name_key">health</field>
+            <field name="asset_type">image</field>
+            <field name="file_path">sprites/health.png</field>
+            <field name="file"></field>
+          </record>
+        <record id="game_asset_23" model="game.assets.manager">
+            <field name="name_key">critical</field>
+            <field name="asset_type">image</field>
+            <field name="file_path">sprites/critical_25.png</field>
+            <field name="file"></field>
+          </record>
+        <record id="game_asset_24" model="game.assets.manager">
+            <field name="name_key">critical_50</field>
+            <field name="asset_type">image</field>
+            <field name="file_path">sprites/critical_50.png</field>
+            <field name="file"></field>
+          </record>
+        <record id="game_asset_25" model="game.assets.manager">
+            <field name="name_key">hp_hud</field>
+            <field name="asset_type">image</field>
+            <field name="file_path">sprites/HUD/HP.png</field>
+            <field name="file"></field>
+          </record>
+        <record id="game_asset_26" model="game.assets.manager">
+            <field name="name_key">hp_hud_2x</field>
+            <field name="asset_type">image</field>
+            <field name="file_path">sprites/HUD/HP_2x.png</field>
+            <field name="file"></field>
+          </record>
+        <record id="game_asset_27" model="game.assets.manager">
+            <field name="name_key">hp_hud_3x</field>
+            <field name="asset_type">image</field>
+            <field name="file_path">sprites/HUD/HP_3x.png</field>
+            <field name="file"></field>
+          </record>
+        <record id="game_asset_28" model="game.assets.manager">
+            <field name="name_key">sp_hud_2x</field>
+            <field name="asset_type">image</field>
+            <field name="file_path">sprites/HUD/SP_2x.png</field>
+            <field name="file"></field>
+          </record>
+        <record id="game_asset_29" model="game.assets.manager">
+            <field name="name_key">xp_hud_2x</field>
+            <field name="asset_type">image</field>
+            <field name="file_path">sprites/HUD/XP_2x.png</field>
+            <field name="file"></field>
+          </record>
+        <record id="game_asset_30" model="game.assets.manager">
+            <field name="name_key">red_bar</field>
+            <field name="asset_type">image</field>
+            <field name="file_path">sprites/HUD/red_bar.png</field>
+            <field name="file"></field>
+          </record>
+        <record id="game_asset_31" model="game.assets.manager">
+            <field name="name_key">yellow_bar</field>
+            <field name="asset_type">image</field>
+            <field name="file_path">sprites/HUD/yellow_bar.png</field>
+            <field name="file"></field>
+          </record>
+        <record id="game_asset_32" model="game.assets.manager">
+            <field name="name_key">green_bar</field>
+            <field name="asset_type">image</field>
+            <field name="file_path">sprites/HUD/green_bar.png</field>
+            <field name="file"></field>
+          </record>
+        <record id="game_asset_33" model="game.assets.manager">
+            <field name="name_key">blue_bar</field>
+            <field name="asset_type">image</field>
+            <field name="file_path">sprites/HUD/blue_bar.png</field>
+            <field name="file"></field>
+          </record>
+        <record id="game_asset_34" model="game.assets.manager">
+            <field name="name_key">exp_blue_bar</field>
+            <field name="asset_type">image</field>
+            <field name="file_path">sprites/HUD/exp_blue_bar.png</field>
+            <field name="file"></field>
+          </record>
+        <record id="game_asset_35" model="game.assets.manager">
+            <field name="name_key">progressbar_background</field>
+            <field name="asset_type">image</field>
+            <field name="file_path">sprites/HUD/bars_background.png</field>
+            <field name="file"></field>
+          </record>
+        <record id="game_asset_36" model="game.assets.manager">
+            <field name="name_key">inventory_shortcut</field>
+            <field name="asset_type">image</field>
+            <field name="file_path">sprites/HUD/I_Key_Light.png</field>
+            <field name="file"></field>
+          </record>
+        <record id="game_asset_37" model="game.assets.manager">
+            <field name="name_key">attributes_shortcut_icon</field>
+            <field name="asset_type">image</field>
+            <field name="file_path">sprites/HUD/Keyboard_White_U.png</field>
+            <field name="file"></field>
+          </record>
+        <record id="game_asset_38" model="game.assets.manager">
+            <field name="name_key">XboxOne_Menu</field>
+            <field name="asset_type">image</field>
+            <field name="file_path">sprites/HUD/XboxOne_Menu.png</field>
+            <field name="file"></field>
+          </record>
+        <record id="game_asset_39" model="game.assets.manager">
+            <field name="name_key">buttonY</field>
+            <field name="asset_type">image</field>
+            <field name="file_path">sprites/XboxOne_Y.png</field>
+            <field name="file"></field>
+          </record>
+        <record id="game_asset_40" model="game.assets.manager">
+            <field name="name_key">h_keyboard_key</field>
+            <field name="asset_type">image</field>
+            <field name="file_path">sprites/H_Key_Light.png</field>
+            <field name="file"></field>
+          </record>
+        <record id="game_asset_41" model="game.assets.manager">
+            <field name="name_key">esc_keyboard_key</field>
+            <field name="asset_type">image</field>
+            <field name="file_path">sprites/Esc_Key_Light.png</field>
+            <field name="file"></field>
+          </record>
+        <record id="game_asset_42" model="game.assets.manager">
+            <field name="name_key">enter_keyboard_key</field>
+            <field name="asset_type">image</field>
+            <field name="file_path">sprites/enter_keyboard_key.png</field>
+            <field name="file"></field>
+          </record>
+        <record id="game_asset_43" model="game.assets.manager">
+            <field name="name_key">buttonXboxWindows</field>
+            <field name="asset_type">image</field>
+            <field name="file_path">sprites/XboxOne_Windows.png</field>
+            <field name="file"></field>
+          </record>
+        <record id="game_asset_44" model="game.assets.manager">
+            <field name="name_key">inventory_box</field>
+            <field name="asset_type">image</field>
+            <field name="file_path">sprites/inventory_box.png</field>
+            <field name="file"></field>
+          </record>
+        <record id="game_asset_45" model="game.assets.manager">
+            <field name="name_key">panel_background</field>
+            <field name="asset_type">image</field>
+            <field name="file_path">sprites/inventory/inventory_background.png</field>
+            <field name="file"></field>
+          </record>
+        <record id="game_asset_46" model="game.assets.manager">
+            <field name="name_key">panel_title</field>
+            <field name="asset_type">image</field>
+            <field name="file_path">sprites/inventory/inventory_title.png</field>
+            <field name="file"></field>
+          </record>
+        <record id="game_asset_47" model="game.assets.manager">
+            <field name="name_key">inventory_slot</field>
+            <field name="asset_type">image</field>
+            <field name="file_path">sprites/inventory/inventory_slot.png</field>
+            <field name="file"></field>
+          </record>
+        <record id="game_asset_48" model="game.assets.manager">
+            <field name="name_key">infobox_background</field>
+            <field name="asset_type">image</field>
+            <field name="file_path">sprites/info_panel.png</field>
+            <field name="file"></field>
+          </record>
+        <record id="game_asset_49" model="game.assets.manager">
+            <field name="name_key">attributes_background</field>
+            <field name="asset_type">image</field>
+            <field name="file_path">sprites/UI/attributes_background.png</field>
+            <field name="file"></field>
+          </record>
+        <record id="game_asset_50" model="game.assets.manager">
+            <field name="name_key">attributes_background_3x</field>
+            <field name="asset_type">image</field>
+            <field name="file_path">sprites/UI/attributes_background_3x.png</field>
+            <field name="file"></field>
+          </record>
+        <record id="game_asset_51" model="game.assets.manager">
+            <field name="name_key">book_ui</field>
+            <field name="asset_type">image</field>
+            <field name="file_path">sprites/HUD/book_ui.png</field>
+            <field name="file"></field>
+          </record>
+        <record id="game_asset_52" model="game.assets.manager">
+            <field name="name_key">lucius_portrait_beard</field>
+            <field name="asset_type">image</field>
+            <field name="file_path">sprites/portraits/lucius_portrait_beard.png</field>
+            <field name="file"></field>
+          </record>
+        <record id="game_asset_53" model="game.assets.manager">
+            <field name="name_key">lucius_portrait_beardless</field>
+            <field name="asset_type">image</field>
+            <field name="file_path">sprites/portraits/lucius_portrait_beardless.png</field>
+            <field name="file"></field>
+          </record>
+        <record id="game_asset_54" model="game.assets.manager">
+            <field name="name_key">red_potion</field>
+            <field name="asset_type">image</field>
+            <field name="file_path">sprites/consumables/red_potion.png</field>
+            <field name="file"></field>
+          </record>
+        <record id="game_asset_55" model="game.assets.manager">
+            <field name="name_key">atk_potion</field>
+            <field name="asset_type">image</field>
+            <field name="file_path">sprites/consumables/atk_potion.png</field>
+            <field name="file"></field>
+          </record>
+        <record id="game_asset_56" model="game.assets.manager">
+            <field name="name_key">treasure_chest</field>
+            <field name="asset_type">image</field>
+            <field name="file_path">sprites/chest.png</field>
+            <field name="file"></field>
+          </record>
+        <record id="game_asset_57" model="game.assets.manager">
+            <field name="name_key">mighty_sword</field>
+            <field name="asset_type">image</field>
+            <field name="file_path">sprites/mighty_sword.png</field>
+            <field name="file"></field>
+          </record>
+        <record id="game_asset_58" model="game.assets.manager">
+            <field name="name_key">dungeon_tiles</field>
+            <field name="asset_type">image</field>
+            <field name="file_path">maps/dungeon/dungeon_tileset.png</field>
+            <field name="file"></field>
+
+          </record>
+        <record id="game_asset_59" model="game.assets.manager">
+            <field name="name_key">rain</field>
+            <field name="asset_type">image</field>
+            <field name="file_path">sprites/rain.png</field>
+            <field name="file"></field>
+          </record>
+        <record id="game_asset_60" model="game.assets.manager">
+            <field name="name_key">dust</field>
+            <field name="asset_type">image</field>
+            <field name="file_path">sprites/dust.png</field>
+            <field name="file"></field>
+          </record>
+        <record id="game_asset_61" model="game.assets.manager">
+            <field name="name_key">leaves</field>
+            <field name="asset_type">image</field>
+            <field name="file_path">sprites/leaves.png</field>
+            <field name="file"></field>
+          </record>
+        <record id="game_asset_62" model="game.assets.manager">
+            <field name="name_key">particle_warp</field>
+            <field name="asset_type">image</field>
+            <field name="file_path">sprites/particle_warp.png</field>
+            <field name="file"></field>
+          </record>
+        <record id="game_asset_63" model="game.assets.manager">
+            <field name="name_key">cloud</field>
+            <field name="asset_type">image</field>
+            <field name="file_path">sprites/clouds/cloud.png</field>
+            <field name="file"></field>
+          </record>
+
+        <record id="game_asset_64" model="game.assets.manager">
+            <field name="name_key">character</field>
+            <field name="asset_type">atlasconfig</field>
+            <field name="file_path">sprites/character.png</field>
+            <field name="file"></field>
+            <field name="json_file_path">sprites/character.json</field>
+            <field name="json_file"></field>
+          </record>
+        <record id="game_asset_65" model="game.assets.manager">
+            <field name="name_key">bat</field>
+            <field name="asset_type">atlasconfig</field>
+            <field name="file_path">sprites/bat.png</field>
+            <field name="file"></field>
+            <field name="json_file_path">sprites/bat.json</field>
+            <field name="json_file"></field>
+          </record>
+        <record id="game_asset_66" model="game.assets.manager">
+            <field name="name_key">ogre</field>
+            <field name="asset_type">atlasconfig</field>
+            <field name="file_path">sprites/ogre.png</field>
+            <field name="file"></field>
+            <field name="json_file_path">sprites/ogre.json</field>
+            <field name="json_file"></field>
+          </record>
+        <record id="game_asset_67" model="game.assets.manager">
+            <field name="name_key">rat</field>
+            <field name="asset_type">atlasconfig</field>
+            <field name="file_path">sprites/rat.png</field>
+            <field name="file"></field>
+            <field name="json_file_path">sprites/rat.json</field>
+            <field name="json_file"></field>
+          </record>
+        <record id="game_asset_68" model="game.assets.manager">
+            <field name="name_key">slash</field>
+            <field name="asset_type">atlasconfig</field>
+            <field name="file_path">sprites/slash.png</field>
+            <field name="file"></field>
+            <field name="json_file_path">sprites/slash.json</field>
+            <field name="json_file"></field>
+          </record>
+        <record id="game_asset_69" model="game.assets.manager">
+            <field name="name_key">flares</field>
+            <field name="asset_type">atlasconfig</field>
+            <field name="file_path">sprites/flares.png</field>
+            <field name="file"></field>
+            <field name="json_file_path">sprites/flares.json</field>
+            <field name="json_file"></field>
+          </record>
+        <record id="game_asset_70" model="game.assets.manager">
+            <field name="name_key">chat_bubble_animation</field>
+            <field name="asset_type">atlasconfig</field>
+            <field name="file_path">sprites/chat_bubble_animation.png</field>
+            <field name="file"></field>
+            <field name="json_file_path">sprites/chat_bubble_animation.json</field>
+            <field name="json_file"></field>
+          </record>
+          <!--Tilemap Assets-->
+        <record id="game_asset_71" model="game.assets.manager">
+          <field name="name_key">larus</field>
+          <field name="asset_type">tilemapconfig</field>
+          <field name="json_file_path">maps/larus.json</field>
+          <field name="json_file"></field>
+        </record>
+        <record id="game_asset_72" model="game.assets.manager">
+          <field name="name_key">tutorial</field>
+          <field name="asset_type">tilemapconfig</field>
+          <field name="json_file_path">maps/tutorial/tutorial.json</field>
+          <field name="json_file"></field>
+        </record>
+        <!--Sound Assets-->
+        <record id="game_asset_73" model="game.assets.manager">
+          <field name="name_key">space_sound</field>
+          <field name="asset_type">audio</field>
+          <field name="file_path">sound/typing/blip_06.mp3</field>
+          <field name="file"></field>
+        </record>
+        <record id="game_asset_74" model="game.assets.manager">
+          <field name="name_key">typing_key_01</field>
+          <field name="asset_type">audio</field>
+          <field name="file_path">sound/typing/blip_01.mp3</field>
+          <field name="file"></field>
+        </record>
+        <record id="game_asset_75" model="game.assets.manager">
+          <field name="name_key">typing_key_02</field>
+          <field name="asset_type">audio</field>
+          <field name="file_path">sound/typing/blip_02.mp3</field>
+          <field name="file"></field>
+        </record>
+        <record id="game_asset_76" model="game.assets.manager">
+          <field name="name_key">typing_key_03</field>
+          <field name="asset_type">audio</field>
+          <field name="file_path">sound/typing/blip_03.mp3</field>
+          <field name="file"></field>
+        </record>
+        <record id="game_asset_77" model="game.assets.manager">
+          <field name="name_key">typing_key_04</field>
+          <field name="asset_type">audio</field>
+          <field name="file_path">sound/typing/blip_04.mp3</field>
+          <field name="file"></field>
+        </record>
+        <record id="game_asset_78" model="game.assets.manager">
+          <field name="name_key">typing_key_05</field>
+          <field name="asset_type">audio</field>
+          <field name="file_path">sound/typing/blip_05.mp3</field>
+          <field name="file"></field>
+        </record>
+        <record id="game_asset_79" model="game.assets.manager">
+          <field name="name_key">path_to_lake_land</field>
+          <field name="asset_type">audio</field>
+          <field name="file_path">sound/path_to_lake_land.mp3</field>
+          <field name="file"></field>
+        </record>
+        <record id="game_asset_80" model="game.assets.manager">
+          <field name="name_key">dungeon_ambient</field>
+          <field name="asset_type">audio</field>
+          <field name="file_path">sound/dungeon_ambient.mp3</field>
+          <field name="file"></field>
+        </record>
+        <record id="game_asset_81" model="game.assets.manager">
+          <field name="name_key">dark_theme</field>
+          <field name="asset_type">audio</field>
+          <field name="file_path">sound/dark_theme.mp3</field>
+          <field name="file"></field>
+        </record>
+        <record id="game_asset_82" model="game.assets.manager">
+          <field name="name_key">forest</field>
+          <field name="asset_type">audio</field>
+          <field name="file_path">sound/forest.mp3</field>
+          <field name="file"></field>
+        </record>
+        <!--SFX-->
+         <!--Atack-->
+        <record id="game_asset_83" model="game.assets.manager">
+          <field name="name_key">atack01</field>
+          <field name="asset_type">audio</field>
+          <field name="file_path">sound/sfx/atk/atack01.mp3</field>
+          <field name="file"></field>
+        </record>
+        <record id="game_asset_84" model="game.assets.manager">
+          <field name="name_key">atack02</field>
+          <field name="asset_type">audio</field>
+          <field name="file_path">sound/sfx/atk/atack02.mp3</field>
+          <field name="file"></field>
+        </record>
+        <record id="game_asset_85" model="game.assets.manager">
+          <field name="name_key">atack03</field>
+          <field name="asset_type">audio</field>
+          <field name="file_path">sound/sfx/atk/atack03.mp3</field>
+          <field name="file"></field>
+        </record>
+        <record id="game_asset_86" model="game.assets.manager">
+          <field name="name_key">critical_hit</field>
+          <field name="asset_type">audio</field>
+          <field name="file_path">sound/sfx/atk/critical.mp3</field>
+          <field name="file"></field>
+        </record>
+        <record id="game_asset_87" model="game.assets.manager">
+          <field name="name_key">damage01</field>
+          <field name="asset_type">audio</field>
+          <field name="file_path">sound/sfx/damage/damage01.mp3</field>
+          <field name="file"></field>
+        </record>
+        <record id="game_asset_88" model="game.assets.manager">
+          <field name="name_key">damage02</field>
+          <field name="asset_type">audio</field>
+          <field name="file_path">sound/sfx/damage/damage02.mp3</field>
+          <field name="file"></field>
+        </record>
+        <record id="game_asset_89" model="game.assets.manager">
+          <field name="name_key">damage03</field>
+          <field name="asset_type">audio</field>
+          <field name="file_path">sound/sfx/damage/damage03.mp3</field>
+          <field name="file"></field>
+        </record>
+        <!--Actions-->
+        <record id="game_asset_90" model="game.assets.manager">
+          <field name="name_key">level_up</field>
+          <field name="asset_type">audio</field>
+          <field name="file_path">sound/sfx/actions/level_up.mp3</field>
+          <field name="file"></field>
+        </record>
+        <!--UI-->
+        <record id="game_asset_91" model="game.assets.manager">
+          <field name="name_key">start_game</field>
+          <field name="asset_type">audio</field>
+          <field name="file_path">sound/sfx/menu/start_game.mp3</field>
+          <field name="file"></field>
+        </record>
+        <!--Interaction-->
+        <record id="game_asset_92" model="game.assets.manager">
+          <field name="name_key">get_items</field>
+          <field name="asset_type">audio</field>
+          <field name="file_path">sound/sfx/interection/get_items.mp3</field>
+          <field name="file"></field>
+        </record>
+        <record id="game_asset_93" model="game.assets.manager">
+          <field name="name_key">equip_item</field>
+          <field name="asset_type">audio</field>
+          <field name="file_path">sound/sfx/interection/equip_item.mp3</field>
+          <field name="file"></field>
+        </record>
+        <!--Consumables-->
+        <record id="game_asset_94" model="game.assets.manager">
+          <field name="name_key">heal</field>
+          <field name="asset_type">audio</field>
+          <field name="file_path">sound/sfx/consumables/heal.mp3</field>
+          <field name="file"></field>
+        </record>
+        <!--Menu-->
+        <record id="game_asset_95" model="game.assets.manager">
+          <field name="name_key">menu_navigation</field>
+          <field name="asset_type">audio</field>
+          <field name="file_path">sound/sfx/menu/menu_navigation.mp3</field>
+          <field name="file"></field>
+        </record>
+        <record id="game_asset_96" model="game.assets.manager">
+          <field name="name_key">inventory_cloth</field>
+          <field name="asset_type">audio</field>
+          <field name="file_path">sound/sfx/menu/inventory_cloth.mp3</field>
+          <field name="file"></field>
+        </record>
+        <record id="game_asset_97" model="game.assets.manager">
+          <field name="name_key">attributes_menu</field>
+          <field name="asset_type">audio</field>
+          <field name="file_path">sound/sfx/menu/attributes_menu.mp3</field>
+          <field name="file"></field>
+        </record>
+        <record id="game_asset_98" model="game.assets.manager">
+          <field name="name_key">turn_page</field>
+          <field name="asset_type">audio</field>
+          <field name="file_path">sound/sfx/menu/turn_page.mp3</field>
+          <field name="file"></field>
+        </record>
+        <!--ASEPRITE-->
+        <record id="game_asset_99" model="game.assets.manager">
+          <field name="name_key">plus_small_button</field>
+          <field name="asset_type">asepriteconfig</field>
+          <field name="file_path">sprites/plus_small_button.png</field>
+          <field name="file"></field>
+          <field name="json_file_path">sprites/plus_small_button.json</field>
+          <field name="json_file"></field>
+        </record>
+        <record id="game_asset_100" model="game.assets.manager">
+          <field name="name_key">minus_small_button</field>
+          <field name="asset_type">asepriteconfig</field>
+          <field name="file_path">sprites/minus_small_button.png</field>
+          <field name="file"></field>
+          <field name="json_file_path">sprites/minus_small_button.json</field>
+          <field name="json_file"></field>
+        </record>
+        
+    </data>
+</odoo>
