@@ -66,3 +66,71 @@ class BuffType(models.Model):
         res = super(BuffType, self).unlink()
         self.buff_type_code_generator()
         return res
+
+
+class ItemTyps(models.Model):
+    _name = "item.type"
+    _description = "Item Type"
+
+    name = fields.Char(string="Name", required=True)
+    item_id = fields.Integer(string="ID", required=True)
+    key = fields.Char(string="Key", required=True)
+
+    _name_unique = models.Constraint(
+        "UNIQUE(name)",
+        "A name must be unique!",
+    )
+    _key_unique = models.Constraint(
+        "UNIQUE(key)",
+        "A key must be unique!",
+    )
+    _item_id_unique = models.Constraint(
+        "UNIQUE(item_id)",
+        "A item_id must be unique!",
+    )
+
+    def item_type_code_generator(self):
+        """Generate a new item type code"""
+        """
+        sample code:
+        
+            import { ItemType } from '../../models/ItemType';
+
+            export const ITEM_TYPE = {
+                EQUIP: new ItemType(1, 'Equip'),
+                USABLE: new ItemType(2, 'Usable'),
+                MISC: new ItemType(3, 'Misc'),
+            };
+
+        """
+        item_types = self.search([])
+        item_types_code = "import { ItemType } from '../../models/ItemType';\n\n export const ITEM_TYPES = {\n"
+        for item_type in item_types:
+            item_types_code += f"  {item_type.key}: new ItemType({item_type.item_id}, '{item_type.name}'),\n"
+        item_types_code += "};"
+
+        utils_model = self.env["rpg.game.utils"]
+        item_type_const_path = utils_model.get_rpg_game_src_directory(
+            "consts/DB_SEED/ItemTypes.js"
+        )
+        with open(item_type_const_path, "w") as f:
+            f.write(item_types_code)
+
+        return item_types_code
+
+    @api.model
+    def create(self, vals):
+        res = super(ItemTyps, self).create(vals)
+        res.item_type_code_generator()
+        return res
+
+    @api.model
+    def write(self, vals):
+        res = super(ItemTyps, self).write(vals)
+        self.item_type_code_generator()
+        return res
+
+    def unlink(self):
+        res = super(ItemTyps, self).unlink()
+        self.item_type_code_generator()
+        return res
