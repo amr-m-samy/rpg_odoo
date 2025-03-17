@@ -8,67 +8,68 @@ export class PanelComponent {
    * Creates a Panel to display invormation on it.
    * @param { Phaser.Scene } scene
    */
-  constructor(scene) {
+  constructor(scene, panelConfig) {
     /**
      * The Phaser Scene that the Panel will be created on.
      * @type { Phaser.Scene }
      */
     this.scene = scene;
-
+    this.panelConfig = panelConfig;
     /**
      * The Offset of the Nine Slice background. It's used to protect the background from streching.
      * It will make it responsive in any scale size without losing resolution.
      * @type { number }
      * @default
      */
-    this.nineSliceOffset = 10;
+    this.nineSliceOffset = this.panelConfig.nineSliceOffset;
 
     /**
      * The vertical padding between the Background edge and the content.
      * @type { number }
      * @default
      */
-    this.verticalBackgroundPadding = 25;
+    this.verticalBackgroundPadding = this.panelConfig.verticalBackgroundPadding;
 
     /**
      * The Padding of the main content to the Top of the Inventory Background.
      * @type { number }
      * @default
      */
-    this.backgroundMainContentPaddingTop = 100;
+    this.backgroundMainContentPaddingTop =
+      this.panelConfig.backgroundMainContentPaddingTop;
 
     /**
      * Default font size of the Title Text.
      * @type { number }
      * @default
      */
-    this.titleTextFontSize = 13;
+    this.titleTextFontSize = this.panelConfig.titleTextFontSize;
 
     /**
      * The name of the sprite texture of the Inventory Background.
      * @type { string }
      * @default
      */
-    this.inventoryBackgroundTexture = "panel_background";
+    this.backgroundTexture = this.panelConfig.backgroundTexture;
 
     /**
      * The name of the sprite texture of the Inventory Title.
      * @type { string }
      */
-    this.panelTitleTexture = "panel_title";
+    this.panelTitleTexture = this.panelConfig.panelTitleTexture;
 
     /**
      * The name of the sprite texture of the Close Button.
      * @type { string }
      * @default
      */
-    this.panelCloseTexture = "close_button";
+    this.panelCloseTexture = this.panelConfig.panelCloseTexture;
 
     /**
      * The name of the panel. AKA Text Title that will be shown on the title panel.
      * @type { string }
      */
-    this.panelName = "Inventory";
+    this.panelName = this.panelConfig.panelName;
 
     /**
      * The panel background sprite.
@@ -93,25 +94,25 @@ export class PanelComponent {
      * @type { string }
      * @default
      */
-    this.titleFontFamily = "'Press Start 2P'";
+    this.titleFontFamily = this.panelConfig.titleFontFamily;
 
     /**
      * The max width of the panel.
      * @type { number }
      */
-    this.panelMaxWidth = 512;
+    this.panelMaxWidth = this.panelConfig.panelMaxWidth;
 
     /**
      * The max height of the panel.
      * @type { number }
      */
-    this.panelMaxHeight = 512;
+    this.panelMaxHeight = this.panelConfig.panelMaxHeight;
 
     /**
      * The margin between the Screen and the panel.
      * @type { number }
      */
-    this.panelScreenMargin = 30;
+    this.panelScreenMargin = this.panelConfig.panelScreenMargin;
 
     this.createBackground();
     this.createTitle();
@@ -142,7 +143,7 @@ export class PanelComponent {
         this.scene.scale.height / 2 - this.panelMaxHeight / 2,
         this.panelMaxWidth,
         this.panelMaxHeight, // the width and height of your object
-        this.inventoryBackgroundTexture, // a key to an already loaded image
+        this.backgroundTexture, // a key to an already loaded image
         this.nineSliceOffset, // the width and height to offset for a corner slice
         this.nineSliceOffset, // (optional) pixels to offset when computing the safe usage area
       )

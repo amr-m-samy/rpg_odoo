@@ -1,18 +1,17 @@
 <odoo>
   <data>
-    <record id="view_game_asset_tree" model="ir.ui.view">
-        <field name="name">game.assets.tree</field>
+    <record id="view_game_asset_list" model="ir.ui.view">
+        <field name="name">game.assets.list</field>
         <field name="model">game.assets.manager</field>
         <field name="arch" type="xml">
           <list string="Game Assets">
            <header>
              <button name="generate_game_assets_import_and_export" string="Generate Game Assets" type="object" display="always" class="oe_highlight"/>
             </header>  
-         <field name="file" widget="image" options='{"zoom": true}'  style="height: 20px;"/>
+            <field name="file" widget="image" options='{"zoom": true}' class="game-assets-image"/>
             <field name="name_key"/>
             <field name="asset_type"/>
             <field name="file_path"/>
-            
             <field name="json_file_path"/>
             <field name="json_file"/>
           </list>

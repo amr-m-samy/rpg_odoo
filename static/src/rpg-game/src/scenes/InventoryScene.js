@@ -7,6 +7,7 @@ import { Player } from "../entities/Player";
 import { LuminusInterfaceController } from "../plugins/LuminusInterfaceController";
 import { LuminusUtils } from "../utils/LuminusUtils";
 export const InventorySceneName = "InventoryScene";
+import { assignPanelConfig } from "../consts/AssignPanelConfig";
 
 /**
  * @class
@@ -193,7 +194,10 @@ export class InventoryScene extends Phaser.Scene {
     // Prevent that the panel is open.
     this.destroyHelpPanel();
     this.luminusInterfaceController = new LuminusInterfaceController(this);
-    this.panelComponent = new PanelComponent(this);
+    this.panelComponent = new PanelComponent(
+      this,
+      assignPanelConfig["InventoryScene"],
+    );
     this.inventoryBackground = this.panelComponent.panelBackground;
     this.inventoryTitle = this.panelComponent.panelTitle;
     this.inventoryTitleText = this.panelComponent.panelTitleText;

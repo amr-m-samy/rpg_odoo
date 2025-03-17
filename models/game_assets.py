@@ -9,6 +9,7 @@ import os
 class GameAsset(models.Model):
     _name = "game.assets.manager"
     _description = "Model for Game Assets"
+    _rec_name = "name_key"
 
     name_key = fields.Char(string="Name", required=True)
     asset_type = fields.Selection(

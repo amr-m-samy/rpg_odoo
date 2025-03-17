@@ -1,0 +1,135 @@
+<odoo>
+  <data>
+    
+  <record model="ir.ui.view" id="info_box_tree">
+      <field name="name">info.box.tree</field>
+      <field name="model">info.box</field>
+      <field name="arch" type="xml">
+        <list>
+           <header>
+             <button name="info_box_config_code_generator" string="Generate info box" type="object" display="always" class="oe_highlight"/>
+            </header>  
+
+          <field name="name"/>
+
+        </list>
+      </field>
+    </record>
+    <record model="ir.ui.view" id="assign_panel_tree">
+      <field name="name">assign.panel.tree</field>
+      <field name="model">assign.panel.component</field>
+      <field name="arch" type="xml">
+        <list>
+           <header>
+             <button name="assign_panel_code_generator" string="Generate assign panel" type="object" display="always" class="oe_highlight"/>
+            </header>  
+          <field name="name"/>
+          <field name="panel_id"/>
+        </list>
+      </field>
+    </record>
+
+  <record model="ir.ui.view" id="panel_tree">
+      <field name="name">panel.tree</field>
+      <field name="model">panel.component</field>
+      <field name="arch" type="xml">
+        <list>
+          <field name="name"/>
+        </list>
+      </field>
+  </record>
+
+    <record model="ir.ui.view" id="info_box_form">
+      <field name="name">info.box.form</field>
+      <field name="model">info.box</field>
+      <field name="arch" type="xml">
+        <form>
+          <sheet>
+            <group>
+              <field name="name"/>
+              <field name="background_asset_id" widget="selection"/>
+              <field name="background_texture_image" widget="image" options='{"zoom": true}' class="game-assets-image"/>
+              <field name="title_text_font_size"/>
+              <field name="title_text_font_family"/>
+              <field name="nine_slice_offset"/>
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+    <record model="ir.ui.view" id="assign_panel_form">
+      <field name="name">assign.panel.form</field>
+      <field name="model">assign.panel.component</field>
+      <field name="arch" type="xml">
+        <form>
+          <sheet>
+            <group>
+              <field name="name"/>
+              <field name="panel_id"/>
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="panel_form">
+      <field name="name">panel.form</field>
+      <field name="model">panel.component</field>
+      <field name="arch" type="xml">
+        <form>
+          <sheet>
+            <group>
+              <group>
+              <field name="name"/>
+              <field name="background_asset_id" widget="selection"/>
+              <field name="background_texture_image" widget="image" options='{"zoom": true}' class="game-assets-image"/>
+              <field name="panel_title_texture_id" widget="selection"/>
+              <field name="panel_title_texture_image" widget="image" options='{"zoom": true}' class="game-assets-image"/>
+              <field name="panel_close_texture_id" widget="selection"/>
+              <field name="panel_close_texture_image" widget="image" options='{"zoom": true}' class="game-assets-image"/>
+            </group>
+            <group>
+              <field name="title_text_font_size"/>
+              <field name="title_text_font_family"/>
+              <field name="nine_slice_offset"/>
+              <field name="vertical_background_padding"/>
+              <field name="background_main_content_padding_top"/>
+              <field name="panel_name"/>
+              <field name="panel_max_width"/>
+              <field name="panel_max_height"/>
+              <field name="panel_screen_margin"/>
+              </group>
+
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="info_box_action_window">
+      <field name="name">info.box.window</field>
+      <field name="res_model">info.box</field>
+      <field name="view_mode">list,form</field>
+    </record>
+
+    <record model="ir.actions.act_window" id="panel_action_window">
+      <field name="name">panel.window</field>
+      <field name="res_model">panel.component</field>
+      <field name="view_mode">list,form</field>
+    </record>
+
+    <record model="ir.actions.act_window" id="assign_panel_action_window">
+      <field name="name">assign.panel.window</field>
+      <field name="res_model">assign.panel.component</field>
+      <field name="view_mode">list,form</field>
+    </record>
+
+    <menuitem name="UI Components" id="rpg_game.ui_components" parent="menu_root"/>
+    <menuitem name="Info Box" id="rpg_game.info_box" parent="rpg_game.ui_components"
+              action="info_box_action_window"/>
+    <menuitem name="Panel" id="rpg_game.panel_component" parent="rpg_game.ui_components"
+              action="panel_action_window"/>
+    <menuitem name="Assign Panel" id="rpg_game.assign_panel_component" parent="rpg_game.ui_components"
+              action="assign_panel_action_window"/>
+  </data>
+</odoo>

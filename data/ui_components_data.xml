@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+       <!-- Info Box Components -->
+        <record id="info_box_01" model="info.box">
+          <field name="background_asset_id">48</field>
+            <field name="title_text_font_size">12</field>
+            <field name="title_text_font_family">Press Start 2P</field>
+            <field name="nine_slice_offset">10</field>
+        </record>
+
+        <!-- Panel Components -->
+        <record id="panel_01" model="panel.component">
+          <field name="name">Inventory</field>
+            <field name="background_asset_id">45</field>
+            <field name="panel_title_texture_id">46</field>
+            <field name="panel_close_texture_id">14</field>
+            <field name="nine_slice_offset">10</field>
+            <field name="panel_name">Inventory</field>
+            <!--<field name="panel_max_width">512</field>-->
+            <!--<field name="panel_max_height">512</field>-->
+            <!--<field name="panel_screen_margin">30</field>-->
+            <!--<field name="panel_title_text_font_size">12</field>-->
+            <!--<field name="panel_title_text_font_family">Press Start 2P</field>-->
+            <!--<filed name="background_main_content_padding_top">100</filed>-->
+            <!--<field name="vertical_background_padding">25</field>-->
+          </record>
+
+          <!-- Assigning Panel Components to Panel -->
+        <record id="assign_panel_01" model="assign.panel.component">
+          <field name="name">AttributeScene</field>
+          <field name="panel_id" ref="panel_01"/>
+          </record>
+
+        <record id="assign_panel_02" model="assign.panel.component">
+          <field name="name">SettingScene</field>
+          <field name="panel_id" ref="panel_01"/>
+          </record>
+        <record id="assign_panel_03" model="assign.panel.component">
+          <field name="name">InventoryScene</field>
+          <field name="panel_id" ref="panel_01"/>
+          </record>
+        <record id="assign_panel_04" model="assign.panel.component">
+          <field name="name">MainMenuScene</field>
+          <field name="panel_id" ref="panel_01"/>
+          </record>
+    </data> 
+  </odoo>

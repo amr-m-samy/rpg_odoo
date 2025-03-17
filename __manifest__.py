@@ -17,13 +17,14 @@ Long description of module's purpose
     # always loaded
     "data": [
         # 'security/ir.model.access.csv',
+        "views/ui_components_views.xml",
         "views/game_assets_views.xml",
         "views/views.xml",
         "views/templates.xml",
         "data/game_assets_data.xml",
+        "data/ui_components_data.xml",
     ],
+    "assets": {"web.assets_backend": ["/rpg_game/static/src/scss/rpg.scss"]},
     # only loaded in demonstration mode
-    "demo": [
-        "demo/demo.xml",
-    ],
+    "demo": [],
 }

@@ -1,5 +1,5 @@
 import { NineSlice } from "phaser3-nineslice";
-
+import { infoBoxConfig } from "../consts/InfoBoxConfig.js";
 export class InfoBox {
   constructor(
     scene,
@@ -15,6 +15,7 @@ export class InfoBox {
      */
     this.scene = scene;
 
+    this.infoBoxConfig = infoBoxConfig["InfoBox"];
     /**
      * @type { NineSlice }
      */
@@ -35,20 +36,20 @@ export class InfoBox {
     this.y = y;
     this.panelMaxWidth = width;
     this.panelMaxHeight = height;
-    this.backgroundTexture = "infobox_background";
+    this.backgroundTexture = this.infoBoxConfig.backgroundTexture;
     this.config = config;
     /**
      * Default font size of the Title Text.
      * @type { number }
      * @default
      */
-    this.titleTextFontSize = 10;
+    this.titleTextFontSize = this.infoBoxConfig.titleTextFontSize;
     /**
      * The default font family of the Inventory Text.
      * @type { string }
      * @default
      */
-    this.titleFontFamily = "'Press Start 2P'";
+    this.titleFontFamily = this.infoBoxConfig.titleFontFamily;
 
     /**
      * The Offset of the Nine Slice background. It's used to protect the background from streching.
@@ -56,7 +57,7 @@ export class InfoBox {
      * @type { number }
      * @default
      */
-    this.nineSliceOffset = 10;
+    this.nineSliceOffset = this.infoBoxConfig.nineSliceOffset;
 
     this.createBackground();
     this.createInformation();
