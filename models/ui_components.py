@@ -68,9 +68,8 @@ class InfoBox(models.Model):
         info_box_config_code += "}," + "\n"
         info_box_config_code += "};" + "\n"
         utils_model = self.env["rpg.game.utils"]
-        rpg_game_src = utils_model.get_rpg_game_src_directory()
-        info_box_config_file_path = os.path.join(
-            rpg_game_src, "consts/InfoBoxConfig.js"
+        info_box_config_file_path = utils_model.get_rpg_game_src_directory(
+            "consts/InfoBoxConfig.js"
         )
 
         with open(info_box_config_file_path, "w", encoding="utf-8") as f:
@@ -89,6 +88,12 @@ class InfoBox(models.Model):
     @api.model
     def write(self, vals):
         res = super(InfoBox, self).write(vals)
+        """Generate the info box configuration code"""
+        self.info_box_config_code_generator()
+        return res
+
+    def unlink(self):
+        res = super(InfoBox, self).unlink()
         """Generate the info box configuration code"""
         self.info_box_config_code_generator()
         return res
@@ -243,6 +248,12 @@ class PanelComponent(models.Model):
         self._panel_config_code_generator()
         return res
 
+    def unlink(self):
+        res = super(PanelComponent, self).unlink()
+        """Generate the panel configuration code"""
+        self._panel_config_code_generator()
+        return res
+
 
 class AssignPanelComponent(models.Model):
     _name = "assign.panel.component"
@@ -272,7 +283,7 @@ class AssignPanelComponent(models.Model):
         assign_panel_code += "export const assignPanelConfig = {" + "\n"
         for assign_panel in self.search([]):
             assign_panel_code += (
-                f"{assign_panel.name}: panelsConfig['{assign_panel.panel_name}Panel'],"
+                f"  {assign_panel.name}: panelsConfig['{assign_panel.panel_name}Panel'],"
                 + "\n"
             )
         assign_panel_code += "};" + "\n"
@@ -296,6 +307,12 @@ class AssignPanelComponent(models.Model):
     @api.model
     def write(self, vals):
         res = super(AssignPanelComponent, self).write(vals)
+        """Generate the assign panel configuration code"""
+        self.assign_panel_code_generator()
+        return res
+
+    def unlink(self):
+        res = super(AssignPanelComponent, self).unlink()
         """Generate the assign panel configuration code"""
         self.assign_panel_code_generator()
         return res

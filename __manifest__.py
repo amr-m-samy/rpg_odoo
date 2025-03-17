@@ -21,8 +21,10 @@ Long description of module's purpose
         "views/game_assets_views.xml",
         "views/views.xml",
         "views/templates.xml",
+        "views/consts_views.xml",
         "data/game_assets_data.xml",
         "data/ui_components_data.xml",
+        "data/consts_data.xml",
     ],
     "assets": {"web.assets_backend": ["/rpg_game/static/src/scss/rpg.scss"]},
     # only loaded in demonstration mode
