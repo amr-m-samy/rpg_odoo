@@ -134,3 +134,93 @@ class ItemTyps(models.Model):
         res = super(ItemTyps, self).unlink()
         self.item_type_code_generator()
         return res
+
+
+class Items(models.Model):
+    _name = "game.items"
+    _description = "Item"
+
+    name = fields.Char(string="Name", required=True)
+    item_id = fields.Integer(string="ID", required=True)
+    item_type = fields.Many2one("item.type", string="Type", required=True)
+    item_key = fields.Char(related="item_type.key", string="Key", store=True)
+    buff_type = fields.Many2one("buff.type", string="Buff Type")
+    buff_key = fields.Char(
+        related="buff_type.key", string="Buff Key", store=True, default=0
+    )
+    description = fields.Text(string="Description", required=True)
+    script = fields.Text(string="Script", required=True)
+    texture = fields.Many2one("game.assets.manager", string="Texture", required=True)
+    texture_image = fields.Binary(related="texture.file", string="Texture Image")
+    sfx = fields.Many2one("game.assets.manager", string="SFX", required=True)
+    stackable = fields.Boolean(string="Stackable", required=True, default=True)
+    inventory_scale = fields.Float(string="Inventory Scale", required=True, default=1.7)
+
+    _name_unique = models.Constraint(
+        "UNIQUE(name)",
+        "A name must be unique!",
+    )
+    _item_id_unique = models.Constraint(
+        "UNIQUE(item_id)",
+        "A item_id must be unique!",
+    )
+
+    def item_code_generator(self):
+        """Generate a new item code"""
+        item_types = self.search([])
+        item_types_code = "import { ItemType } from '../../models/ItemType';\n"
+        item_types_code += "import { BUFF_TYPES } from './BuffTypes';\n\n"
+        item_types_code += """
+        /**
+            * @example
+            * The 'script' works like this:
+            * ACTION, WHAT, AMOUNT
+            * ACTION: rec -> recover
+            * WHAT: hp -> health
+            * AMOUNT: 50
+            * Will translate to -> Recover 50 HP.
+            * Then the transpiles will take care to recover the HP.
+        */
+
+        """
+        item_types_code += "export const DB_SEED_ITEMS = [\n"
+        for item_type in item_types:
+            item_types_code += f"  {{\n"
+            item_types_code += f"    id: {item_type.item_id},\n"
+            item_types_code += f'    name: "{item_type.name}",\n'
+            item_types_code += f"    type: ItemType.{item_type.item_key},\n"
+            item_types_code += f"    buffType: {f'BUFF_TYPES.{item_type.buff_key}' if item_type.buff_key else '0'},\n"
+            item_types_code += f'    description: "{item_type.description}",\n'
+            item_types_code += f'    script: "{item_type.script}",\n'
+            item_types_code += f'    texture: "{item_type.texture.name_key}",\n'
+            item_types_code += f'    sfx: "{item_type.sfx.name_key}",\n'
+            item_types_code += f"    stackable: {str(item_type.stackable).lower()},\n"
+            item_types_code += f"    inventoryScale: {item_type.inventory_scale},\n"
+            item_types_code += f"  }},\n"
+        item_types_code += "];"
+
+        utils_model = self.env["rpg.game.utils"]
+        item_type_const_path = utils_model.get_rpg_game_src_directory(
+            "consts/DB_SEED/Items.js"
+        )
+        with open(item_type_const_path, "w") as f:
+            f.write(item_types_code)
+
+        return item_types_code
+
+    @api.model
+    def create(self, vals):
+        res = super(Items, self).create(vals)
+        res.item_code_generator()
+        return res
+
+    @api.model
+    def write(self, vals):
+        res = super(Items, self).write(vals)
+        self.item_code_generator()
+        return res
+
+    def unlink(self):
+        res = super(Items, self).unlink()
+        self.item_code_generator()
+        return res

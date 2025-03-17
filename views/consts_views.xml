@@ -1,5 +1,7 @@
 <odoo>
   <data>
+
+
     <record id="view_buff_type_list" model="ir.ui.view">
       <field name="name">buff.type.list</field>
       <field name="model">buff.type</field>
@@ -8,6 +10,22 @@
           <field name="name"/>
           <field name="buff_id"/>
           <field name="key"/>
+        </list>
+      </field>
+    </record>
+
+    <record id="view_game_items_list" model="ir.ui.view">
+      <field name="name">game.items.list</field>
+      <field name="model">game.items</field>
+      <field name="arch" type="xml">
+        <list string="Game Items">
+           <header>
+             <button name="item_code_generator" string="Generate Game items" type="object" display="always" class="oe_highlight"/>
+            </header>  
+          <field name="name"/>
+          <field name="item_type" widget="selection"/>
+          <field name="texture_image" widget="image"/>
+          <field name="sfx"/>
         </list>
       </field>
     </record>
@@ -56,6 +74,30 @@
       </field>
     </record>
 
+    <record id="view_game_items_form" model="ir.ui.view">
+      <field name="name">game.items.form</field>
+      <field name="model">game.items</field>
+      <field name="arch" type="xml">
+        <form string="Game Items">
+          <sheet>
+            <group>
+              <field name="name"/>
+              <field name="item_id"/>
+              <field name="item_type"/>
+              <field name="buff_type"/>
+              <field name="description"/>
+              <field name="script"/>
+              <field name="texture"/>
+              <field name="texture_image" widget="image" class="game-assets-image" options='{"zoom": true}'/>
+              <field name="sfx"/>
+              <field name="stackable"/>
+              <field name="inventory_scale"/>
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
     <record id="action_buff_type" model="ir.actions.act_window">
       <field name="name">Buff Types</field>
       <field name="res_model">buff.type</field>
@@ -68,11 +110,19 @@
       <field name="view_mode">list,form</field>
     </record>
 
+    <record id="action_game_items" model="ir.actions.act_window">
+      <field name="name">Game Items</field>
+      <field name="res_model">game.items</field>
+      <field name="view_mode">list,form</field>
+    </record>
+
      
     <menuitem name="Consts" id="rpg_game.consts" parent="menu_root"/>
     <menuitem name="Buff Types" id="buff_type" parent="rpg_game.consts"
               action="action_buff_type"/>
     <menuitem name="Item Types" id="item_type" parent="rpg_game.consts"
               action="action_item_type"/>
+    <menuitem name="Game Items" id="game_items" parent="rpg_game.consts"
+              action="action_game_items"/>
   </data>
 </odoo>

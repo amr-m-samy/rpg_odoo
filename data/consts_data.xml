@@ -34,5 +34,57 @@
           <field name="item_id">3</field>
         </record>
 
+        <!-- ================== Game Items ================= -->
+
+        <record id="game_item_01" model="game.items">
+          <field name="name">Red Potion</field>
+          <field name="item_id">1</field>
+          <field name="item_type" ref="item_type_02"/>
+          <field name="description">A small potion that recovers 2 Health Points [HP].</field>
+          <field name="script">rec hp 2;</field>
+          <field name="texture" ref="game_asset_54"/>
+          <field name="sfx" ref="game_asset_94"/>
+          <field name="stackable">true</field>
+          <field name="inventory_scale">1.7</field>
+        </record>
+
+        <record id="game_item_02" model="game.items">
+          <field name="name">Dark Potion</field>
+          <field name="item_id">2</field>
+          <field name="item_type" ref="item_type_02"/>
+          <field name="buff_type" ref="buff_type_01"/>
+          <field name="description">They say this potion is only for those who have a strong heart, for those who drunk it became elves. (Increases the ATACK by 5 points for 60 seconds.)</field>
+          <field name="script">buff atk 5 60;</field>
+          <field name="texture" ref="game_asset_55"/>
+          <field name="sfx" ref="game_asset_94"/>
+          <field name="stackable">true</field>
+          <field name="inventory_scale">1.7</field>
+        </record>
+
+        <record id="game_item_03" model="game.items">
+          <field name="name">Treasure</field>
+          <field name="item_id">3</field>
+          <field name="item_type" ref="item_type_02"/>
+          <field name="buff_type" ref="buff_type_01"/>
+          <field name="description">The treasure of the mighty, legend says that those who opened this box, became the most powerfull warriors of all time. (Increases the ATACK by 50 points for 120 seconds.)</field>
+          <field name="script">buff atk 50 120;</field>
+          <field name="texture" ref="game_asset_56"/>
+          <field name="sfx" ref="game_asset_93"/>
+          <field name="stackable">true</field>
+          <field name="inventory_scale">1.7</field>
+        </record>
+
+        <record id="game_item_04" model="game.items">
+          <field name="name">Mighty Sword</field>
+          <field name="item_id">4</field>
+          <field name="item_type" ref="item_type_02"/>
+          <field name="buff_type" ref="buff_type_02"/>
+          <field name="description">A powerfull sword created by merlin The Wizzard of Wizzards. Used to break stones, it's durability is out of the blue. (Increases the ATACK by 5 points for 120 seconds. Carrier can only have one of these)</field>
+          <field name="script">buff atk 5 120;</field>
+          <field name="texture" ref="game_asset_57"/>
+          <field name="sfx" ref="game_asset_93"/>
+          <field name="stackable">true</field>
+          <field name="inventory_scale">1.7</field>
+        </record>
     </data>
 </odoo>
