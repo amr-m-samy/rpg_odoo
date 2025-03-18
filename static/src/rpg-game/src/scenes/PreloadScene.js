@@ -273,6 +273,7 @@ export class PreloadScene extends Phaser.Scene {
         // this.scene.start('MainScene');
         //this.scene.start('MainMenuScene');
         // this.scene.start('TutorialScene');
+        // this.scene.start('AnimationScene');
         this.scene.start(selectscene || "MainMenuScene");
       },
     });
