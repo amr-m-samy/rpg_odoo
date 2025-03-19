@@ -109,6 +109,8 @@ import minus_small_button from "../assets/sprites/minus_small_button.png";
 import minus_small_button_json from "../assets/sprites/minus_small_button.json";
 import transparent_grid from "../assets/sprites/grid-ps2.png";
 import transparent_grid_2 from "../assets/sprites/grid-ps1.png";
+import atlas_character22_image from "../assets/sprites/hero_yellow.png";
+import atlas_character22_image_json from "../assets/sprites/hero_yellow.json";
 
 export const Images = [
     {name: "tiles", image: tiles},
@@ -214,7 +216,8 @@ export const AtlasConfig = [
     {name: "rat", image: atlas_rat_image, json: atlas_rat_image_json},
     {name: "slash", image: atlas_slash_image, json: atlas_slash_image_json},
     {name: "flares", image: atlas_flares_image, json: atlas_flares_image_json},
-    {name: "chat_bubble_animation", image: atlas_chat_bubble_animation_image, json: atlas_chat_bubble_animation_image_json}
+    {name: "chat_bubble_animation", image: atlas_chat_bubble_animation_image, json: atlas_chat_bubble_animation_image_json},
+    {name: "character22", image: atlas_character22_image, json: atlas_character22_image_json}
 ];;
 
 export const ASEPRITE_CONFIG = [

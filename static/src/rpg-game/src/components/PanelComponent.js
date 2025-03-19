@@ -141,9 +141,9 @@ export class PanelComponent {
       .nineslice(
         this.scene.scale.width / 2 - this.panelMaxWidth / 2,
         this.scene.scale.height / 2 - this.panelMaxHeight / 2,
+        this.backgroundTexture, // a key to an already loaded image
         this.panelMaxWidth,
         this.panelMaxHeight, // the width and height of your object
-        this.backgroundTexture, // a key to an already loaded image
         this.nineSliceOffset, // the width and height to offset for a corner slice
         this.nineSliceOffset, // (optional) pixels to offset when computing the safe usage area
       )

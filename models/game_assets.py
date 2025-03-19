@@ -283,15 +283,19 @@ class GameAsset(models.Model):
     def create(self, vals_list):
         records = super(GameAsset, self).create(vals_list)
         records._add_asset()
+        records.generate_game_assets_import_and_export()
         return records
 
     def write(self, vals):
         self._remove_asset()
         res = super(GameAsset, self).write(vals)
         self._add_asset()
+        self.generate_game_assets_import_and_export()
         return res
 
     def unlink(self):
         for record in self:
             record._remove_asset()
+
+        self.generate_game_assets_import_and_export()
         return super(GameAsset, self).unlink()

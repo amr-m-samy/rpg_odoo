@@ -68,9 +68,9 @@ export class InfoBox {
       .nineslice(
         this.x,
         this.y,
+        this.backgroundTexture, // a key to an already loaded image
         this.panelMaxWidth,
         this.panelMaxHeight, // the width and height of your object
-        this.backgroundTexture, // a key to an already loaded image
         this.nineSliceOffset, // the width and height to offset for a corner slice
         this.nineSliceOffset, // (optional) pixels to offset when computing the safe usage area
       )
