@@ -10,7 +10,7 @@
             "scale": 1,
             "frames": [
                 {
-                    "filename": "bat/atk-up/bat00",
+                    "filename": "bat/atk-up/00",
                     "rotated": false,
                     "trimmed": false,
                     "sourceSize": {
@@ -31,7 +31,7 @@
                     }
                 },
                 {
-                    "filename": "bat/atk-up/bat03",
+                    "filename": "bat/atk-up/03",
                     "rotated": false,
                     "trimmed": false,
                     "sourceSize": {
@@ -52,7 +52,7 @@
                     }
                 },
                 {
-                    "filename": "bat/atk-down/bat00",
+                    "filename": "bat/atk-down/00",
                     "rotated": false,
                     "trimmed": false,
                     "sourceSize": {
@@ -73,7 +73,7 @@
                     }
                 },
                 {
-                    "filename": "bat/atk-down/bat01",
+                    "filename": "bat/atk-down/01",
                     "rotated": false,
                     "trimmed": false,
                     "sourceSize": {
@@ -94,7 +94,7 @@
                     }
                 },
                 {
-                    "filename": "bat/atk-up/bat01",
+                    "filename": "bat/atk-up/01",
                     "rotated": false,
                     "trimmed": false,
                     "sourceSize": {
@@ -115,7 +115,7 @@
                     }
                 },
                 {
-                    "filename": "bat/atk-up/bat04",
+                    "filename": "bat/atk-up/04",
                     "rotated": false,
                     "trimmed": false,
                     "sourceSize": {
@@ -136,7 +136,7 @@
                     }
                 },
                 {
-                    "filename": "bat/atk-down/bat02",
+                    "filename": "bat/atk-down/02",
                     "rotated": false,
                     "trimmed": false,
                     "sourceSize": {
@@ -157,7 +157,7 @@
                     }
                 },
                 {
-                    "filename": "bat/atk-down/bat04",
+                    "filename": "bat/atk-down/04",
                     "rotated": false,
                     "trimmed": false,
                     "sourceSize": {
@@ -178,7 +178,7 @@
                     }
                 },
                 {
-                    "filename": "bat/atk-up/bat02",
+                    "filename": "bat/atk-up/02",
                     "rotated": false,
                     "trimmed": false,
                     "sourceSize": {
@@ -199,7 +199,7 @@
                     }
                 },
                 {
-                    "filename": "bat/atk-right/bat02",
+                    "filename": "bat/atk-right/02",
                     "rotated": false,
                     "trimmed": false,
                     "sourceSize": {
@@ -220,7 +220,7 @@
                     }
                 },
                 {
-                    "filename": "bat/atk-right/bat03",
+                    "filename": "bat/atk-right/03",
                     "rotated": false,
                     "trimmed": false,
                     "sourceSize": {
@@ -241,7 +241,7 @@
                     }
                 },
                 {
-                    "filename": "bat/atk-right/bat00",
+                    "filename": "bat/atk-right/00",
                     "rotated": false,
                     "trimmed": false,
                     "sourceSize": {
@@ -262,7 +262,7 @@
                     }
                 },
                 {
-                    "filename": "bat/atk-right/bat01",
+                    "filename": "bat/atk-right/01",
                     "rotated": false,
                     "trimmed": false,
                     "sourceSize": {
@@ -283,7 +283,7 @@
                     }
                 },
                 {
-                    "filename": "bat/atk-right/bat04",
+                    "filename": "bat/atk-right/04",
                     "rotated": false,
                     "trimmed": false,
                     "sourceSize": {
@@ -304,7 +304,7 @@
                     }
                 },
                 {
-                    "filename": "bat/atk-down/bat03",
+                    "filename": "bat/atk-down/03",
                     "rotated": false,
                     "trimmed": false,
                     "sourceSize": {
@@ -325,7 +325,7 @@
                     }
                 },
                 {
-                    "filename": "bat/idle-down/bat00",
+                    "filename": "bat/idle-down/00",
                     "rotated": false,
                     "trimmed": false,
                     "sourceSize": {
@@ -346,7 +346,7 @@
                     }
                 },
                 {
-                    "filename": "bat/idle-down/bat03",
+                    "filename": "bat/idle-down/03",
                     "rotated": false,
                     "trimmed": false,
                     "sourceSize": {
@@ -367,7 +367,7 @@
                     }
                 },
                 {
-                    "filename": "bat/walk-down/bat00",
+                    "filename": "bat/walk-down/00",
                     "rotated": false,
                     "trimmed": false,
                     "sourceSize": {
@@ -388,7 +388,7 @@
                     }
                 },
                 {
-                    "filename": "bat/walk-down/bat03",
+                    "filename": "bat/walk-down/03",
                     "rotated": false,
                     "trimmed": false,
                     "sourceSize": {
@@ -409,7 +409,7 @@
                     }
                 },
                 {
-                    "filename": "bat/idle-down/bat01",
+                    "filename": "bat/idle-down/01",
                     "rotated": false,
                     "trimmed": false,
                     "sourceSize": {
@@ -430,7 +430,7 @@
                     }
                 },
                 {
-                    "filename": "bat/walk-down/bat01",
+                    "filename": "bat/walk-down/01",
                     "rotated": false,
                     "trimmed": false,
                     "sourceSize": {
@@ -451,7 +451,7 @@
                     }
                 },
                 {
-                    "filename": "bat/idle-down/bat02",
+                    "filename": "bat/idle-down/02",
                     "rotated": false,
                     "trimmed": false,
                     "sourceSize": {
@@ -472,7 +472,7 @@
                     }
                 },
                 {
-                    "filename": "bat/walk-down/bat02",
+                    "filename": "bat/walk-down/02",
                     "rotated": false,
                     "trimmed": false,
                     "sourceSize": {
@@ -493,7 +493,7 @@
                     }
                 },
                 {
-                    "filename": "bat/idle-down/bat04",
+                    "filename": "bat/idle-down/04",
                     "rotated": false,
                     "trimmed": false,
                     "sourceSize": {
@@ -514,7 +514,7 @@
                     }
                 },
                 {
-                    "filename": "bat/walk-down/bat04",
+                    "filename": "bat/walk-down/04",
                     "rotated": false,
                     "trimmed": false,
                     "sourceSize": {
@@ -535,7 +535,7 @@
                     }
                 },
                 {
-                    "filename": "bat/idle-right/bat00",
+                    "filename": "bat/idle-right/00",
                     "rotated": false,
                     "trimmed": false,
                     "sourceSize": {
@@ -556,7 +556,7 @@
                     }
                 },
                 {
-                    "filename": "bat/walk-right/bat00",
+                    "filename": "bat/walk-right/00",
                     "rotated": false,
                     "trimmed": false,
                     "sourceSize": {
@@ -577,7 +577,7 @@
                     }
                 },
                 {
-                    "filename": "bat/idle-right/bat01",
+                    "filename": "bat/idle-right/01",
                     "rotated": false,
                     "trimmed": false,
                     "sourceSize": {
@@ -598,7 +598,7 @@
                     }
                 },
                 {
-                    "filename": "bat/walk-right/bat01",
+                    "filename": "bat/walk-right/01",
                     "rotated": false,
                     "trimmed": false,
                     "sourceSize": {
@@ -619,7 +619,7 @@
                     }
                 },
                 {
-                    "filename": "bat/idle-right/bat02",
+                    "filename": "bat/idle-right/02",
                     "rotated": false,
                     "trimmed": false,
                     "sourceSize": {
@@ -640,7 +640,7 @@
                     }
                 },
                 {
-                    "filename": "bat/walk-right/bat02",
+                    "filename": "bat/walk-right/02",
                     "rotated": false,
                     "trimmed": false,
                     "sourceSize": {
@@ -661,7 +661,7 @@
                     }
                 },
                 {
-                    "filename": "bat/idle-right/bat03",
+                    "filename": "bat/idle-right/03",
                     "rotated": false,
                     "trimmed": false,
                     "sourceSize": {
@@ -682,7 +682,7 @@
                     }
                 },
                 {
-                    "filename": "bat/walk-right/bat03",
+                    "filename": "bat/walk-right/03",
                     "rotated": false,
                     "trimmed": false,
                     "sourceSize": {
@@ -703,7 +703,7 @@
                     }
                 },
                 {
-                    "filename": "bat/idle-right/bat04",
+                    "filename": "bat/idle-right/04",
                     "rotated": false,
                     "trimmed": false,
                     "sourceSize": {
@@ -724,7 +724,7 @@
                     }
                 },
                 {
-                    "filename": "bat/walk-right/bat04",
+                    "filename": "bat/walk-right/04",
                     "rotated": false,
                     "trimmed": false,
                     "sourceSize": {
@@ -745,7 +745,7 @@
                     }
                 },
                 {
-                    "filename": "bat/idle-up/bat00",
+                    "filename": "bat/idle-up/00",
                     "rotated": false,
                     "trimmed": false,
                     "sourceSize": {
@@ -766,7 +766,7 @@
                     }
                 },
                 {
-                    "filename": "bat/walk-up/bat00",
+                    "filename": "bat/walk-up/00",
                     "rotated": false,
                     "trimmed": false,
                     "sourceSize": {
@@ -787,7 +787,7 @@
                     }
                 },
                 {
-                    "filename": "bat/idle-up/bat01",
+                    "filename": "bat/idle-up/01",
                     "rotated": false,
                     "trimmed": false,
                     "sourceSize": {
@@ -808,7 +808,7 @@
                     }
                 },
                 {
-                    "filename": "bat/walk-up/bat01",
+                    "filename": "bat/walk-up/01",
                     "rotated": false,
                     "trimmed": false,
                     "sourceSize": {
@@ -829,7 +829,7 @@
                     }
                 },
                 {
-                    "filename": "bat/idle-up/bat02",
+                    "filename": "bat/idle-up/02",
                     "rotated": false,
                     "trimmed": false,
                     "sourceSize": {
@@ -850,7 +850,7 @@
                     }
                 },
                 {
-                    "filename": "bat/walk-up/bat02",
+                    "filename": "bat/walk-up/02",
                     "rotated": false,
                     "trimmed": false,
                     "sourceSize": {
@@ -871,7 +871,7 @@
                     }
                 },
                 {
-                    "filename": "bat/idle-up/bat03",
+                    "filename": "bat/idle-up/03",
                     "rotated": false,
                     "trimmed": false,
                     "sourceSize": {
@@ -892,7 +892,7 @@
                     }
                 },
                 {
-                    "filename": "bat/walk-up/bat03",
+                    "filename": "bat/walk-up/03",
                     "rotated": false,
                     "trimmed": false,
                     "sourceSize": {
@@ -913,7 +913,7 @@
                     }
                 },
                 {
-                    "filename": "bat/idle-up/bat04",
+                    "filename": "bat/idle-up/04",
                     "rotated": false,
                     "trimmed": false,
                     "sourceSize": {
@@ -934,7 +934,7 @@
                     }
                 },
                 {
-                    "filename": "bat/walk-up/bat04",
+                    "filename": "bat/walk-up/04",
                     "rotated": false,
                     "trimmed": false,
                     "sourceSize": {

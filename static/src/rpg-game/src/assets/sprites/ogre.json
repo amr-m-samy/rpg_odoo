@@ -10,7 +10,7 @@
             "scale": 1,
             "frames": [
                 {
-                    "filename": "ogre/atk-up/ogre01",
+                    "filename": "ogre/atk-up/01",
                     "rotated": false,
                     "trimmed": false,
                     "sourceSize": {
@@ -31,7 +31,7 @@
                     }
                 },
                 {
-                    "filename": "ogre/atk-up/ogre02",
+                    "filename": "ogre/atk-up/02",
                     "rotated": false,
                     "trimmed": false,
                     "sourceSize": {
@@ -52,7 +52,7 @@
                     }
                 },
                 {
-                    "filename": "ogre/atk-down/ogre00",
+                    "filename": "ogre/atk-down/00",
                     "rotated": false,
                     "trimmed": false,
                     "sourceSize": {
@@ -73,7 +73,7 @@
                     }
                 },
                 {
-                    "filename": "ogre/atk-right/ogre01",
+                    "filename": "ogre/atk-right/01",
                     "rotated": false,
                     "trimmed": false,
                     "sourceSize": {
@@ -94,7 +94,7 @@
                     }
                 },
                 {
-                    "filename": "ogre/atk-right/ogre00",
+                    "filename": "ogre/atk-right/00",
                     "rotated": false,
                     "trimmed": false,
                     "sourceSize": {
@@ -115,7 +115,7 @@
                     }
                 },
                 {
-                    "filename": "ogre/walk-down/ogre01",
+                    "filename": "ogre/walk-down/01",
                     "rotated": false,
                     "trimmed": false,
                     "sourceSize": {
@@ -136,7 +136,7 @@
                     }
                 },
                 {
-                    "filename": "ogre/atk-up/ogre00",
+                    "filename": "ogre/atk-up/00",
                     "rotated": false,
                     "trimmed": false,
                     "sourceSize": {
@@ -157,7 +157,7 @@
                     }
                 },
                 {
-                    "filename": "ogre/walk-up/ogre04",
+                    "filename": "ogre/walk-up/04",
                     "rotated": false,
                     "trimmed": false,
                     "sourceSize": {
@@ -178,7 +178,7 @@
                     }
                 },
                 {
-                    "filename": "ogre/walk-down/ogre05",
+                    "filename": "ogre/walk-down/05",
                     "rotated": false,
                     "trimmed": false,
                     "sourceSize": {
@@ -199,7 +199,7 @@
                     }
                 },
                 {
-                    "filename": "ogre/walk-up/ogre01",
+                    "filename": "ogre/walk-up/01",
                     "rotated": false,
                     "trimmed": false,
                     "sourceSize": {
@@ -220,7 +220,7 @@
                     }
                 },
                 {
-                    "filename": "ogre/idle-right/ogre00",
+                    "filename": "ogre/idle-right/00",
                     "rotated": false,
                     "trimmed": false,
                     "sourceSize": {
@@ -241,7 +241,7 @@
                     }
                 },
                 {
-                    "filename": "ogre/idle-right/ogre01",
+                    "filename": "ogre/idle-right/01",
                     "rotated": false,
                     "trimmed": false,
                     "sourceSize": {
@@ -262,7 +262,7 @@
                     }
                 },
                 {
-                    "filename": "ogre/idle-down/ogre00",
+                    "filename": "ogre/idle-down/00",
                     "rotated": false,
                     "trimmed": false,
                     "sourceSize": {
@@ -283,7 +283,7 @@
                     }
                 },
                 {
-                    "filename": "ogre/idle-down/ogre01",
+                    "filename": "ogre/idle-down/01",
                     "rotated": false,
                     "trimmed": false,
                     "sourceSize": {
@@ -304,7 +304,7 @@
                     }
                 },
                 {
-                    "filename": "ogre/idle-up/ogre00",
+                    "filename": "ogre/idle-up/00",
                     "rotated": false,
                     "trimmed": false,
                     "sourceSize": {
@@ -325,7 +325,7 @@
                     }
                 },
                 {
-                    "filename": "ogre/idle-up/ogre01",
+                    "filename": "ogre/idle-up/01",
                     "rotated": false,
                     "trimmed": false,
                     "sourceSize": {
@@ -346,7 +346,7 @@
                     }
                 },
                 {
-                    "filename": "ogre/walk-down/ogre00",
+                    "filename": "ogre/walk-down/00",
                     "rotated": false,
                     "trimmed": false,
                     "sourceSize": {
@@ -367,7 +367,7 @@
                     }
                 },
                 {
-                    "filename": "ogre/walk-down/ogre02",
+                    "filename": "ogre/walk-down/02",
                     "rotated": false,
                     "trimmed": false,
                     "sourceSize": {
@@ -388,7 +388,7 @@
                     }
                 },
                 {
-                    "filename": "ogre/walk-up/ogre03",
+                    "filename": "ogre/walk-up/03",
                     "rotated": false,
                     "trimmed": false,
                     "sourceSize": {
@@ -409,7 +409,7 @@
                     }
                 },
                 {
-                    "filename": "ogre/walk-down/ogre04",
+                    "filename": "ogre/walk-down/04",
                     "rotated": false,
                     "trimmed": false,
                     "sourceSize": {
@@ -430,7 +430,7 @@
                     }
                 },
                 {
-                    "filename": "ogre/walk-up/ogre00",
+                    "filename": "ogre/walk-up/00",
                     "rotated": false,
                     "trimmed": false,
                     "sourceSize": {
@@ -451,7 +451,7 @@
                     }
                 },
                 {
-                    "filename": "ogre/walk-up/ogre02",
+                    "filename": "ogre/walk-up/02",
                     "rotated": false,
                     "trimmed": false,
                     "sourceSize": {
@@ -472,7 +472,7 @@
                     }
                 },
                 {
-                    "filename": "ogre/atk-right/ogre02",
+                    "filename": "ogre/atk-right/02",
                     "rotated": false,
                     "trimmed": false,
                     "sourceSize": {
@@ -493,7 +493,7 @@
                     }
                 },
                 {
-                    "filename": "ogre/walk-right/ogre05",
+                    "filename": "ogre/walk-right/05",
                     "rotated": false,
                     "trimmed": false,
                     "sourceSize": {
@@ -514,7 +514,7 @@
                     }
                 },
                 {
-                    "filename": "ogre/atk-down/ogre01",
+                    "filename": "ogre/atk-down/01",
                     "rotated": false,
                     "trimmed": false,
                     "sourceSize": {
@@ -535,7 +535,7 @@
                     }
                 },
                 {
-                    "filename": "ogre/walk-right/ogre04",
+                    "filename": "ogre/walk-right/04",
                     "rotated": false,
                     "trimmed": false,
                     "sourceSize": {
@@ -556,7 +556,7 @@
                     }
                 },
                 {
-                    "filename": "ogre/walk-right/ogre02",
+                    "filename": "ogre/walk-right/02",
                     "rotated": false,
                     "trimmed": false,
                     "sourceSize": {
@@ -577,7 +577,7 @@
                     }
                 },
                 {
-                    "filename": "ogre/walk-right/ogre01",
+                    "filename": "ogre/walk-right/01",
                     "rotated": false,
                     "trimmed": false,
                     "sourceSize": {
@@ -598,7 +598,7 @@
                     }
                 },
                 {
-                    "filename": "ogre/atk-down/ogre02",
+                    "filename": "ogre/atk-down/02",
                     "rotated": false,
                     "trimmed": false,
                     "sourceSize": {
@@ -619,7 +619,7 @@
                     }
                 },
                 {
-                    "filename": "ogre/walk-right/ogre00",
+                    "filename": "ogre/walk-right/00",
                     "rotated": false,
                     "trimmed": false,
                     "sourceSize": {
@@ -640,7 +640,7 @@
                     }
                 },
                 {
-                    "filename": "ogre/walk-right/ogre03",
+                    "filename": "ogre/walk-right/03",
                     "rotated": false,
                     "trimmed": false,
                     "sourceSize": {
@@ -661,7 +661,7 @@
                     }
                 },
                 {
-                    "filename": "ogre/walk-down/ogre03",
+                    "filename": "ogre/walk-down/03",
                     "rotated": false,
                     "trimmed": false,
                     "sourceSize": {

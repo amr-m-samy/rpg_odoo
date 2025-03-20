@@ -1,6 +1,6 @@
 {
     "frames": {
-        "slash/slash03": {
+        "slash/03": {
             "frame": {
                 "x": 6,
                 "y": 6,
@@ -24,7 +24,7 @@
                 "y": 0.5
             }
         },
-        "slash/slash04": {
+        "slash/04": {
             "frame": {
                 "x": 6,
                 "y": 34,
@@ -48,7 +48,7 @@
                 "y": 0.5
             }
         },
-        "slash/slash02": {
+        "slash/02": {
             "frame": {
                 "x": 6,
                 "y": 62,
@@ -72,7 +72,7 @@
                 "y": 0.5
             }
         },
-        "slash/slash01": {
+        "slash/01": {
             "frame": {
                 "x": 25,
                 "y": 6,

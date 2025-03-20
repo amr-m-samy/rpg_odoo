@@ -6,6 +6,27 @@ import base64
 import os
 
 
+class AtlasConfig(models.Model):
+    _name = "game.atlas.config"
+    _description = "Model for Atlas Config"
+    _rec_name = "key"
+
+    name = fields.Char(string="Atlas name", required=True)
+    key = fields.Char(string="key", required=True)
+    frame_rate = fields.Integer(string="Frame Rate", default=8, required=True)
+    prefix = fields.Char(string="Prefix", required=True)
+    start = fields.Integer(string="Start", default=0, required=True)
+    end = fields.Integer(string="End", default=0, required=True)
+    zero_pad = fields.Integer(string="Zero Pad", required=True)
+    repeat = fields.Integer(string="Repeat", default=-1, required=True)
+    game_asset = fields.Many2one("game.assets.manager", string="Game Asset")
+
+    _key_unique = models.Constraint(
+        "UNIQUE(key)",
+        "A key must be unique!",
+    )
+
+
 class GameAsset(models.Model):
     _name = "game.assets.manager"
     _description = "Model for Game Assets"
@@ -36,11 +57,30 @@ class GameAsset(models.Model):
     )  # For atlas and aseprite
     file = fields.Binary(string="File")
     json_file = fields.Binary(string="JSON File")
+    atlas_config_ids = fields.One2many(
+        "game.atlas.config", "game_asset", string="Atlas"
+    )
 
     _name_key_unique = models.Constraint(
         "UNIQUE(name_key)",
         "A name must be unique!",
     )
+
+    def upload_binary_to_file_field(self):
+        """
+        upload binary data to the file field.
+        """
+        assets_path = self.env["rpg.game.utils"].get_rpg_game_src_directory("assets/")
+        all_assets = self.env["game.assets.manager"].search([])
+        for record in all_assets:
+            if record.file_path:
+                file_path = os.path.join(assets_path, record.file_path)
+                with open(file_path, "rb") as f:
+                    record.file = base64.b64encode(f.read())
+            if record.json_file_path:
+                json_file_path = os.path.join(assets_path, record.json_file_path)
+                with open(json_file_path, "rb") as f:
+                    record.json_file = base64.b64encode(f.read())
 
     def _get_assets_directory(self):
         this_directory = os.path.dirname(os.path.abspath(__file__))
@@ -98,6 +138,108 @@ class GameAsset(models.Model):
                 os.remove(file_path)
             if json_file_path and os.path.exists(json_file_path):
                 os.remove(json_file_path)
+
+    def _atlas_json_frame_collector(self):
+        """
+        Collect all the frames from the atlas json files.
+        """
+        atlas_frames = []
+        assets = self.env["game.assets.manager"].search([])
+        for asset in assets:
+            if asset.asset_type == "atlasconfig":
+                name = asset.name_key
+                json_data = base64.b64decode(asset.json_file).decode("utf-8")
+                json_obj = json.loads(json_data)
+                frames = json_obj.get("frames")
+                textures = json_obj.get("textures")
+                if frames:  # For the case of the texture packer images
+                    atlas_frames.append(
+                        {
+                            "name": name,
+                            "frames_name": [frame for frame in frames.keys()],
+                        }
+                    )
+                if textures:  # For the case of the texture packer folder
+                    atlas_frames.append(
+                        {
+                            "name": name,
+                            "frames_name": [
+                                frame["filename"] for frame in textures[0].get("frames")
+                            ],
+                        }
+                    )
+        return atlas_frames
+
+    def _split_number_from_end(self, string):
+        """
+        Split the number from the end of the string.
+        """
+        number = ""
+        for char in string[::-1]:
+            if char.isdigit():
+                number += char
+            else:
+                break
+        return number[::-1]
+
+    def _organize_atlas_json_frames(self):
+        """
+        Organize the atlas json frames in a dictionary.
+        """
+        atlas_frames = self._atlas_json_frame_collector()
+        organized_frames = {}
+        for atlas_frame in atlas_frames:
+            name = atlas_frame["name"]
+            frames_name = atlas_frame["frames_name"]
+            organized_frames[name] = {}
+            for frame_name in frames_name:
+                number = self._split_number_from_end(frame_name)
+                if number:
+                    frame_name = frame_name.replace(number, "")
+                if frame_name not in organized_frames[name]:
+                    organized_frames[name][frame_name] = []
+                organized_frames[name][frame_name].append(number)
+
+        for key, value in organized_frames.items():
+            for frame_name, numbers in value.items():
+                numbers = [number for number in numbers]
+                numbers.sort()
+                organized_frames[key][frame_name] = numbers
+
+        return organized_frames
+
+    def create_atlas_config_records(self):
+        """
+        Create atlas config  records from the atlas json files.
+        """
+        self.env["game.atlas.config"].search([]).unlink()
+        collect_frames_keys = []
+        organized_frames = self._organize_atlas_json_frames()
+        for key, value in organized_frames.items():
+            for frame_name, numbers in value.items():
+                if len(numbers) > 0 and numbers != [""]:
+                    prefix = frame_name
+                    start = int(numbers[0])
+                    end = int(numbers[-1])
+                    zero_pad = len(numbers[-1])
+                    repeat = -1
+
+                    self.env["game.atlas.config"].create(
+                        {
+                            "name": key,
+                            "key": frame_name.replace("/", "-")[:-1],
+                            "frame_rate": 8,
+                            "prefix": prefix,
+                            "start": start,
+                            "end": end,
+                            "zero_pad": zero_pad,
+                            "repeat": repeat,
+                            "game_asset": self.env["game.assets.manager"]
+                            .search([("name_key", "=", key)])
+                            .id,
+                        }
+                    )
+        return collect_frames_keys
 
     def generate_game_assets_import_and_export(self):
         """
@@ -289,6 +431,7 @@ class GameAsset(models.Model):
     def write(self, vals):
         self._remove_asset()
         res = super(GameAsset, self).write(vals)
+        # self.create_atlas_config_records()
         self._add_asset()
         self.generate_game_assets_import_and_export()
         return res

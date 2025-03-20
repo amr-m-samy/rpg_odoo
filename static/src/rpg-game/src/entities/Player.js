@@ -7,6 +7,7 @@ import { LuminusKeyboardMouseController } from "../plugins/LuminusKeyboardMouseC
 import { LuminusMovement } from "../plugins/LuminusMovement";
 import { BaseEntity } from "./BaseEntity";
 import { EntityAttributes } from "./EntityAttributes";
+import { PlayerConfig } from "../consts/player/PlayerConfig";
 
 /**
  * @class
@@ -163,7 +164,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
       this.joystickScene,
     );
 
-    this.play("character-idle-down");
+    this.play(`${PlayerConfig.texture}-idle-down`);
 
     /**
      * The container that holds the player game objects.

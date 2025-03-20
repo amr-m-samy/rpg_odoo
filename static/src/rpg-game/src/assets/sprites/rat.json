@@ -10,7 +10,7 @@
             "scale": 1,
             "frames": [
                 {
-                    "filename": "rat/atk-right/rat00",
+                    "filename": "rat/atk-right/00",
                     "rotated": false,
                     "trimmed": false,
                     "sourceSize": {
@@ -31,7 +31,7 @@
                     }
                 },
                 {
-                    "filename": "rat/atk-down/rat00",
+                    "filename": "rat/atk-down/00",
                     "rotated": false,
                     "trimmed": false,
                     "sourceSize": {
@@ -52,7 +52,7 @@
                     }
                 },
                 {
-                    "filename": "rat/atk-right/rat01",
+                    "filename": "rat/atk-right/01",
                     "rotated": false,
                     "trimmed": false,
                     "sourceSize": {
@@ -73,7 +73,7 @@
                     }
                 },
                 {
-                    "filename": "rat/atk-down/rat01",
+                    "filename": "rat/atk-down/01",
                     "rotated": false,
                     "trimmed": false,
                     "sourceSize": {
@@ -94,7 +94,7 @@
                     }
                 },
                 {
-                    "filename": "rat/atk-right/rat02",
+                    "filename": "rat/atk-right/02",
                     "rotated": false,
                     "trimmed": false,
                     "sourceSize": {
@@ -115,7 +115,7 @@
                     }
                 },
                 {
-                    "filename": "rat/atk-right/rat04",
+                    "filename": "rat/atk-right/04",
                     "rotated": false,
                     "trimmed": false,
                     "sourceSize": {
@@ -136,7 +136,7 @@
                     }
                 },
                 {
-                    "filename": "rat/atk-down/rat02",
+                    "filename": "rat/atk-down/02",
                     "rotated": false,
                     "trimmed": false,
                     "sourceSize": {
@@ -157,7 +157,7 @@
                     }
                 },
                 {
-                    "filename": "rat/atk-down/rat03",
+                    "filename": "rat/atk-down/03",
                     "rotated": false,
                     "trimmed": false,
                     "sourceSize": {
@@ -178,7 +178,7 @@
                     }
                 },
                 {
-                    "filename": "rat/atk-right/rat05",
+                    "filename": "rat/atk-right/05",
                     "rotated": false,
                     "trimmed": false,
                     "sourceSize": {
@@ -199,7 +199,7 @@
                     }
                 },
                 {
-                    "filename": "rat/idle-right/rat01",
+                    "filename": "rat/idle-right/01",
                     "rotated": false,
                     "trimmed": false,
                     "sourceSize": {
@@ -220,7 +220,7 @@
                     }
                 },
                 {
-                    "filename": "rat/idle-down/rat01",
+                    "filename": "rat/idle-down/01",
                     "rotated": false,
                     "trimmed": false,
                     "sourceSize": {
@@ -241,7 +241,7 @@
                     }
                 },
                 {
-                    "filename": "rat/idle-down/rat03",
+                    "filename": "rat/idle-down/03",
                     "rotated": false,
                     "trimmed": false,
                     "sourceSize": {
@@ -262,7 +262,7 @@
                     }
                 },
                 {
-                    "filename": "rat/atk-up/rat01",
+                    "filename": "rat/atk-up/01",
                     "rotated": false,
                     "trimmed": false,
                     "sourceSize": {
@@ -283,7 +283,7 @@
                     }
                 },
                 {
-                    "filename": "rat/death/rat02",
+                    "filename": "rat/death/02",
                     "rotated": false,
                     "trimmed": false,
                     "sourceSize": {
@@ -304,7 +304,7 @@
                     }
                 },
                 {
-                    "filename": "rat/death/rat03",
+                    "filename": "rat/death/03",
                     "rotated": false,
                     "trimmed": false,
                     "sourceSize": {
@@ -325,7 +325,7 @@
                     }
                 },
                 {
-                    "filename": "rat/atk-up/rat02",
+                    "filename": "rat/atk-up/02",
                     "rotated": false,
                     "trimmed": false,
                     "sourceSize": {
@@ -346,7 +346,7 @@
                     }
                 },
                 {
-                    "filename": "rat/atk-up/rat00",
+                    "filename": "rat/atk-up/00",
                     "rotated": false,
                     "trimmed": false,
                     "sourceSize": {
@@ -367,7 +367,7 @@
                     }
                 },
                 {
-                    "filename": "rat/atk-up/rat03",
+                    "filename": "rat/atk-up/03",
                     "rotated": false,
                     "trimmed": false,
                     "sourceSize": {
@@ -388,7 +388,7 @@
                     }
                 },
                 {
-                    "filename": "rat/death/rat04",
+                    "filename": "rat/death/04",
                     "rotated": false,
                     "trimmed": false,
                     "sourceSize": {
@@ -409,7 +409,7 @@
                     }
                 },
                 {
-                    "filename": "rat/death/rat00",
+                    "filename": "rat/death/00",
                     "rotated": false,
                     "trimmed": false,
                     "sourceSize": {
@@ -430,7 +430,7 @@
                     }
                 },
                 {
-                    "filename": "rat/idle-up/rat01",
+                    "filename": "rat/idle-up/01",
                     "rotated": false,
                     "trimmed": false,
                     "sourceSize": {
@@ -451,7 +451,7 @@
                     }
                 },
                 {
-                    "filename": "rat/idle-up/rat03",
+                    "filename": "rat/idle-up/03",
                     "rotated": false,
                     "trimmed": false,
                     "sourceSize": {
@@ -472,7 +472,7 @@
                     }
                 },
                 {
-                    "filename": "rat/death/rat01",
+                    "filename": "rat/death/01",
                     "rotated": false,
                     "trimmed": false,
                     "sourceSize": {
@@ -493,7 +493,7 @@
                     }
                 },
                 {
-                    "filename": "rat/idle-down/rat00",
+                    "filename": "rat/idle-down/00",
                     "rotated": false,
                     "trimmed": false,
                     "sourceSize": {
@@ -514,7 +514,7 @@
                     }
                 },
                 {
-                    "filename": "rat/idle-down/rat02",
+                    "filename": "rat/idle-down/02",
                     "rotated": false,
                     "trimmed": false,
                     "sourceSize": {
@@ -535,7 +535,7 @@
                     }
                 },
                 {
-                    "filename": "rat/walk-down/rat00",
+                    "filename": "rat/walk-down/00",
                     "rotated": false,
                     "trimmed": false,
                     "sourceSize": {
@@ -556,7 +556,7 @@
                     }
                 },
                 {
-                    "filename": "rat/walk-down/rat01",
+                    "filename": "rat/walk-down/01",
                     "rotated": false,
                     "trimmed": false,
                     "sourceSize": {
@@ -577,7 +577,7 @@
                     }
                 },
                 {
-                    "filename": "rat/walk-down/rat02",
+                    "filename": "rat/walk-down/02",
                     "rotated": false,
                     "trimmed": false,
                     "sourceSize": {
@@ -598,7 +598,7 @@
                     }
                 },
                 {
-                    "filename": "rat/walk-down/rat03",
+                    "filename": "rat/walk-down/03",
                     "rotated": false,
                     "trimmed": false,
                     "sourceSize": {
@@ -619,7 +619,7 @@
                     }
                 },
                 {
-                    "filename": "rat/atk-right/rat03",
+                    "filename": "rat/atk-right/03",
                     "rotated": false,
                     "trimmed": false,
                     "sourceSize": {
@@ -640,7 +640,7 @@
                     }
                 },
                 {
-                    "filename": "rat/idle-right/rat00",
+                    "filename": "rat/idle-right/00",
                     "rotated": false,
                     "trimmed": false,
                     "sourceSize": {
@@ -661,7 +661,7 @@
                     }
                 },
                 {
-                    "filename": "rat/walk-right/rat00",
+                    "filename": "rat/walk-right/00",
                     "rotated": false,
                     "trimmed": false,
                     "sourceSize": {
@@ -682,7 +682,7 @@
                     }
                 },
                 {
-                    "filename": "rat/walk-right/rat01",
+                    "filename": "rat/walk-right/01",
                     "rotated": false,
                     "trimmed": false,
                     "sourceSize": {
@@ -703,7 +703,7 @@
                     }
                 },
                 {
-                    "filename": "rat/walk-right/rat02",
+                    "filename": "rat/walk-right/02",
                     "rotated": false,
                     "trimmed": false,
                     "sourceSize": {
@@ -724,7 +724,7 @@
                     }
                 },
                 {
-                    "filename": "rat/idle-up/rat00",
+                    "filename": "rat/idle-up/00",
                     "rotated": false,
                     "trimmed": false,
                     "sourceSize": {
@@ -745,7 +745,7 @@
                     }
                 },
                 {
-                    "filename": "rat/idle-up/rat02",
+                    "filename": "rat/idle-up/02",
                     "rotated": false,
                     "trimmed": false,
                     "sourceSize": {
@@ -766,7 +766,7 @@
                     }
                 },
                 {
-                    "filename": "rat/walk-up/rat01",
+                    "filename": "rat/walk-up/01",
                     "rotated": false,
                     "trimmed": false,
                     "sourceSize": {
@@ -787,7 +787,7 @@
                     }
                 },
                 {
-                    "filename": "rat/walk-up/rat00",
+                    "filename": "rat/walk-up/00",
                     "rotated": false,
                     "trimmed": false,
                     "sourceSize": {
@@ -808,7 +808,7 @@
                     }
                 },
                 {
-                    "filename": "rat/walk-up/rat02",
+                    "filename": "rat/walk-up/02",
                     "rotated": false,
                     "trimmed": false,
                     "sourceSize": {
@@ -829,7 +829,7 @@
                     }
                 },
                 {
-                    "filename": "rat/walk-up/rat03",
+                    "filename": "rat/walk-up/03",
                     "rotated": false,
                     "trimmed": false,
                     "sourceSize": {

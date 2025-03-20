@@ -4,10 +4,6 @@ from odoo.exceptions import ValidationError
 import os
 
 
-# q: how to make get_rpg_game_src_directory method available to all models?
-# a: create a base model and inherit it in all models
-
-
 class InfoBox(models.Model):
     _name = "info.box"
     _description = "Info Box"

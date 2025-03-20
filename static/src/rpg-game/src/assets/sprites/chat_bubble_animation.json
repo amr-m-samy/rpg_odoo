@@ -10,7 +10,7 @@
             "scale": 1,
             "frames": [
                 {
-                    "filename": "chat_box_01",
+                    "filename": "chatbox/01",
                     "rotated": false,
                     "trimmed": false,
                     "sourceSize": {
@@ -31,7 +31,7 @@
                     }
                 },
                 {
-                    "filename": "chat_box_02",
+                    "filename": "chatbox/02",
                     "rotated": false,
                     "trimmed": false,
                     "sourceSize": {
@@ -52,7 +52,7 @@
                     }
                 },
                 {
-                    "filename": "chat_box_03",
+                    "filename": "chatbox/03",
                     "rotated": false,
                     "trimmed": false,
                     "sourceSize": {
@@ -73,7 +73,7 @@
                     }
                 },
                 {
-                    "filename": "chat_box_04",
+                    "filename": "chatbox/04",
                     "rotated": false,
                     "trimmed": false,
                     "sourceSize": {

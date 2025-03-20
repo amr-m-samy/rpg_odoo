@@ -7,6 +7,8 @@
           <list string="Game Assets">
            <header>
              <button name="generate_game_assets_import_and_export" string="Generate Game Assets" type="object" display="always" class="oe_highlight"/>
+             <button name="upload_binary_to_file_field" string="Auto Upload files" type="object" display="always" class="oe_highlight"/>
+             <!--<button name="create_atlas_config_records" string="gernerat Atlas" type="object" display="always" class="oe_highlight"/>-->
             </header>  
             <field name="file" widget="image" options='{"zoom": true}' class="game-assets-image"/>
             <field name="name_key"/>
@@ -22,9 +24,11 @@
         <field name="name">game.assets.form</field>
         <field name="model">game.assets.manager</field>
         <field name="arch" type="xml">
-
             <form>
+              <heading>
 
+             <button name="create_atlas_config_records" string="gernerat Atlas" type="object" display="always" class="oe_highlight"/>
+           </heading>
                 <sheet>
                     <group>
                       <field name="name_key" required="1"/>
@@ -37,8 +41,7 @@
                         invisible="asset_type == 'image' or asset_type == 'audio' or asset_type == 'json'"
                         required="asset_type == 'atlasconfig' or asset_type == 'aspriteconfig' or asset_type == 'tilemapconfig'"
                         />
-
-
+                      <field name="atlas_config_ids" invisible="asset_type != 'atlasconfig'"/>
                     </group>
                 </sheet>
             </form>
