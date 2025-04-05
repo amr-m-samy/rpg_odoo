@@ -136,10 +136,17 @@ export class LuminusBattleManager extends AnimationNames {
    * @param { Phaser.Physics.Arcade.Sprite } atacker The atacker
    */
   createHitBox(atacker) {
-    console.log(atacker.scene.player);
+    let playerX = atacker.scene.player.container.x;
+    let playerY = atacker.scene.player.container.y;
+
+    //if the atacker is not overlapping with the player, then the hitbox will be created at the atacker position to avoid the hitbox to be created at the player position when the player is not atacking.
+    if (!atacker.overlapWithPlayer) {
+      playerX = atacker.container.x;
+      playerY = atacker.container.y;
+    }
     const hitbox = atacker.scene.physics.add.sprite(
-      atacker.scene.player.container.x,
-      atacker.scene.player.container.y,
+      playerX,
+      playerY,
       this.hitboxSpriteName,
       0,
     );
@@ -268,7 +275,20 @@ export class LuminusBattleManager extends AnimationNames {
           if (target.entityName === this.enemyConstructorName)
             target.dropItems();
           target.anims.stop();
-          target.destroyAll();
+          if (
+            target.scene.anims.exists(
+              `${target.texture.key}-${target.deathAnimationName}`,
+            )
+          ) {
+            target.anims.play(
+              `${target.texture.key}-${target.deathAnimationName}`,
+            );
+            target.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
+              target.destroyAll();
+            });
+          } else {
+            target.destroyAll();
+          }
         }, 100);
       }
       // Not very Optimized.
@@ -405,7 +425,7 @@ export class LuminusBattleManager extends AnimationNames {
               this.takeDamage(atacker, enemy);
               enemy.canTakeDamage = false;
               atackedEnemies.push(enemy);
-              atacker.canAtack = false;
+              //atacker.canAtack = false; // mychange
               // if (atacker.anims.getProgress() === 1) {
               // }
             },

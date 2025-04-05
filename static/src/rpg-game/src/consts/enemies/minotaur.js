@@ -1,3 +1,5 @@
+import { EntityDrops } from '../../models/EntityDrops';
+
 export const MinotaurConfig = {
   id: 1,
   name: "Minotaur",
@@ -11,8 +13,12 @@ export const MinotaurConfig = {
   exp: 600,
   healthBarOffsetX: 16,
   healthBarOffsetY: -10,
-  scale: 1.0,
+  scale: 0.7,
   drops: [
+    new EntityDrops(
+      1,
+      100,
+    ),
   ],
 };
 

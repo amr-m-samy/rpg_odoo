@@ -432,10 +432,10 @@ class GameAsset(models.Model):
         all_enemies_atlas_configs_code = []
         atlas_config_code = ""
         for atlas_config in enimy_animation_type_ids:
+            atlas_config_code = (
+                "import { EntityDrops } from '../../models/EntityDrops';\n\n"
+            )
             if atlas_config.asset_type == "atlasconfig":
-                atlas_config_code = (
-                    "import { EntityDrops } from '../../models/EntityDrops';\n\n"
-                )
                 atlas_config_code += (
                     f"export const {atlas_config.name_key.capitalize()} = [\n"
                 )

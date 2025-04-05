@@ -198,11 +198,13 @@ export class Enemy extends Phaser.Physics.Arcade.Sprite {
       ) {
         // console.log('Player');
         let overlaps = false;
+        this.overlapWithPlayer = false;
         this.scene.physics.overlap(
           target.gameObject.hitZone,
           this,
           (t, enemy) => {
             overlaps = true;
+            this.overlapWithPlayer = true;
             this.stopMovement();
             if (this.canAtack) this.luminusBattleManager.atack(this);
           },

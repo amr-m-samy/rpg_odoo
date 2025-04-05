@@ -115,6 +115,8 @@ import atlas_goblin_monika_image from "../assets/sprites/goblin_monika.png";
 import atlas_goblin_monika_image_json from "../assets/sprites/goblin_monika.json";
 import minotaur from "../assets/sprites/minotaur.png";
 import minotaur_json from "../assets/sprites/minotaur.json";
+import monika from "../assets/sprites/monika.png";
+import monika_json from "../assets/sprites/monika.json";
 
 export const Images = [
     {name: "tiles", image: tiles},
@@ -228,7 +230,8 @@ export const AtlasConfig = [
 export const ASEPRITE_CONFIG = [
     {name: "plus_small_button", image: plus_small_button, json: plus_small_button_json},
     {name: "minus_small_button", image: minus_small_button, json: minus_small_button_json},
-    {name: "minotaur", image: minotaur, json: minotaur_json}
+    {name: "minotaur", image: minotaur, json: minotaur_json},
+    {name: "monika", image: monika, json: monika_json}
 ];;
 
 export const TilemapConfig = [
