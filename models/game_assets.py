@@ -12,6 +12,7 @@ class AtlasConfig(models.Model):
     _rec_name = "key"
 
     name = fields.Char(string="Atlas name", required=True)
+    active = fields.Boolean(string="Active", default=True)
     key = fields.Char(string="key", required=True)
     frame_rate = fields.Integer(string="Frame Rate", default=8, required=True)
     prefix = fields.Char(string="Prefix", required=True)
@@ -19,12 +20,58 @@ class AtlasConfig(models.Model):
     end = fields.Integer(string="End", default=0, required=True)
     zero_pad = fields.Integer(string="Zero Pad", required=True)
     repeat = fields.Integer(string="Repeat", default=-1, required=True)
-    game_asset = fields.Many2one("game.assets.manager", string="Game Asset")
+    game_asset_id = fields.Many2one(
+        "game.assets.manager", string="Game Asset", ondelete="cascade"
+    )
 
     _key_unique = models.Constraint(
         "UNIQUE(key)",
         "A key must be unique!",
     )
+
+
+class DropConfig(models.Model):
+    _name = "game.drop.config"
+    _description = "Model for Drop Config"
+    _rec_name = "name"
+
+    name = fields.Char(string="Name", readonly=True)
+    asset_id = fields.Many2one(
+        "game.assets.manager",
+        string="Asset",
+        required=True,
+        readonly=True,
+        ondelete="cascade",
+    )
+    item_id = fields.Many2one("game.items", string="Item", required=True)
+    chance = fields.Integer(string="Chance", required=True)
+
+    def create(self, vals):
+        for val in vals:
+            val["name"] = (
+                self.env["game.assets.manager"]
+                .browse(val["asset_id"])
+                .name_key.capitalize()
+                + " - "
+                + self.env["game.items"].browse(val["item_id"]).name
+                + " - "
+                + "Drop"
+            )
+        res = super(DropConfig, self).create(vals)
+        return res
+
+    def write(self, vals):
+        if vals.get("item_id"):
+            self.name = (
+                self.asset_id.name_key.capitalize()
+                + " - "
+                + self.env["game.items"].browse(vals["item_id"]).name
+                + " - "
+                + "Drop"
+            )
+
+        res = super(DropConfig, self).write(vals)
+        return res
 
 
 class GameAsset(models.Model):
@@ -33,6 +80,7 @@ class GameAsset(models.Model):
     _rec_name = "name_key"
 
     name_key = fields.Char(string="Name", required=True)
+    active = fields.Boolean(string="Active", default=True)
     asset_type = fields.Selection(
         [
             ("image", "Image"),
@@ -44,6 +92,15 @@ class GameAsset(models.Model):
         default="image",
         string="File Type",
         required=True,
+    )
+    animation_type = fields.Selection(
+        [
+            ("player", "Player"),
+            ("enemy", "Enemy"),
+            ("friend", "Friend"),
+            ("misc", "Misc"),
+        ],
+        string="Animation Type",
     )
     file_path = fields.Char(
         string="File Path",
@@ -58,12 +115,33 @@ class GameAsset(models.Model):
     file = fields.Binary(string="File")
     json_file = fields.Binary(string="JSON File")
     atlas_config_ids = fields.One2many(
-        "game.atlas.config", "game_asset", string="Atlas"
+        "game.atlas.config", "game_asset_id", string="Atlas"
     )
+
+    # Entity Config Fields
+    entity_config_id = fields.Integer(
+        string="ID", help="ID of the entity the set on the tiled map"
+    )
+    base_health = fields.Integer(string="Base Health", default=10)
+    attack = fields.Integer(string="Attack")
+    defense = fields.Integer(string="Defense")
+    speed = fields.Integer(string="Speed")
+    flee = fields.Integer(string="Flee")
+    hit = fields.Integer(string="Hit")
+    exp = fields.Integer(string="Exp")
+    health_bar_offset_x = fields.Integer(string="Health Bar Offset X")
+    health_bar_offset_y = fields.Integer(string="Health Bar Offset Y")
+    scale = fields.Float(string="Scale", default=1.0)
+    drops_ids = fields.One2many("game.drop.config", "asset_id", string="Drops")
 
     _name_key_unique = models.Constraint(
         "UNIQUE(name_key)",
         "A name must be unique!",
+    )
+
+    _entity_config_id_unique = models.Constraint(
+        "UNIQUE(entity_config_id)",
+        "A entity_config_id must be unique!",
     )
 
     def upload_binary_to_file_field(self):
@@ -92,6 +170,14 @@ class GameAsset(models.Model):
             raise Exception(f"Assets directory not found: {assets_directory}")
         return assets_directory
 
+    def _remove_characters_from_aesprite_json_filename(self, jsonObj):
+        """
+        Remove the character from the aseprite json filename.
+        """
+        for frame in jsonObj["frames"]:
+            frame["filename"] = "".join(filter(str.isdigit, frame["filename"]))
+        return jsonObj
+
     def _add_asset(self):
         """
         Add a new asset to the assets folder.
@@ -115,6 +201,10 @@ class GameAsset(models.Model):
                     "utf-8"
                 )  # Decode from base64 and convert to string
                 json_obj = json.loads(json_data)  # Parse JSON to validate it
+                if record.asset_type == "asepriteconfig":
+                    json_obj = self._remove_characters_from_aesprite_json_filename(
+                        json_obj
+                    )
                 with open(json_file_path, "w", encoding="utf-8") as f:
                     json.dump(json_obj, f, indent=4)  # Save it as a readable JSON file
 
@@ -182,6 +272,12 @@ class GameAsset(models.Model):
                 break
         return number[::-1]
 
+    def _remove_file_name(self, string):
+        """
+        Remove the file name from the string.
+        """
+        return string.rsplit("/", 1)[0]
+
     def _organize_atlas_json_frames(self):
         """
         Organize the atlas json frames in a dictionary.
@@ -194,6 +290,7 @@ class GameAsset(models.Model):
             organized_frames[name] = {}
             for frame_name in frames_name:
                 number = self._split_number_from_end(frame_name)
+
                 if number:
                     frame_name = frame_name.replace(number, "")
                 if frame_name not in organized_frames[name]:
@@ -208,9 +305,28 @@ class GameAsset(models.Model):
 
         return organized_frames
 
+    def _caculate_atlas_frame_rate(self, numbers):
+        """
+        Calculate the frame rate for the atlas config.
+        """
+        if numbers:
+            if len(numbers) > 1:
+                return len(numbers)
+        return 0
+
+    def _calculate_repeat(self, numbers, key):
+        """
+        Calculate the repeat for the atlas config.
+        """
+        is_atk = key.find("-atk-")
+        if numbers:
+            if len(numbers) > 1 and is_atk == -1:
+                return -1
+        return 0
+
     def create_atlas_config_records(self):
         """
-        Create atlas config  records from the atlas json files.
+        Create atlas config records from the atlas json files.
         """
         self.env["game.atlas.config"].search([]).unlink()
         collect_frames_keys = []
@@ -218,28 +334,298 @@ class GameAsset(models.Model):
         for key, value in organized_frames.items():
             for frame_name, numbers in value.items():
                 if len(numbers) > 0 and numbers != [""]:
+                    frame_name_without_filename = ""
+                    if frame_name[-1] != "/":
+                        frame_name_without_filename = self._remove_file_name(frame_name)
+                    else:
+                        frame_name_without_filename = frame_name[:-1]
                     prefix = frame_name
                     start = int(numbers[0])
                     end = int(numbers[-1])
                     zero_pad = len(numbers[-1])
-                    repeat = -1
+                    frame_key = frame_name_without_filename.replace("/", "-")
+                    repeat = self._calculate_repeat(numbers, frame_key)
 
                     self.env["game.atlas.config"].create(
                         {
                             "name": key,
-                            "key": frame_name.replace("/", "-")[:-1],
-                            "frame_rate": 8,
+                            "key": frame_key,
+                            "frame_rate": self._caculate_atlas_frame_rate(numbers),
                             "prefix": prefix,
                             "start": start,
                             "end": end,
                             "zero_pad": zero_pad,
                             "repeat": repeat,
-                            "game_asset": self.env["game.assets.manager"]
+                            "game_asset_id": self.env["game.assets.manager"]
                             .search([("name_key", "=", key)])
                             .id,
                         }
                     )
         return collect_frames_keys
+
+    def _save_enemy_atla_config_to_file(self, enemy_name, code):
+        """
+        Save the enemy atlas config code to a file.
+        """
+        assets_path = self.env["rpg.game.utils"].get_rpg_game_src_directory(
+            f"consts/enemies/{enemy_name}.js"
+        )
+        with open(assets_path, "w", encoding="utf-8") as f:
+            f.write(code)
+
+    def generate_enemy_atlas_config_code(self):
+        """
+        Generate the atlas config javascript file.
+
+        import { EntityDrops } from "../../models/EntityDrops";
+
+        export const Bat = [
+          // Down
+          {
+            atlas: "bat",
+            key: "bat-idle-down",
+            frameRate: 8,
+            prefix: "bat/idle-down/",
+            start: 0,
+            end: 4,
+            zeroPad: 2,
+            repeat: -1,
+          },
+          {
+            atlas: "bat",
+            key: "bat-atk-down",
+            frameRate: 5,
+            prefix: "bat/atk-down/",
+            start: 0,
+            end: 4,
+            zeroPad: 2,
+            repeat: 0,
+          },
+        ];
+
+        export const BatConfig = {
+          id: 2,
+          name: "Bat",
+          texture: "bat",
+          baseHealth: 10,
+          atack: 7,
+          defense: 1,
+          speed: 30,
+          flee: 3,
+          hit: 5,
+          exp: 50,
+          hit: 5,
+          healthBarOffsetX: -6,
+          healthBarOffsetY: 16,
+          drops: [
+            new EntityDrops(
+              1, // Red Potion
+              50, // 50% chance of dropping the item
+            ),
+          ],
+        };
+        """
+
+        enimy_animation_type_ids = self.env["game.assets.manager"].search(
+            [("animation_type", "in", ["enemy"])]
+        )
+        all_enemies_atlas_configs_code = []
+        atlas_config_code = ""
+        for atlas_config in enimy_animation_type_ids:
+            if atlas_config.asset_type == "atlasconfig":
+                atlas_config_code = (
+                    "import { EntityDrops } from '../../models/EntityDrops';\n\n"
+                )
+                atlas_config_code += (
+                    f"export const {atlas_config.name_key.capitalize()} = [\n"
+                )
+                for atlas in atlas_config.atlas_config_ids:
+                    atlas_config_code += (
+                        f"  {{\n"
+                        f'    atlas: "{atlas.name}",\n'
+                        f'    key: "{atlas.key}",\n'
+                        f"    frameRate: {atlas.frame_rate},\n"
+                        f'    prefix: "{atlas.prefix}",\n'
+                        f"    start: {atlas.start},\n"
+                        f"    end: {atlas.end},\n"
+                        f"    zeroPad: {atlas.zero_pad},\n"
+                        f"    repeat: {atlas.repeat},\n"
+                        f"  }},\n"
+                    )
+                atlas_config_code += "];\n\n"
+
+            if atlas_config.animation_type == "enemy":
+                atlas_config_code += (
+                    f"export const {atlas_config.name_key.capitalize()}Config = {{\n"
+                    f"  id: {atlas_config.entity_config_id},\n"
+                    f'  name: "{atlas_config.name_key.capitalize()}",\n'
+                    f'  texture: "{atlas_config.name_key}",\n'
+                    f"  baseHealth: {atlas_config.base_health},\n"
+                    f"  atack: {atlas_config.attack},\n"  # atack -> attack with one 't'
+                    f"  defense: {atlas_config.defense},\n"
+                    f"  speed: {atlas_config.speed},\n"
+                    f"  flee: {atlas_config.flee},\n"
+                    f"  hit: {atlas_config.hit},\n"
+                    f"  exp: {atlas_config.exp},\n"
+                    f"  healthBarOffsetX: {atlas_config.health_bar_offset_x},\n"
+                    f"  healthBarOffsetY: {atlas_config.health_bar_offset_y},\n"
+                    f"  scale: {atlas_config.scale},\n"
+                    f"  drops: [\n"
+                )
+                for drop in atlas_config.drops_ids:
+                    atlas_config_code += (
+                        f"    new EntityDrops(\n"
+                        f"      {drop.item_id.id},\n"
+                        f"      {drop.chance},\n"
+                        f"    ),\n"
+                    )
+                atlas_config_code += "  ],\n};\n\n"
+            all_enemies_atlas_configs_code.append(atlas_config_code)
+
+            self._save_enemy_atla_config_to_file(
+                atlas_config.name_key, atlas_config_code
+            )
+            atlas_config_code = ""
+
+        self._generate_enemies_seed_config_code()
+        self._generate_misc_atlas_config_code()
+        self._generate_Animation_code()
+        return atlas_config_code
+
+    def _generate_misc_atlas_config_code(self):
+        """
+        Generate the atlas config javascript file for the misc atlas.
+        """
+        atlas_configs_asset_ids = (
+            self.env["game.atlas.config"]
+            .search([("game_asset_id.animation_type", "=", "misc")])
+            .game_asset_id
+        )
+
+        atlas_config_code = "export const Misc = [\n"
+        for atlas_config in atlas_configs_asset_ids:
+
+            for atlas in atlas_config.atlas_config_ids:
+                atlas_config_code += f"// -------------- {atlas.name} --------------\n"
+                atlas_config_code += (
+                    f"  {{\n"
+                    f'    atlas: "{atlas.name}",\n'
+                    f'    key: "{atlas.key}",\n'
+                    f"    frameRate: {atlas.frame_rate},\n"
+                    f'    prefix: "{atlas.prefix}",\n'
+                    f"    start: {atlas.start},\n"
+                    f"    end: {atlas.end},\n"
+                    f"    zeroPad: {atlas.zero_pad},\n"
+                    f"    repeat: {atlas.repeat},\n"
+                    f"  }},\n"
+                )
+        atlas_config_code += "];\n\n"
+        self._save_misc_atla_config_to_file(atlas_config_code)
+        return atlas_config_code
+
+    def _generate_Animation_code(self):
+        """
+                Generate the Animation javascript file.
+        import { Bat } from "./enemies/bat";
+        import { Ogre } from "./enemies/ogre";
+        import { Rat } from "./enemies/rat";
+        import { Player } from "./player/Player";
+        import { PlayerConfig } from "./player/PlayerConfig";
+        import { Misc } from "./misc/Misc";
+
+        export const Animations = [
+          ...Bat,
+          ...Rat,
+          ...Ogre,
+          ...Player[PlayerConfig.texture],
+          ...Misc,
+        ];
+        """
+        atlas_enemy_configs_asset_ids = (
+            self.env["game.atlas.config"]
+            .search([("game_asset_id.animation_type", "=", "enemy")])
+            .game_asset_id
+        )
+
+        animation_code = 'import { Player } from "./player/Player";\n'
+        animation_code += 'import { PlayerConfig } from "./player/PlayerConfig"\n'
+        animation_code += 'import { Misc } from "./misc/Misc";'
+        for atlas_config in atlas_enemy_configs_asset_ids:
+            animation_code += f'import {{ {atlas_config.name_key.capitalize()} }} from "./enemies/{atlas_config.name_key}";\n'
+        animation_code += "export const Animations = [\n"
+        animation_code += "  ...Player[PlayerConfig.texture],\n"
+        animation_code += "  ...Misc,\n"
+        for atlas_config in atlas_enemy_configs_asset_ids:
+            animation_code += f"  ...{atlas_config.name_key.capitalize()},\n"
+        animation_code += "];\n"
+        self._save_animation_to_file(animation_code)
+        return animation_code
+
+    def _save_misc_atla_config_to_file(self, code):
+        """
+        Save the misc atlas config code to a file.
+        """
+        assets_path = self.env["rpg.game.utils"].get_rpg_game_src_directory(
+            "consts/misc/Misc.js"
+        )
+        with open(assets_path, "w", encoding="utf-8") as f:
+            f.write(code)
+
+    def _save_enemies_seed_config_to_file(self, code):
+        """
+        Save the enemies seed config code to a file.
+        """
+        assets_path = self.env["rpg.game.utils"].get_rpg_game_src_directory(
+            "consts/enemies/EnemiesSeedConfig.js"
+        )
+        with open(assets_path, "w", encoding="utf-8") as f:
+            f.write(code)
+
+    def _save_animation_to_file(self, code):
+        """
+        Save the animation code to a file.
+        """
+        assets_path = self.env["rpg.game.utils"].get_rpg_game_src_directory(
+            "consts/Animations.js"
+        )
+        with open(assets_path, "w", encoding="utf-8") as f:
+            f.write(code)
+
+    def _generate_enemies_seed_config_code(self):
+        """
+        Generate the enemies seed config javascript file.
+
+        example:
+
+        import { BatConfig } from "./bat";
+        import { OgreConfig } from "./ogre";
+        import { RatConfig } from "./rat";
+        export const EnemiesSeedConfig = [
+          RatConfig,
+          BatConfig,
+          OgreConfig,
+        ];
+        """
+        # atlas_configs_asset_ids = (
+        #     self.env["game.atlas.config"]
+        #     .search([("game_asset_id.animation_type", "=", "enemy")])
+        #     .game_asset_id
+        # )
+        enimy_and_friend_animation_type_ids = self.env["game.assets.manager"].search(
+            [("animation_type", "in", ["enemy", "friend"])]
+        )
+        enemies_seed_config_code = ""
+        for atlas_config in enimy_and_friend_animation_type_ids:
+            enemies_seed_config_code += f'import {{ {atlas_config.name_key.capitalize()}Config }} from "./{atlas_config.name_key}";\n'
+        enemies_seed_config_code += "export const EnemiesSeedConfig = [\n"
+        for atlas_config in enimy_and_friend_animation_type_ids:
+            enemies_seed_config_code += (
+                f"  {atlas_config.name_key.capitalize()}Config,\n"
+            )
+        enemies_seed_config_code += "];\n"
+
+        self._save_enemies_seed_config_to_file(enemies_seed_config_code)
+        return enemies_seed_config_code
 
     def generate_game_assets_import_and_export(self):
         """
@@ -431,7 +817,6 @@ class GameAsset(models.Model):
     def write(self, vals):
         self._remove_asset()
         res = super(GameAsset, self).write(vals)
-        # self.create_atlas_config_records()
         self._add_asset()
         self.generate_game_assets_import_and_export()
         return res

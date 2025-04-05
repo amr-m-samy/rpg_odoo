@@ -136,9 +136,10 @@ export class LuminusBattleManager extends AnimationNames {
    * @param { Phaser.Physics.Arcade.Sprite } atacker The atacker
    */
   createHitBox(atacker) {
+    console.log(atacker.scene.player);
     const hitbox = atacker.scene.physics.add.sprite(
-      atacker.container.x,
-      atacker.container.y,
+      atacker.scene.player.container.x,
+      atacker.scene.player.container.y,
       this.hitboxSpriteName,
       0,
     );

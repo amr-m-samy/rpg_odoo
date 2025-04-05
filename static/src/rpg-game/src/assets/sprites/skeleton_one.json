@@ -1,0 +1,1489 @@
+{
+    "textures": [
+        {
+            "image": "skeleton",
+            "format": "RGBA8888",
+            "size": {
+                "w": 413,
+                "h": 427
+            },
+            "scale": 1,
+            "frames": [
+                {
+                    "filename": "skeleton_one/atk-down/atk-down5",
+                    "rotated": false,
+                    "trimmed": true,
+                    "sourceSize": {
+                        "w": 79,
+                        "h": 56
+                    },
+                    "spriteSourceSize": {
+                        "x": 9,
+                        "y": 0,
+                        "w": 66,
+                        "h": 56
+                    },
+                    "frame": {
+                        "x": 0,
+                        "y": 0,
+                        "w": 66,
+                        "h": 56
+                    }
+                },
+                {
+                    "filename": "skeleton_one/atk-up/atk-up6",
+                    "rotated": false,
+                    "trimmed": true,
+                    "sourceSize": {
+                        "w": 77,
+                        "h": 56
+                    },
+                    "spriteSourceSize": {
+                        "x": 15,
+                        "y": 2,
+                        "w": 62,
+                        "h": 54
+                    },
+                    "frame": {
+                        "x": 0,
+                        "y": 56,
+                        "w": 62,
+                        "h": 54
+                    }
+                },
+                {
+                    "filename": "skeleton_one/atk-down/atk-down6",
+                    "rotated": false,
+                    "trimmed": true,
+                    "sourceSize": {
+                        "w": 79,
+                        "h": 56
+                    },
+                    "spriteSourceSize": {
+                        "x": 17,
+                        "y": 0,
+                        "w": 62,
+                        "h": 52
+                    },
+                    "frame": {
+                        "x": 66,
+                        "y": 0,
+                        "w": 62,
+                        "h": 52
+                    }
+                },
+                {
+                    "filename": "skeleton_one/atk-left/atk-left4",
+                    "rotated": false,
+                    "trimmed": true,
+                    "sourceSize": {
+                        "w": 67,
+                        "h": 47
+                    },
+                    "spriteSourceSize": {
+                        "x": 4,
+                        "y": 0,
+                        "w": 56,
+                        "h": 47
+                    },
+                    "frame": {
+                        "x": 66,
+                        "y": 52,
+                        "w": 56,
+                        "h": 47
+                    }
+                },
+                {
+                    "filename": "skeleton_one/atk-left/atk-left5",
+                    "rotated": false,
+                    "trimmed": true,
+                    "sourceSize": {
+                        "w": 67,
+                        "h": 47
+                    },
+                    "spriteSourceSize": {
+                        "x": 0,
+                        "y": 0,
+                        "w": 56,
+                        "h": 47
+                    },
+                    "frame": {
+                        "x": 0,
+                        "y": 110,
+                        "w": 56,
+                        "h": 47
+                    }
+                },
+                {
+                    "filename": "skeleton_one/atk-right/atk-right5",
+                    "rotated": false,
+                    "trimmed": true,
+                    "sourceSize": {
+                        "w": 67,
+                        "h": 47
+                    },
+                    "spriteSourceSize": {
+                        "x": 11,
+                        "y": 0,
+                        "w": 56,
+                        "h": 47
+                    },
+                    "frame": {
+                        "x": 56,
+                        "y": 110,
+                        "w": 56,
+                        "h": 47
+                    }
+                },
+                {
+                    "filename": "skeleton_one/atk-right/atk-right4",
+                    "rotated": false,
+                    "trimmed": true,
+                    "sourceSize": {
+                        "w": 67,
+                        "h": 47
+                    },
+                    "spriteSourceSize": {
+                        "x": 7,
+                        "y": 0,
+                        "w": 56,
+                        "h": 47
+                    },
+                    "frame": {
+                        "x": 128,
+                        "y": 0,
+                        "w": 56,
+                        "h": 47
+                    }
+                },
+                {
+                    "filename": "skeleton_one/atk-up/atk-up5",
+                    "rotated": false,
+                    "trimmed": true,
+                    "sourceSize": {
+                        "w": 77,
+                        "h": 56
+                    },
+                    "spriteSourceSize": {
+                        "x": 5,
+                        "y": 0,
+                        "w": 54,
+                        "h": 56
+                    },
+                    "frame": {
+                        "x": 112,
+                        "y": 99,
+                        "w": 54,
+                        "h": 56
+                    }
+                },
+                {
+                    "filename": "skeleton_one/atk-right/atk-right6",
+                    "rotated": false,
+                    "trimmed": true,
+                    "sourceSize": {
+                        "w": 67,
+                        "h": 47
+                    },
+                    "spriteSourceSize": {
+                        "x": 11,
+                        "y": 0,
+                        "w": 56,
+                        "h": 47
+                    },
+                    "frame": {
+                        "x": 122,
+                        "y": 52,
+                        "w": 56,
+                        "h": 47
+                    }
+                },
+                {
+                    "filename": "skeleton_one/atk-left/atk-left6",
+                    "rotated": false,
+                    "trimmed": true,
+                    "sourceSize": {
+                        "w": 67,
+                        "h": 47
+                    },
+                    "spriteSourceSize": {
+                        "x": 0,
+                        "y": 0,
+                        "w": 56,
+                        "h": 47
+                    },
+                    "frame": {
+                        "x": 0,
+                        "y": 157,
+                        "w": 56,
+                        "h": 47
+                    }
+                },
+                {
+                    "filename": "skeleton_one/atk-down/atk-down4",
+                    "rotated": false,
+                    "trimmed": true,
+                    "sourceSize": {
+                        "w": 79,
+                        "h": 56
+                    },
+                    "spriteSourceSize": {
+                        "x": 1,
+                        "y": 1,
+                        "w": 54,
+                        "h": 46
+                    },
+                    "frame": {
+                        "x": 56,
+                        "y": 157,
+                        "w": 54,
+                        "h": 46
+                    }
+                },
+                {
+                    "filename": "skeleton_one/atk-down/atk-down1",
+                    "rotated": false,
+                    "trimmed": true,
+                    "sourceSize": {
+                        "w": 79,
+                        "h": 56
+                    },
+                    "spriteSourceSize": {
+                        "x": 15,
+                        "y": 0,
+                        "w": 46,
+                        "h": 47
+                    },
+                    "frame": {
+                        "x": 110,
+                        "y": 157,
+                        "w": 46,
+                        "h": 47
+                    }
+                },
+                {
+                    "filename": "skeleton_one/atk-left/atk-left1",
+                    "rotated": false,
+                    "trimmed": true,
+                    "sourceSize": {
+                        "w": 67,
+                        "h": 47
+                    },
+                    "spriteSourceSize": {
+                        "x": 22,
+                        "y": 0,
+                        "w": 45,
+                        "h": 47
+                    },
+                    "frame": {
+                        "x": 184,
+                        "y": 0,
+                        "w": 45,
+                        "h": 47
+                    }
+                },
+                {
+                    "filename": "skeleton_one/atk-left/atk-left3",
+                    "rotated": false,
+                    "trimmed": true,
+                    "sourceSize": {
+                        "w": 67,
+                        "h": 47
+                    },
+                    "spriteSourceSize": {
+                        "x": 25,
+                        "y": 0,
+                        "w": 39,
+                        "h": 47
+                    },
+                    "frame": {
+                        "x": 156,
+                        "y": 155,
+                        "w": 39,
+                        "h": 47
+                    }
+                },
+                {
+                    "filename": "skeleton_one/atk-up/atk-up4",
+                    "rotated": false,
+                    "trimmed": true,
+                    "sourceSize": {
+                        "w": 77,
+                        "h": 56
+                    },
+                    "spriteSourceSize": {
+                        "x": 7,
+                        "y": 9,
+                        "w": 45,
+                        "h": 47
+                    },
+                    "frame": {
+                        "x": 178,
+                        "y": 47,
+                        "w": 45,
+                        "h": 47
+                    }
+                },
+                {
+                    "filename": "skeleton_one/atk-right/atk-right1",
+                    "rotated": false,
+                    "trimmed": true,
+                    "sourceSize": {
+                        "w": 67,
+                        "h": 47
+                    },
+                    "spriteSourceSize": {
+                        "x": 0,
+                        "y": 0,
+                        "w": 45,
+                        "h": 47
+                    },
+                    "frame": {
+                        "x": 178,
+                        "y": 94,
+                        "w": 45,
+                        "h": 47
+                    }
+                },
+                {
+                    "filename": "skeleton_one/atk-right/atk-right3",
+                    "rotated": false,
+                    "trimmed": true,
+                    "sourceSize": {
+                        "w": 67,
+                        "h": 47
+                    },
+                    "spriteSourceSize": {
+                        "x": 3,
+                        "y": 0,
+                        "w": 39,
+                        "h": 47
+                    },
+                    "frame": {
+                        "x": 0,
+                        "y": 204,
+                        "w": 39,
+                        "h": 47
+                    }
+                },
+                {
+                    "filename": "skeleton_one/death/hurt1",
+                    "rotated": false,
+                    "trimmed": true,
+                    "sourceSize": {
+                        "w": 64,
+                        "h": 64
+                    },
+                    "spriteSourceSize": {
+                        "x": 17,
+                        "y": 15,
+                        "w": 46,
+                        "h": 47
+                    },
+                    "frame": {
+                        "x": 39,
+                        "y": 204,
+                        "w": 46,
+                        "h": 47
+                    }
+                },
+                {
+                    "filename": "skeleton_one/atk-down/atk-down2",
+                    "rotated": false,
+                    "trimmed": true,
+                    "sourceSize": {
+                        "w": 79,
+                        "h": 56
+                    },
+                    "spriteSourceSize": {
+                        "x": 7,
+                        "y": 0,
+                        "w": 45,
+                        "h": 47
+                    },
+                    "frame": {
+                        "x": 85,
+                        "y": 204,
+                        "w": 45,
+                        "h": 47
+                    }
+                },
+                {
+                    "filename": "skeleton_one/walk-down/walk21",
+                    "rotated": false,
+                    "trimmed": true,
+                    "sourceSize": {
+                        "w": 64,
+                        "h": 64
+                    },
+                    "spriteSourceSize": {
+                        "x": 17,
+                        "y": 15,
+                        "w": 46,
+                        "h": 47
+                    },
+                    "frame": {
+                        "x": 130,
+                        "y": 204,
+                        "w": 46,
+                        "h": 47
+                    }
+                },
+                {
+                    "filename": "skeleton_one/walk-down/walk23",
+                    "rotated": false,
+                    "trimmed": true,
+                    "sourceSize": {
+                        "w": 64,
+                        "h": 64
+                    },
+                    "spriteSourceSize": {
+                        "x": 17,
+                        "y": 15,
+                        "w": 46,
+                        "h": 47
+                    },
+                    "frame": {
+                        "x": 176,
+                        "y": 202,
+                        "w": 46,
+                        "h": 47
+                    }
+                },
+                {
+                    "filename": "skeleton_one/walk-down/walk25",
+                    "rotated": false,
+                    "trimmed": true,
+                    "sourceSize": {
+                        "w": 64,
+                        "h": 64
+                    },
+                    "spriteSourceSize": {
+                        "x": 17,
+                        "y": 15,
+                        "w": 46,
+                        "h": 47
+                    },
+                    "frame": {
+                        "x": 229,
+                        "y": 0,
+                        "w": 46,
+                        "h": 47
+                    }
+                },
+                {
+                    "filename": "skeleton_one/walk-down/walk26",
+                    "rotated": false,
+                    "trimmed": true,
+                    "sourceSize": {
+                        "w": 64,
+                        "h": 64
+                    },
+                    "spriteSourceSize": {
+                        "x": 15,
+                        "y": 16,
+                        "w": 47,
+                        "h": 46
+                    },
+                    "frame": {
+                        "x": 223,
+                        "y": 47,
+                        "w": 47,
+                        "h": 46
+                    }
+                },
+                {
+                    "filename": "skeleton_one/walk-down/walk27",
+                    "rotated": false,
+                    "trimmed": true,
+                    "sourceSize": {
+                        "w": 64,
+                        "h": 64
+                    },
+                    "spriteSourceSize": {
+                        "x": 17,
+                        "y": 15,
+                        "w": 46,
+                        "h": 47
+                    },
+                    "frame": {
+                        "x": 223,
+                        "y": 93,
+                        "w": 46,
+                        "h": 47
+                    }
+                },
+                {
+                    "filename": "skeleton_one/walk-up/walk7",
+                    "rotated": false,
+                    "trimmed": true,
+                    "sourceSize": {
+                        "w": 64,
+                        "h": 64
+                    },
+                    "spriteSourceSize": {
+                        "x": 13,
+                        "y": 15,
+                        "w": 46,
+                        "h": 46
+                    },
+                    "frame": {
+                        "x": 223,
+                        "y": 140,
+                        "w": 46,
+                        "h": 46
+                    }
+                },
+                {
+                    "filename": "skeleton_one/death/hurt2",
+                    "rotated": false,
+                    "trimmed": true,
+                    "sourceSize": {
+                        "w": 64,
+                        "h": 64
+                    },
+                    "spriteSourceSize": {
+                        "x": 18,
+                        "y": 16,
+                        "w": 46,
+                        "h": 46
+                    },
+                    "frame": {
+                        "x": 222,
+                        "y": 186,
+                        "w": 46,
+                        "h": 46
+                    }
+                },
+                {
+                    "filename": "skeleton_one/death/hurt3",
+                    "rotated": false,
+                    "trimmed": true,
+                    "sourceSize": {
+                        "w": 64,
+                        "h": 64
+                    },
+                    "spriteSourceSize": {
+                        "x": 18,
+                        "y": 23,
+                        "w": 46,
+                        "h": 39
+                    },
+                    "frame": {
+                        "x": 0,
+                        "y": 251,
+                        "w": 46,
+                        "h": 39
+                    }
+                },
+                {
+                    "filename": "skeleton_one/death/hurt4",
+                    "rotated": false,
+                    "trimmed": true,
+                    "sourceSize": {
+                        "w": 64,
+                        "h": 64
+                    },
+                    "spriteSourceSize": {
+                        "x": 18,
+                        "y": 27,
+                        "w": 46,
+                        "h": 36
+                    },
+                    "frame": {
+                        "x": 46,
+                        "y": 251,
+                        "w": 46,
+                        "h": 36
+                    }
+                },
+                {
+                    "filename": "skeleton_one/death/hurt5",
+                    "rotated": false,
+                    "trimmed": true,
+                    "sourceSize": {
+                        "w": 64,
+                        "h": 64
+                    },
+                    "spriteSourceSize": {
+                        "x": 18,
+                        "y": 33,
+                        "w": 46,
+                        "h": 31
+                    },
+                    "frame": {
+                        "x": 222,
+                        "y": 232,
+                        "w": 46,
+                        "h": 31
+                    }
+                },
+                {
+                    "filename": "skeleton_one/death/hurt6",
+                    "rotated": false,
+                    "trimmed": true,
+                    "sourceSize": {
+                        "w": 64,
+                        "h": 64
+                    },
+                    "spriteSourceSize": {
+                        "x": 18,
+                        "y": 28,
+                        "w": 46,
+                        "h": 36
+                    },
+                    "frame": {
+                        "x": 176,
+                        "y": 249,
+                        "w": 46,
+                        "h": 36
+                    }
+                },
+                {
+                    "filename": "skeleton_one/idle-down/walk19",
+                    "rotated": false,
+                    "trimmed": true,
+                    "sourceSize": {
+                        "w": 64,
+                        "h": 64
+                    },
+                    "spriteSourceSize": {
+                        "x": 17,
+                        "y": 15,
+                        "w": 46,
+                        "h": 46
+                    },
+                    "frame": {
+                        "x": 275,
+                        "y": 0,
+                        "w": 46,
+                        "h": 46
+                    }
+                },
+                {
+                    "filename": "skeleton_one/idle-left/walk10",
+                    "rotated": false,
+                    "trimmed": true,
+                    "sourceSize": {
+                        "w": 64,
+                        "h": 64
+                    },
+                    "spriteSourceSize": {
+                        "x": 10,
+                        "y": 15,
+                        "w": 45,
+                        "h": 46
+                    },
+                    "frame": {
+                        "x": 275,
+                        "y": 46,
+                        "w": 45,
+                        "h": 46
+                    }
+                },
+                {
+                    "filename": "skeleton_one/idle-right/walk28",
+                    "rotated": false,
+                    "trimmed": true,
+                    "sourceSize": {
+                        "w": 64,
+                        "h": 64
+                    },
+                    "spriteSourceSize": {
+                        "x": 9,
+                        "y": 15,
+                        "w": 45,
+                        "h": 46
+                    },
+                    "frame": {
+                        "x": 270,
+                        "y": 92,
+                        "w": 45,
+                        "h": 46
+                    }
+                },
+                {
+                    "filename": "skeleton_one/atk-up/atk-up1",
+                    "rotated": false,
+                    "trimmed": true,
+                    "sourceSize": {
+                        "w": 77,
+                        "h": 56
+                    },
+                    "spriteSourceSize": {
+                        "x": 10,
+                        "y": 9,
+                        "w": 46,
+                        "h": 46
+                    },
+                    "frame": {
+                        "x": 269,
+                        "y": 138,
+                        "w": 46,
+                        "h": 46
+                    }
+                },
+                {
+                    "filename": "skeleton_one/walk-down/walk20",
+                    "rotated": false,
+                    "trimmed": true,
+                    "sourceSize": {
+                        "w": 64,
+                        "h": 64
+                    },
+                    "spriteSourceSize": {
+                        "x": 17,
+                        "y": 15,
+                        "w": 46,
+                        "h": 46
+                    },
+                    "frame": {
+                        "x": 269,
+                        "y": 184,
+                        "w": 46,
+                        "h": 46
+                    }
+                },
+                {
+                    "filename": "skeleton_one/atk-up/atk-up2",
+                    "rotated": false,
+                    "trimmed": true,
+                    "sourceSize": {
+                        "w": 77,
+                        "h": 56
+                    },
+                    "spriteSourceSize": {
+                        "x": 6,
+                        "y": 10,
+                        "w": 45,
+                        "h": 46
+                    },
+                    "frame": {
+                        "x": 268,
+                        "y": 230,
+                        "w": 45,
+                        "h": 46
+                    }
+                },
+                {
+                    "filename": "skeleton_one/walk-down/walk22",
+                    "rotated": false,
+                    "trimmed": true,
+                    "sourceSize": {
+                        "w": 64,
+                        "h": 64
+                    },
+                    "spriteSourceSize": {
+                        "x": 17,
+                        "y": 16,
+                        "w": 45,
+                        "h": 46
+                    },
+                    "frame": {
+                        "x": 0,
+                        "y": 290,
+                        "w": 45,
+                        "h": 46
+                    }
+                },
+                {
+                    "filename": "skeleton_one/atk-up/atk-up3",
+                    "rotated": false,
+                    "trimmed": true,
+                    "sourceSize": {
+                        "w": 77,
+                        "h": 56
+                    },
+                    "spriteSourceSize": {
+                        "x": 0,
+                        "y": 10,
+                        "w": 46,
+                        "h": 46
+                    },
+                    "frame": {
+                        "x": 222,
+                        "y": 263,
+                        "w": 46,
+                        "h": 46
+                    }
+                },
+                {
+                    "filename": "skeleton_one/walk-down/walk24",
+                    "rotated": false,
+                    "trimmed": true,
+                    "sourceSize": {
+                        "w": 64,
+                        "h": 64
+                    },
+                    "spriteSourceSize": {
+                        "x": 17,
+                        "y": 15,
+                        "w": 46,
+                        "h": 46
+                    },
+                    "frame": {
+                        "x": 45,
+                        "y": 290,
+                        "w": 46,
+                        "h": 46
+                    }
+                },
+                {
+                    "filename": "skeleton_one/walk-up/walk8",
+                    "rotated": false,
+                    "trimmed": true,
+                    "sourceSize": {
+                        "w": 64,
+                        "h": 64
+                    },
+                    "spriteSourceSize": {
+                        "x": 13,
+                        "y": 16,
+                        "w": 46,
+                        "h": 46
+                    },
+                    "frame": {
+                        "x": 91,
+                        "y": 287,
+                        "w": 46,
+                        "h": 46
+                    }
+                },
+                {
+                    "filename": "skeleton_one/walk-up/walk9",
+                    "rotated": false,
+                    "trimmed": true,
+                    "sourceSize": {
+                        "w": 64,
+                        "h": 64
+                    },
+                    "spriteSourceSize": {
+                        "x": 13,
+                        "y": 15,
+                        "w": 46,
+                        "h": 46
+                    },
+                    "frame": {
+                        "x": 137,
+                        "y": 285,
+                        "w": 46,
+                        "h": 46
+                    }
+                },
+                {
+                    "filename": "skeleton_one/atk-down/atk-down3",
+                    "rotated": false,
+                    "trimmed": true,
+                    "sourceSize": {
+                        "w": 79,
+                        "h": 56
+                    },
+                    "spriteSourceSize": {
+                        "x": 0,
+                        "y": 2,
+                        "w": 46,
+                        "h": 45
+                    },
+                    "frame": {
+                        "x": 268,
+                        "y": 276,
+                        "w": 46,
+                        "h": 45
+                    }
+                },
+                {
+                    "filename": "skeleton_one/walk-left/walk11",
+                    "rotated": false,
+                    "trimmed": true,
+                    "sourceSize": {
+                        "w": 64,
+                        "h": 64
+                    },
+                    "spriteSourceSize": {
+                        "x": 14,
+                        "y": 16,
+                        "w": 46,
+                        "h": 45
+                    },
+                    "frame": {
+                        "x": 321,
+                        "y": 0,
+                        "w": 46,
+                        "h": 45
+                    }
+                },
+                {
+                    "filename": "skeleton_one/walk-left/walk12",
+                    "rotated": false,
+                    "trimmed": true,
+                    "sourceSize": {
+                        "w": 64,
+                        "h": 64
+                    },
+                    "spriteSourceSize": {
+                        "x": 15,
+                        "y": 15,
+                        "w": 46,
+                        "h": 45
+                    },
+                    "frame": {
+                        "x": 321,
+                        "y": 45,
+                        "w": 46,
+                        "h": 45
+                    }
+                },
+                {
+                    "filename": "skeleton_one/walk-up/walk6",
+                    "rotated": false,
+                    "trimmed": true,
+                    "sourceSize": {
+                        "w": 64,
+                        "h": 64
+                    },
+                    "spriteSourceSize": {
+                        "x": 13,
+                        "y": 15,
+                        "w": 46,
+                        "h": 45
+                    },
+                    "frame": {
+                        "x": 313,
+                        "y": 230,
+                        "w": 46,
+                        "h": 45
+                    }
+                },
+                {
+                    "filename": "skeleton_one/walk-left/walk14",
+                    "rotated": false,
+                    "trimmed": true,
+                    "sourceSize": {
+                        "w": 64,
+                        "h": 64
+                    },
+                    "spriteSourceSize": {
+                        "x": 8,
+                        "y": 15,
+                        "w": 46,
+                        "h": 46
+                    },
+                    "frame": {
+                        "x": 320,
+                        "y": 90,
+                        "w": 46,
+                        "h": 46
+                    }
+                },
+                {
+                    "filename": "skeleton_one/walk-up/walk5",
+                    "rotated": false,
+                    "trimmed": true,
+                    "sourceSize": {
+                        "w": 64,
+                        "h": 64
+                    },
+                    "spriteSourceSize": {
+                        "x": 13,
+                        "y": 15,
+                        "w": 46,
+                        "h": 46
+                    },
+                    "frame": {
+                        "x": 315,
+                        "y": 136,
+                        "w": 46,
+                        "h": 46
+                    }
+                },
+                {
+                    "filename": "skeleton_one/walk-left/walk16",
+                    "rotated": false,
+                    "trimmed": true,
+                    "sourceSize": {
+                        "w": 64,
+                        "h": 64
+                    },
+                    "spriteSourceSize": {
+                        "x": 10,
+                        "y": 15,
+                        "w": 46,
+                        "h": 46
+                    },
+                    "frame": {
+                        "x": 315,
+                        "y": 182,
+                        "w": 46,
+                        "h": 46
+                    }
+                },
+                {
+                    "filename": "skeleton_one/walk-left/walk17",
+                    "rotated": false,
+                    "trimmed": true,
+                    "sourceSize": {
+                        "w": 64,
+                        "h": 64
+                    },
+                    "spriteSourceSize": {
+                        "x": 15,
+                        "y": 15,
+                        "w": 46,
+                        "h": 46
+                    },
+                    "frame": {
+                        "x": 314,
+                        "y": 275,
+                        "w": 46,
+                        "h": 46
+                    }
+                },
+                {
+                    "filename": "skeleton_one/walk-left/walk18",
+                    "rotated": false,
+                    "trimmed": true,
+                    "sourceSize": {
+                        "w": 64,
+                        "h": 64
+                    },
+                    "spriteSourceSize": {
+                        "x": 16,
+                        "y": 15,
+                        "w": 46,
+                        "h": 46
+                    },
+                    "frame": {
+                        "x": 0,
+                        "y": 336,
+                        "w": 46,
+                        "h": 46
+                    }
+                },
+                {
+                    "filename": "skeleton_one/walk-right/walk29",
+                    "rotated": false,
+                    "trimmed": true,
+                    "sourceSize": {
+                        "w": 64,
+                        "h": 64
+                    },
+                    "spriteSourceSize": {
+                        "x": 4,
+                        "y": 16,
+                        "w": 46,
+                        "h": 45
+                    },
+                    "frame": {
+                        "x": 46,
+                        "y": 336,
+                        "w": 46,
+                        "h": 45
+                    }
+                },
+                {
+                    "filename": "skeleton_one/walk-right/walk30",
+                    "rotated": false,
+                    "trimmed": true,
+                    "sourceSize": {
+                        "w": 64,
+                        "h": 64
+                    },
+                    "spriteSourceSize": {
+                        "x": 3,
+                        "y": 15,
+                        "w": 46,
+                        "h": 45
+                    },
+                    "frame": {
+                        "x": 92,
+                        "y": 333,
+                        "w": 46,
+                        "h": 45
+                    }
+                },
+                {
+                    "filename": "skeleton_one/walk-up/walk4",
+                    "rotated": false,
+                    "trimmed": true,
+                    "sourceSize": {
+                        "w": 64,
+                        "h": 64
+                    },
+                    "spriteSourceSize": {
+                        "x": 12,
+                        "y": 16,
+                        "w": 46,
+                        "h": 46
+                    },
+                    "frame": {
+                        "x": 138,
+                        "y": 331,
+                        "w": 46,
+                        "h": 46
+                    }
+                },
+                {
+                    "filename": "skeleton_one/walk-right/walk32",
+                    "rotated": false,
+                    "trimmed": true,
+                    "sourceSize": {
+                        "w": 64,
+                        "h": 64
+                    },
+                    "spriteSourceSize": {
+                        "x": 10,
+                        "y": 15,
+                        "w": 46,
+                        "h": 46
+                    },
+                    "frame": {
+                        "x": 184,
+                        "y": 321,
+                        "w": 46,
+                        "h": 46
+                    }
+                },
+                {
+                    "filename": "skeleton_one/walk-up/walk3",
+                    "rotated": false,
+                    "trimmed": true,
+                    "sourceSize": {
+                        "w": 64,
+                        "h": 64
+                    },
+                    "spriteSourceSize": {
+                        "x": 13,
+                        "y": 15,
+                        "w": 46,
+                        "h": 46
+                    },
+                    "frame": {
+                        "x": 230,
+                        "y": 321,
+                        "w": 46,
+                        "h": 46
+                    }
+                },
+                {
+                    "filename": "skeleton_one/walk-right/walk34",
+                    "rotated": false,
+                    "trimmed": true,
+                    "sourceSize": {
+                        "w": 64,
+                        "h": 64
+                    },
+                    "spriteSourceSize": {
+                        "x": 8,
+                        "y": 15,
+                        "w": 46,
+                        "h": 46
+                    },
+                    "frame": {
+                        "x": 276,
+                        "y": 321,
+                        "w": 46,
+                        "h": 46
+                    }
+                },
+                {
+                    "filename": "skeleton_one/walk-right/walk35",
+                    "rotated": false,
+                    "trimmed": true,
+                    "sourceSize": {
+                        "w": 64,
+                        "h": 64
+                    },
+                    "spriteSourceSize": {
+                        "x": 3,
+                        "y": 15,
+                        "w": 46,
+                        "h": 46
+                    },
+                    "frame": {
+                        "x": 367,
+                        "y": 0,
+                        "w": 46,
+                        "h": 46
+                    }
+                },
+                {
+                    "filename": "skeleton_one/walk-right/walk36",
+                    "rotated": false,
+                    "trimmed": true,
+                    "sourceSize": {
+                        "w": 64,
+                        "h": 64
+                    },
+                    "spriteSourceSize": {
+                        "x": 2,
+                        "y": 15,
+                        "w": 46,
+                        "h": 46
+                    },
+                    "frame": {
+                        "x": 367,
+                        "y": 46,
+                        "w": 46,
+                        "h": 46
+                    }
+                },
+                {
+                    "filename": "skeleton_one/walk-up/walk2",
+                    "rotated": false,
+                    "trimmed": true,
+                    "sourceSize": {
+                        "w": 64,
+                        "h": 64
+                    },
+                    "spriteSourceSize": {
+                        "x": 13,
+                        "y": 15,
+                        "w": 46,
+                        "h": 45
+                    },
+                    "frame": {
+                        "x": 366,
+                        "y": 92,
+                        "w": 46,
+                        "h": 45
+                    }
+                },
+                {
+                    "filename": "skeleton_one/idle-up/walk1",
+                    "rotated": false,
+                    "trimmed": true,
+                    "sourceSize": {
+                        "w": 64,
+                        "h": 64
+                    },
+                    "spriteSourceSize": {
+                        "x": 13,
+                        "y": 15,
+                        "w": 46,
+                        "h": 45
+                    },
+                    "frame": {
+                        "x": 359,
+                        "y": 228,
+                        "w": 46,
+                        "h": 45
+                    }
+                },
+                {
+                    "filename": "skeleton_one/walk-right/walk33",
+                    "rotated": false,
+                    "trimmed": true,
+                    "sourceSize": {
+                        "w": 64,
+                        "h": 64
+                    },
+                    "spriteSourceSize": {
+                        "x": 16,
+                        "y": 16,
+                        "w": 43,
+                        "h": 45
+                    },
+                    "frame": {
+                        "x": 361,
+                        "y": 137,
+                        "w": 43,
+                        "h": 45
+                    }
+                },
+                {
+                    "filename": "skeleton_one/walk-right/walk31",
+                    "rotated": false,
+                    "trimmed": true,
+                    "sourceSize": {
+                        "w": 64,
+                        "h": 64
+                    },
+                    "spriteSourceSize": {
+                        "x": 8,
+                        "y": 15,
+                        "w": 45,
+                        "h": 45
+                    },
+                    "frame": {
+                        "x": 361,
+                        "y": 182,
+                        "w": 45,
+                        "h": 45
+                    }
+                },
+                {
+                    "filename": "skeleton_one/walk-left/walk15",
+                    "rotated": false,
+                    "trimmed": true,
+                    "sourceSize": {
+                        "w": 64,
+                        "h": 64
+                    },
+                    "spriteSourceSize": {
+                        "x": 5,
+                        "y": 16,
+                        "w": 43,
+                        "h": 45
+                    },
+                    "frame": {
+                        "x": 360,
+                        "y": 273,
+                        "w": 43,
+                        "h": 45
+                    }
+                },
+                {
+                    "filename": "skeleton_one/walk-left/walk13",
+                    "rotated": false,
+                    "trimmed": true,
+                    "sourceSize": {
+                        "w": 64,
+                        "h": 64
+                    },
+                    "spriteSourceSize": {
+                        "x": 11,
+                        "y": 15,
+                        "w": 45,
+                        "h": 45
+                    },
+                    "frame": {
+                        "x": 360,
+                        "y": 318,
+                        "w": 45,
+                        "h": 45
+                    }
+                },
+                {
+                    "filename": "skeleton_one/atk-right/atk-right2",
+                    "rotated": false,
+                    "trimmed": true,
+                    "sourceSize": {
+                        "w": 67,
+                        "h": 47
+                    },
+                    "spriteSourceSize": {
+                        "x": 13,
+                        "y": 2,
+                        "w": 29,
+                        "h": 45
+                    },
+                    "frame": {
+                        "x": 322,
+                        "y": 321,
+                        "w": 29,
+                        "h": 45
+                    }
+                },
+                {
+                    "filename": "skeleton_one/atk-left/atk-left2",
+                    "rotated": false,
+                    "trimmed": true,
+                    "sourceSize": {
+                        "w": 67,
+                        "h": 47
+                    },
+                    "spriteSourceSize": {
+                        "x": 25,
+                        "y": 2,
+                        "w": 29,
+                        "h": 45
+                    },
+                    "frame": {
+                        "x": 0,
+                        "y": 382,
+                        "w": 29,
+                        "h": 45
+                    }
+                },
+                {
+                    "filename": "skeleton_one/walk-down/walk19",
+                    "rotated": false,
+                    "trimmed": true,
+                    "sourceSize": {
+                        "w": 64,
+                        "h": 64
+                    },
+                    "spriteSourceSize": {
+                        "x": 17,
+                        "y": 15,
+                        "w": 46,
+                        "h": 46
+                    },
+                    "frame": {
+                        "x": 275,
+                        "y": 0,
+                        "w": 46,
+                        "h": 46
+                    }
+                },
+                {
+                    "filename": "skeleton_one/walk-left/walk10",
+                    "rotated": false,
+                    "trimmed": true,
+                    "sourceSize": {
+                        "w": 64,
+                        "h": 64
+                    },
+                    "spriteSourceSize": {
+                        "x": 10,
+                        "y": 15,
+                        "w": 45,
+                        "h": 46
+                    },
+                    "frame": {
+                        "x": 275,
+                        "y": 46,
+                        "w": 45,
+                        "h": 46
+                    }
+                },
+                {
+                    "filename": "skeleton_one/walk-right/walk28",
+                    "rotated": false,
+                    "trimmed": true,
+                    "sourceSize": {
+                        "w": 64,
+                        "h": 64
+                    },
+                    "spriteSourceSize": {
+                        "x": 9,
+                        "y": 15,
+                        "w": 45,
+                        "h": 46
+                    },
+                    "frame": {
+                        "x": 270,
+                        "y": 92,
+                        "w": 45,
+                        "h": 46
+                    }
+                },
+                {
+                    "filename": "skeleton_one/walk-up/walk1",
+                    "rotated": false,
+                    "trimmed": true,
+                    "sourceSize": {
+                        "w": 64,
+                        "h": 64
+                    },
+                    "spriteSourceSize": {
+                        "x": 13,
+                        "y": 15,
+                        "w": 46,
+                        "h": 45
+                    },
+                    "frame": {
+                        "x": 359,
+                        "y": 228,
+                        "w": 46,
+                        "h": 45
+                    }
+                }
+            ]
+        }
+    ],
+    "meta": {
+        "app": "http://free-tex-packer.com",
+        "version": "0.6.7"
+    }
+}

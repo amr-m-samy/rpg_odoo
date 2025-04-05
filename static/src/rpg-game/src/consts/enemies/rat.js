@@ -1,11 +1,40 @@
-import { EntityDrops } from "../../models/EntityDrops";
+import { EntityDrops } from '../../models/EntityDrops';
 
 export const Rat = [
-  // Down
+  {
+    atlas: "rat",
+    key: "rat-atk-right",
+    frameRate: 6,
+    prefix: "rat/atk-right/",
+    start: 0,
+    end: 5,
+    zeroPad: 2,
+    repeat: 0,
+  },
+  {
+    atlas: "rat",
+    key: "rat-atk-down",
+    frameRate: 4,
+    prefix: "rat/atk-down/",
+    start: 0,
+    end: 3,
+    zeroPad: 2,
+    repeat: 0,
+  },
+  {
+    atlas: "rat",
+    key: "rat-idle-right",
+    frameRate: 2,
+    prefix: "rat/idle-right/",
+    start: 0,
+    end: 1,
+    zeroPad: 2,
+    repeat: -1,
+  },
   {
     atlas: "rat",
     key: "rat-idle-down",
-    frameRate: 1,
+    frameRate: 4,
     prefix: "rat/idle-down/",
     start: 0,
     end: 3,
@@ -14,13 +43,33 @@ export const Rat = [
   },
   {
     atlas: "rat",
-    key: "rat-atk-down",
-    frameRate: 2,
-    prefix: "rat/atk-down/",
+    key: "rat-atk-up",
+    frameRate: 4,
+    prefix: "rat/atk-up/",
     start: 0,
     end: 3,
     zeroPad: 2,
     repeat: 0,
+  },
+  {
+    atlas: "rat",
+    key: "rat-death",
+    frameRate: 5,
+    prefix: "rat/death/",
+    start: 0,
+    end: 4,
+    zeroPad: 2,
+    repeat: -1,
+  },
+  {
+    atlas: "rat",
+    key: "rat-idle-up",
+    frameRate: 4,
+    prefix: "rat/idle-up/",
+    start: 0,
+    end: 3,
+    zeroPad: 2,
+    repeat: -1,
   },
   {
     atlas: "rat",
@@ -32,46 +81,13 @@ export const Rat = [
     zeroPad: 2,
     repeat: -1,
   },
-
-  // Right
-  {
-    atlas: "rat",
-    key: "rat-idle-right",
-    frameRate: 1,
-    prefix: "rat/idle-right/",
-    start: 0,
-    end: 1,
-    zeroPad: 2,
-    repeat: -1,
-  },
   {
     atlas: "rat",
     key: "rat-walk-right",
-    frameRate: 4,
+    frameRate: 3,
     prefix: "rat/walk-right/",
     start: 0,
     end: 2,
-    zeroPad: 2,
-    repeat: -1,
-  },
-  {
-    atlas: "rat",
-    key: "rat-atk-right",
-    frameRate: 2,
-    prefix: "rat/atk-right/",
-    start: 0,
-    end: 4,
-    zeroPad: 2,
-    repeat: 0,
-  },
-  // UP
-  {
-    atlas: "rat",
-    key: "rat-idle-up",
-    frameRate: 1,
-    prefix: "rat/idle-up/",
-    start: 0,
-    end: 3,
     zeroPad: 2,
     repeat: -1,
   },
@@ -85,24 +101,14 @@ export const Rat = [
     zeroPad: 2,
     repeat: -1,
   },
-  {
-    atlas: "rat",
-    key: "rat-atk-up",
-    frameRate: 2,
-    prefix: "rat/atk-up/",
-    start: 0,
-    end: 3,
-    zeroPad: 2,
-    repeat: 0,
-  },
 ];
 
 export const RatConfig = {
-  id: 1,
+  id: 4,
   name: "Rat",
   texture: "rat",
   baseHealth: 10,
-  atack: 5,
+  atack: 30,
   defense: 1,
   speed: 25,
   flee: 2,
@@ -110,10 +116,12 @@ export const RatConfig = {
   exp: 25,
   healthBarOffsetX: -5,
   healthBarOffsetY: 16,
+  scale: 1.0,
   drops: [
     new EntityDrops(
-      1, // Red Potion
-      100, // 100% chance of dropping the item
+      3,
+      100,
     ),
   ],
 };
+

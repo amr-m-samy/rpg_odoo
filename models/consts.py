@@ -141,7 +141,6 @@ class Items(models.Model):
     _description = "Item"
 
     name = fields.Char(string="Name", required=True)
-    item_id = fields.Integer(string="ID", required=True)
     item_type = fields.Many2one("item.type", string="Type", required=True)
     item_key = fields.Char(related="item_type.key", string="Key", store=True)
     buff_type = fields.Many2one("buff.type", string="Buff Type")
@@ -159,10 +158,6 @@ class Items(models.Model):
     _name_unique = models.Constraint(
         "UNIQUE(name)",
         "A name must be unique!",
-    )
-    _item_id_unique = models.Constraint(
-        "UNIQUE(item_id)",
-        "A item_id must be unique!",
     )
 
     def item_code_generator(self):
@@ -186,7 +181,7 @@ class Items(models.Model):
         item_types_code += "export const DB_SEED_ITEMS = [\n"
         for item_type in item_types:
             item_types_code += f"  {{\n"
-            item_types_code += f"    id: {item_type.item_id},\n"
+            item_types_code += f"    id: {item_type.id},\n"
             item_types_code += f'    name: "{item_type.name}",\n'
             item_types_code += f"    type: ItemType.{item_type.item_key},\n"
             item_types_code += f"    buffType: {f'BUFF_TYPES.{item_type.buff_key}' if item_type.buff_key else '0'},\n"

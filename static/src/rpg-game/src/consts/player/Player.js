@@ -1,7 +1,7 @@
 import { PlayerConfig } from "./PlayerConfig.js";
 export const Player = {
   // chracater_lumi
-  character_lumi: [
+  character: [
     {
       atlas: PlayerConfig.texture,
       key: `${PlayerConfig.texture}-idle-down`,

@@ -200,39 +200,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
         },
       })
       .setDepth(0);
-    //this.walkDust = this.walkDust.addEmitter({
-    //  follow: this.container,
-    //  speed: 2,
-    //  scale: { start: 0.1, end: 0.25 },
-    //  frequency: 300,
-    //  quantity: 20,
-    //  lifespan: 1000,
-    //  rotate: { min: 0, max: 360 },
-    //  alpha: { start: 1, end: 0 },
-    //  followOffset: {
-    //    y: 10,
-    //  },
-    //});
-
     this.walkDust.on = false;
-    //this.walkDust = this.scene.add
-    //  .particles(this.dustParticleName)
-    //  .setDepth(0)
-    //  .createEmitter({
-    //    follow: this.container,
-    //    speed: 2,
-    //    scale: { start: 0.1, end: 0.25 },
-    //    frequency: 300,
-    //    quantity: 20,
-    //    lifespan: 1000,
-    //    rotate: { min: 0, max: 360 },
-    //    alpha: { start: 1, end: 0 },
-    //    followOffset: {
-    //      y: 10,
-    //    },
-    //  });
-    //
-    //this.walkDust.on = false;
     // All the dependencies that need to be inside the update game loop.
     this.scene.events.on("update", this.onUpdate, this);
   }

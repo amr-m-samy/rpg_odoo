@@ -1,62 +1,96 @@
 <odoo>
   <data>
     <record id="view_game_asset_list" model="ir.ui.view">
-        <field name="name">game.assets.list</field>
-        <field name="model">game.assets.manager</field>
-        <field name="arch" type="xml">
-          <list string="Game Assets">
-           <header>
-             <button name="generate_game_assets_import_and_export" string="Generate Game Assets" type="object" display="always" class="oe_highlight"/>
-             <button name="upload_binary_to_file_field" string="Auto Upload files" type="object" display="always" class="oe_highlight"/>
-             <!--<button name="create_atlas_config_records" string="gernerat Atlas" type="object" display="always" class="oe_highlight"/>-->
-            </header>  
-            <field name="file" widget="image" options='{"zoom": true}' class="game-assets-image"/>
-            <field name="name_key"/>
-            <field name="asset_type"/>
-            <field name="file_path"/>
-            <field name="json_file_path"/>
-            <field name="json_file"/>
-          </list>
-        </field>
+      <field name="name">game.assets.list</field>
+      <field name="model">game.assets.manager</field>
+      <field name="arch" type="xml">
+        <list string="Game Assets">
+          <header>
+            <button class="oe_highlight" display="always" name="generate_game_assets_import_and_export" string="Generate Game Assets" type="object"></button>
+            <button class="oe_highlight" display="always" name="upload_binary_to_file_field" string="Auto Upload files" type="object"></button>
+            <!--<button name="gererate_atlas_config_code" string="gernerat Atlas" type="object" display="always" class="oe_highlight"/>-->
+          </header>
+          <field class="game-assets-image" name="file" options="{&quot;zoom&quot;: true}" widget="image"></field>
+          <field name="name_key"></field>
+          <field name="asset_type"></field>
+          <field name="file_path"></field>
+          <field name="json_file_path"></field>
+          <field name="json_file"></field>
+        </list>
+      </field>
     </record>
-
     <record id="view_game_asset_form" model="ir.ui.view">
-        <field name="name">game.assets.form</field>
-        <field name="model">game.assets.manager</field>
-        <field name="arch" type="xml">
-            <form>
-              <heading>
-
-             <button name="create_atlas_config_records" string="gernerat Atlas" type="object" display="always" class="oe_highlight"/>
-           </heading>
-                <sheet>
+      <field name="name">game.assets.form</field>
+      <field name="model">game.assets.manager</field>
+      <field name="arch" type="xml">
+        <form>
+          <heading>
+            <button class="oe_highlight" display="always" name="create_atlas_config_records" string="gernerat Atlas" type="object"></button>
+            <button class="oe_highlight" display="always" name="generate_enemy_atlas_config_code" string="test" type="object"></button>
+          </heading>
+          <sheet>
+            <group>
+              <group>
+                <field name="name_key" required="1"></field>
+                <field invisible="1" name="active"></field>
+                <field name="asset_type" required="1"></field>
+                <field invisible="asset_type != 'atlasconfig' and asset_type != 'asepriteconfig'" name="animation_type" required="asset_type == 'atlasconfig'"></field>
+                <field invisible="asset_type == 'tilemapconfig'" name="file_path"></field>
+                <field invisible="asset_type == 'tilemapconfig'" name="file" required="1"></field>
+                <field invisible="asset_type == 'image' or asset_type == 'audio'" name="json_file_path"></field>
+                <field invisible="asset_type == 'image' or asset_type == 'audio' or asset_type == 'json'" name="json_file" required="asset_type == 'atlasconfig' or asset_type == 'aspriteconfig' or asset_type == 'tilemapconfig'"></field>
+                <field name="entity_config_id"></field>
+              </group>
+              <group invisible="asset_type != 'atlasconfig'  and asset_type != 'asepriteconfig'">
+                <notebook colspan="2">
+                  <page invisible="asset_type != 'atlasconfig'" name="atlas_config" string="Atlas Config">
+                    <field name="atlas_config_ids">
+                      <list create="false" default_order="key" delete="false" string="Atlas Config">
+                        <field name="key"></field>
+                        <field name="frame_rate"></field>
+                        <field name="repeat"></field>
+                      </list>
+                    </field>
+                  </page>
+                  <page invisible="animation_type != 'enemy'" name="entity_config" string="Entity Config">
                     <group>
-                      <field name="name_key" required="1"/>
-                      <field name="asset_type" required="1"/>
-                      <field name="file_path" invisible="asset_type == 'tilemapconfig'"/>
-                      <field name="file" required="1" invisible="asset_type == 'tilemapconfig'"/>
-                      <field name="json_file_path" invisible="asset_type == 'image' or asset_type == 'audio'" />
-                      <field 
-                        name="json_file" 
-                        invisible="asset_type == 'image' or asset_type == 'audio' or asset_type == 'json'"
-                        required="asset_type == 'atlasconfig' or asset_type == 'aspriteconfig' or asset_type == 'tilemapconfig'"
-                        />
-                      <field name="atlas_config_ids" invisible="asset_type != 'atlasconfig'"/>
+                      <field name="base_health" required="animation_type == 'enemy'"></field>
+                      <field name="attack" required="animation_type == 'enemy'"></field>
+                      <field name="defense" required="animation_type == 'enemy'"></field>
+                      <field name="speed" required="animation_type == 'enemy'"></field>
+                      <field name="flee" required="animation_type == 'enemy'"></field>
+                      <field name="hit" required="animation_type == 'enemy'"></field>
+                      <field name="exp" required="animation_type == 'enemy'"></field>
+                      <field name="health_bar_offset_x"></field>
+                      <field name="health_bar_offset_y"></field>
+                      <field name="scale"></field>
                     </group>
-                </sheet>
-            </form>
-        </field>
+                  </page>
+                  <page invisible="animation_type != 'enemy'" name="drop_config" string="Drop Config">
+                    <group>
+                      <field name="drops_ids" nolabel="1" widget="one2many_list">
+                        <list string="Drops">
+                          <field name="name"></field>
+                          <field name="chance"></field>
+                        </list>
+                      </field>
+                    </group>
+                  </page>
+                </notebook>
+              </group>
+            </group>
+          </sheet>
+        </form>
+      </field>
     </record>
-
-     <!--Action to open the asset list -->
+    <!--Action to open the asset list -->
     <record id="action_game_assets" model="ir.actions.act_window">
-        <field name="name">Game Assets</field>
-        <field name="res_model">game.assets.manager</field>
-        <field name="view_mode">list,form</field>
+      <field name="name">Game Assets</field>
+      <field name="res_model">game.assets.manager</field>
+      <field name="view_mode">list,form</field>
     </record>
-
-     <!--Menu item for the asset interface -->
-    <menuitem name="rpg_game" id="menu_root"/>
-    <menuitem id="menu_game_assets" name="Game Assets" action="action_game_assets" parent="menu_root"/>
+    <!--Menu item for the asset interface -->
+    <menuitem id="menu_root" name="rpg_game"></menuitem>
+    <menuitem action="action_game_assets" id="menu_game_assets" name="Game Assets" parent="menu_root"></menuitem>
   </data>
 </odoo>

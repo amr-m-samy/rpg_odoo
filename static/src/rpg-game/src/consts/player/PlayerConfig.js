@@ -1,4 +1,4 @@
 export const PlayerConfig = {
-  texture: "character_lumi",
+  texture: "character",
   variableName: "player",
 };

@@ -10,7 +10,7 @@
             "scale": 1,
             "frames": [
                 {
-                    "filename": "chatbox/01",
+                    "filename": "chat_bubble_animation01",
                     "rotated": false,
                     "trimmed": false,
                     "sourceSize": {
@@ -31,7 +31,7 @@
                     }
                 },
                 {
-                    "filename": "chatbox/02",
+                    "filename": "chat_bubble_animation02",
                     "rotated": false,
                     "trimmed": false,
                     "sourceSize": {
@@ -52,7 +52,7 @@
                     }
                 },
                 {
-                    "filename": "chatbox/03",
+                    "filename": "chat_bubble_animation03",
                     "rotated": false,
                     "trimmed": false,
                     "sourceSize": {
@@ -73,7 +73,7 @@
                     }
                 },
                 {
-                    "filename": "chatbox/04",
+                    "filename": "chat_bubble_animation04",
                     "rotated": false,
                     "trimmed": false,
                     "sourceSize": {

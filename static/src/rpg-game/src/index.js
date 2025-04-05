@@ -19,6 +19,7 @@ import { TutorialScene } from "./scenes/TutorialScene";
 import { MainMenuScene } from "./scenes/MainMenuScene";
 import { AttributeScene } from "./scenes/AttributeScene";
 import { AnimationScene } from "./scenes/AnimationScene";
+import { ForTestScene } from "./scenes/ForTestScene";
 /**
  * @type { Phaser.Core.Config}
  */
@@ -38,6 +39,7 @@ const config = {
     TutorialScene,
     MainMenuScene,
     AnimationScene,
+    ForTestScene,
 
     // UI Scenes should be loaded after the game Scenes.
     JoystickScene,
@@ -86,8 +88,8 @@ const config = {
     default: "arcade",
     arcade: {
       gravity: { y: 0 }, // Top down game, so no gravity
-      checkCollision: false,
-      debug: false,
+      checkCollision: true,
+      debug: true,
       debugShowBody: true,
       debugShowStaticBody: true,
       debugShowVelocity: true,

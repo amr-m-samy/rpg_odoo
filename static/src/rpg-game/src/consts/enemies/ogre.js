@@ -1,16 +1,15 @@
-import { EntityDrops } from "../../models/EntityDrops";
+import { EntityDrops } from '../../models/EntityDrops';
 
 export const Ogre = [
-  // Down
   {
     atlas: "ogre",
-    key: "ogre-idle-down",
-    frameRate: 2,
-    prefix: "ogre/idle-down/",
+    key: "ogre-atk-up",
+    frameRate: 3,
+    prefix: "ogre/atk-up/",
     start: 0,
-    end: 1,
+    end: 2,
     zeroPad: 2,
-    repeat: -1,
+    repeat: 0,
   },
   {
     atlas: "ogre",
@@ -24,15 +23,34 @@ export const Ogre = [
   },
   {
     atlas: "ogre",
+    key: "ogre-atk-right",
+    frameRate: 3,
+    prefix: "ogre/atk-right/",
+    start: 0,
+    end: 2,
+    zeroPad: 2,
+    repeat: 0,
+  },
+  {
+    atlas: "ogre",
     key: "ogre-walk-down",
-    frameRate: 8,
+    frameRate: 6,
     prefix: "ogre/walk-down/",
     start: 0,
     end: 5,
     zeroPad: 2,
     repeat: -1,
   },
-  // Right
+  {
+    atlas: "ogre",
+    key: "ogre-walk-up",
+    frameRate: 5,
+    prefix: "ogre/walk-up/",
+    start: 0,
+    end: 4,
+    zeroPad: 2,
+    repeat: -1,
+  },
   {
     atlas: "ogre",
     key: "ogre-idle-right",
@@ -45,25 +63,14 @@ export const Ogre = [
   },
   {
     atlas: "ogre",
-    key: "ogre-atk-right",
-    frameRate: 3,
-    prefix: "ogre/atk-right/",
+    key: "ogre-idle-down",
+    frameRate: 2,
+    prefix: "ogre/idle-down/",
     start: 0,
-    end: 2,
-    zeroPad: 2,
-    repeat: 0,
-  },
-  {
-    atlas: "ogre",
-    key: "ogre-walk-right",
-    frameRate: 8,
-    prefix: "ogre/walk-right/",
-    start: 0,
-    end: 5,
+    end: 1,
     zeroPad: 2,
     repeat: -1,
   },
-  // Up
   {
     atlas: "ogre",
     key: "ogre-idle-up",
@@ -76,21 +83,11 @@ export const Ogre = [
   },
   {
     atlas: "ogre",
-    key: "ogre-atk-up",
-    frameRate: 3,
-    prefix: "ogre/atk-up/",
+    key: "ogre-walk-right",
+    frameRate: 6,
+    prefix: "ogre/walk-right/",
     start: 0,
-    end: 2,
-    zeroPad: 2,
-    repeat: 0,
-  },
-  {
-    atlas: "ogre",
-    key: "ogre-walk-up",
-    frameRate: 8,
-    prefix: "ogre/walk-up/",
-    start: 0,
-    end: 4,
+    end: 5,
     zeroPad: 2,
     repeat: -1,
   },
@@ -107,17 +104,18 @@ export const OgreConfig = {
   flee: 3,
   hit: 5,
   exp: 100,
-  hit: 5,
   healthBarOffsetX: -5,
   healthBarOffsetY: 17,
+  scale: 1.0,
   drops: [
     new EntityDrops(
-      3, // Treasure Chest
-      2, // 1% chance of dropping the item
+      3,
+      2,
     ),
     new EntityDrops(
-      4, // Mighty Sword
-      10, // 5% chance of dropping the item
+      4,
+      41,
     ),
   ],
 };
+

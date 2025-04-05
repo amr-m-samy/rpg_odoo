@@ -389,6 +389,7 @@
         <record id="game_asset_64" model="game.assets.manager">
             <field name="name_key">character</field>
             <field name="asset_type">atlasconfig</field>
+            <field name="atlas_animation_type">player</field>
             <field name="file_path">sprites/character.png</field>
             <field name="file"></field>
             <field name="json_file_path">sprites/character.json</field>
@@ -397,6 +398,7 @@
         <record id="game_asset_65" model="game.assets.manager">
             <field name="name_key">bat</field>
             <field name="asset_type">atlasconfig</field>
+            <field name="atlas_animation_type">enemy</field>
             <field name="file_path">sprites/bat.png</field>
             <field name="file"></field>
             <field name="json_file_path">sprites/bat.json</field>
@@ -405,6 +407,7 @@
         <record id="game_asset_66" model="game.assets.manager">
             <field name="name_key">ogre</field>
             <field name="asset_type">atlasconfig</field>
+            <field name="atlas_animation_type">enemy</field>
             <field name="file_path">sprites/ogre.png</field>
             <field name="file"></field>
             <field name="json_file_path">sprites/ogre.json</field>
@@ -413,6 +416,7 @@
         <record id="game_asset_67" model="game.assets.manager">
             <field name="name_key">rat</field>
             <field name="asset_type">atlasconfig</field>
+            <field name="atlas_animation_type">enemy</field>
             <field name="file_path">sprites/rat.png</field>
             <field name="file"></field>
             <field name="json_file_path">sprites/rat.json</field>
@@ -421,6 +425,7 @@
         <record id="game_asset_68" model="game.assets.manager">
             <field name="name_key">slash</field>
             <field name="asset_type">atlasconfig</field>
+            <field name="atlas_animation_type">misc</field>
             <field name="file_path">sprites/slash.png</field>
             <field name="file"></field>
             <field name="json_file_path">sprites/slash.json</field>
@@ -429,6 +434,8 @@
         <record id="game_asset_69" model="game.assets.manager">
             <field name="name_key">flares</field>
             <field name="asset_type">atlasconfig</field>
+            <field name="atlas_animation_type">misc</field>
+            <field name="file_path">sprites/slash.png</field>
             <field name="file_path">sprites/flares.png</field>
             <field name="file"></field>
             <field name="json_file_path">sprites/flares.json</field>
@@ -437,6 +444,8 @@
         <record id="game_asset_70" model="game.assets.manager">
             <field name="name_key">chat_bubble_animation</field>
             <field name="asset_type">atlasconfig</field>
+            <field name="atlas_animation_type">misc</field>
+            <field name="file_path">sprites/slash.png</field>
             <field name="file_path">sprites/chat_bubble_animation.png</field>
             <field name="file"></field>
             <field name="json_file_path">sprites/chat_bubble_animation.json</field>
