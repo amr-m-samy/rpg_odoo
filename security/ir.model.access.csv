@@ -1,3 +1,14 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_game_assets_manager_admin,game.assets.manager.admin,model_game_assets_manager,base.group_user,1,1,1,1
-access_ui_components_admin,ui.components.admin,model_ui_components,base.group_user,1,1,1,1
+access_game_atlas_config,game.atlas.config,model_game_atlas_config,base.group_user,1,1,1,1
+access_game_drop_config,game.drop.config,model_game_drop_config,base.group_user,1,1,1,1
+access_info_box,info.box,model_info_box,base.group_user,1,1,1,1
+access_panel_component,panel.component,model_panel_component,base.group_user,1,1,1,1
+access_assign_panel_component,assign.panel.component,model_assign_panel_component,base.group_user,1,1,1,1
+access_game_buff_type,game.buff.type,model_buff_type,base.group_user,1,1,1,1
+access_game_item_type,game.item.type,model_item_type,base.group_user,1,1,1,1
+access_game_items,game.items,model_game_items,base.group_user,1,1,1,1
+access_rpg_base_entity,rpg.base.entity,model_rpg_base_entity,base.group_user,1,1,1,1
+access_rpg_scene,rpg.scene,model_rpg_scene,base.group_user,1,1,1,1
+access_tileset_image_config,tileset.image.config,model_tileset_image_config,base.group_user,1,1,1,1
+

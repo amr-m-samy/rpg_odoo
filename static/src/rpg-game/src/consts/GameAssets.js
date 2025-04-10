@@ -73,8 +73,10 @@ import atlas_flares_image from "../assets/sprites/flares.png";
 import atlas_flares_image_json from "../assets/sprites/flares.json";
 import atlas_chat_bubble_animation_image from "../assets/sprites/chat_bubble_animation.png";
 import atlas_chat_bubble_animation_image_json from "../assets/sprites/chat_bubble_animation.json";
-import tile_larus_json from "../assets/maps/larus.json";
+import tile_larus_json from "../assets/maps/larus/larus.json";
+import tile_larus_json_json from "../assets/maps/larus.json";
 import tile_tutorial_json from "../assets/maps/tutorial/tutorial.json";
+import tile_tutorial_json_json from "../assets/maps/tutorial/tutorial.json";
 import space_sound from "../assets/sound/typing/blip_06.mp3";
 import typing_key_01 from "../assets/sound/typing/blip_01.mp3";
 import typing_key_02 from "../assets/sound/typing/blip_02.mp3";
@@ -111,12 +113,22 @@ import atlas_ogre_image from "../assets/sprites/ogre.png";
 import atlas_ogre_image_json from "../assets/sprites/ogre.json";
 import atlas_skeleton_one_image from "../assets/sprites/skeleton_one.png";
 import atlas_skeleton_one_image_json from "../assets/sprites/skeleton_one.json";
-import atlas_goblin_monika_image from "../assets/sprites/goblin_monika.png";
-import atlas_goblin_monika_image_json from "../assets/sprites/goblin_monika.json";
-import minotaur from "../assets/sprites/minotaur.png";
-import minotaur_json from "../assets/sprites/minotaur.json";
 import monika from "../assets/sprites/monika.png";
 import monika_json from "../assets/sprites/monika.json";
+import tile_intro22_json from "../assets/maps/intro22/intro22.json";
+import demo_interior from "../assets/sprites/demo_interior.png";
+import demo_room from "../assets/sprites/demo_room.png";
+import minotaur from "../assets/sprites/minotaur.png";
+import minotaur_json from "../assets/sprites/minotaur.json";
+import alex from "../assets/sprites/alex.png";
+import alex_json from "../assets/sprites/alex.json";
+import adam_tile from "../assets/sprites/adam_tile.png";
+import bob_tile from "../assets/sprites/bob_tile.png";
+import tile_demo48x48_json from "../assets/maps/demo48x48/demo48x48.json";
+import interior_free_ext48x48_ext from "../assets/sprites/interior_free_ext48x48_ext.png";
+import room_builder_ext48x48_ext from "../assets/sprites/room_builder_ext48x48_ext.png";
+import collision48x48 from "../assets/sprites/collision48x48.png";
+import dialog_box from "../assets/sprites/UI/dialog_box.png";
 
 export const Images = [
     {name: "tiles", image: tiles},
@@ -183,7 +195,15 @@ export const Images = [
     {name: "particle_warp", image: particle_warp},
     {name: "cloud", image: cloud},
     {name: "transparent_grid", image: transparent_grid},
-    {name: "transparent_grid_2", image: transparent_grid_2}
+    {name: "transparent_grid_2", image: transparent_grid_2},
+    {name: "demo_interior", image: demo_interior},
+    {name: "demo_room", image: demo_room},
+    {name: "adam_tile", image: adam_tile},
+    {name: "bob_tile", image: bob_tile},
+    {name: "interior_free_ext48x48_ext", image: interior_free_ext48x48_ext},
+    {name: "room_builder_ext48x48_ext", image: room_builder_ext48x48_ext},
+    {name: "collision48x48", image: collision48x48},
+    {name: "dialog_box", image: dialog_box}
 ];;
 
 export const Audios = [
@@ -223,18 +243,20 @@ export const AtlasConfig = [
     {name: "flares", image: atlas_flares_image, json: atlas_flares_image_json},
     {name: "chat_bubble_animation", image: atlas_chat_bubble_animation_image, json: atlas_chat_bubble_animation_image_json},
     {name: "ogre", image: atlas_ogre_image, json: atlas_ogre_image_json},
-    {name: "skeleton_one", image: atlas_skeleton_one_image, json: atlas_skeleton_one_image_json},
-    {name: "goblin_monika", image: atlas_goblin_monika_image, json: atlas_goblin_monika_image_json}
+    {name: "skeleton_one", image: atlas_skeleton_one_image, json: atlas_skeleton_one_image_json}
 ];;
 
 export const ASEPRITE_CONFIG = [
     {name: "plus_small_button", image: plus_small_button, json: plus_small_button_json},
     {name: "minus_small_button", image: minus_small_button, json: minus_small_button_json},
+    {name: "monika", image: monika, json: monika_json},
     {name: "minotaur", image: minotaur, json: minotaur_json},
-    {name: "monika", image: monika, json: monika_json}
+    {name: "alex", image: alex, json: alex_json}
 ];;
 
 export const TilemapConfig = [
     {name: "larus", json: tile_larus_json},
-    {name: "tutorial", json: tile_tutorial_json}
+    {name: "tutorial", json: tile_tutorial_json},
+    {name: "intro22", json: tile_intro22_json},
+    {name: "demo48x48", json: tile_demo48x48_json}
 ];;

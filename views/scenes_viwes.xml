@@ -1,0 +1,99 @@
+<odoo>
+  <data>
+    <record id="view_rpg_scene_tree" model="ir.ui.view">
+      <field name="name">rpg.scene.tree</field>
+      <field name="model">rpg.scene</field>
+      <field name="arch" type="xml">
+        <list string="RPG Scene">
+          <field name="name"></field>
+          <field name="map_name"></field>
+        </list>
+      </field>
+    </record>
+    <record id="view_rpg_scene_form" model="ir.ui.view">
+      <field name="name">rpg.scene.form</field>
+      <field name="model">rpg.scene</field>
+      <field name="arch" type="xml">
+        <form>
+          <headering>
+            <button class="oe_highlight" display="always" name="generate_scene_info_code_file" string="Update Scenes" type="object"></button>
+          </headering>
+          <sheet>
+            <group>
+              <group>
+                <field name="name"></field>
+                <field name="description"></field>
+                <field name="map_name"></field>
+                <field name="zoom"></field>
+              </group>
+              <group>
+                <field name="is_sound"></field>
+                <field invisible="is_sound != True" name="sound_id"></field>
+                <field invisible="is_sound != True" name="sound_volume"></field>
+                <field invisible="is_sound != True" name="sound_loop"></field>
+                <field name="is_enemy_zone"></field>
+              </group>
+              <group>
+                <notebook colspan="1">
+                  <page name="tileset_image_config" string="Tileset Image Config">
+                    <field name="tileset_image_config_ids" widget="one2many_list">
+                      <list>
+                        <field name="name"></field>
+                        <field name="asset_id"></field>
+                      </list>
+                    </field>
+                  </page>
+                </notebook>
+              </group>
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+    <record id="rpg_scene_action" model="ir.actions.act_window">
+      <field name="name">RPG Scene</field>
+      <field name="res_model">rpg.scene</field>
+      <field name="view_mode">list,form</field>
+      <field name="view_id" ref="view_rpg_scene_tree"></field>
+    </record>
+    <menuitem id="rpg_game.scenes" name="Scene" parent="menu_root"></menuitem>
+    <menuitem action="rpg_scene_action" id="add_rpg_scene" name="Scenes" parent="rpg_game.scenes"></menuitem>
+    <!-- ****** Tileset Image Config ****** -->
+    <record id="view_tileset_image_config_tree" model="ir.ui.view">
+      <field name="name">tileset.image.config.tree</field>
+      <field name="model">tileset.image.config</field>
+      <field name="arch" type="xml">
+        <list string="Tileset Image Config">
+          <field name="name"></field>
+          <field name="asset_id"></field>
+        </list>
+      </field>
+    </record>
+    <record id="view_tileset_image_config_form" model="ir.ui.view">
+      <field name="name">tileset.image.config.form</field>
+      <field name="model">tileset.image.config</field>
+      <field name="arch" type="xml">
+        <form>
+          <sheet>
+            <group>
+              <field name="name"></field>
+              <field name="asset_id"></field>
+              <field name="is_advanced"></field>
+              <field invisible="is_advanced != True" name="width"></field>
+              <field invisible="is_advanced != True" name="height"></field>
+              <field invisible="is_advanced != True" name="margin"></field>
+              <field invisible="is_advanced != True" name="spacing"></field>
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+    <record id="tileset_image_config_action" model="ir.actions.act_window">
+      <field name="name">Tileset Image Config</field>
+      <field name="res_model">tileset.image.config</field>
+      <field name="view_mode">list,form</field>
+      <field name="view_id" ref="view_tileset_image_config_tree"></field>
+    </record>
+    <menuitem action="tileset_image_config_action" id="add_tileset_image_config" name="Tileset Image Config" parent="rpg_game.scenes"></menuitem>
+  </data>
+</odoo>

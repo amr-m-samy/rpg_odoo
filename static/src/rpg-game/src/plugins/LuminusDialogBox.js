@@ -3,6 +3,7 @@ import { NineSlice } from "phaser3-nineslice";
 import { Player } from "../entities/Player";
 import { LuminusTypingSoundManager } from "./LuminusTypingSoundManager";
 import { LuminusVideoOpener } from "./LuminusVideoOpener";
+import { dialogBoxConfig } from "../consts/DialogBoxConfig";
 
 /**
  * @class
@@ -16,6 +17,7 @@ export class LuminusDialogBox {
    * @param { Phaser.Physics.Arcade.Sprite } player Player Game Object.
    */
   constructor(scene, player) {
+    this.dialogBoxConfig = dialogBoxConfig;
     /**
      * Scene Context.
      * @type { Phaser.Scene }  */
@@ -30,28 +32,29 @@ export class LuminusDialogBox {
      *  @type { string }
      * @default
      * */
-    this.dialogSpriteName = "dialog";
+    this.dialogSpriteName = this.dialogBoxConfig.dialogSpriteName;
 
     /**
      * Name of the Sprite of the button action.
      * @type { string }
      * @default
      * */
-    this.actionButtonSpriteName = "space";
+    this.actionButtonSpriteName = this.dialogBoxConfig.actionButtonSpriteName;
 
     /**
      * Interaction sprite name.
      * @type { string }
      * @default
      * */
-    this.interactionSpriteName = "chat_bubble_animation";
+    this.interactionSpriteName = this.dialogBoxConfig.interactionSpriteName;
 
     /**
      * The name of the animation that the iteraction icon will play.
      * @type { string }
      * @default
      */
-    this.animationIteractionIconName = "chat_bubble_animation";
+    this.animationIteractionIconName =
+      this.dialogBoxConfig.animationIteractionIconName;
 
     /**
      * Name of the Sprite of the Mobile button action.
@@ -65,19 +68,19 @@ export class LuminusDialogBox {
      * @type { Phaser.Input.Keyboard.KeyCodes }
      * @default
      *  */
-    this.actionButtonKeyCode = Phaser.Input.Keyboard.KeyCodes.SPACE;
+    this.actionButtonKeyCode = this.dialogBoxConfig.actionButtonKeyCode;
     /**
      * Dialog height.
      * @type { number }
      * @default
      *   */
-    this.dialogHeight = 150; // Dialog Height
+    this.dialogHeight = this.dialogBoxConfig.dialogHeight; // 150; // Dialog Height
     /**
      * Margin of the dialog. Used to make spaces in the dialog.
      * @type { number }
      * @default
      *   */
-    this.margin = 15;
+    this.margin = this.dialogBoxConfig.margin;
     /**
      * Width and Height of the corner Slice.
      * @example
@@ -93,31 +96,35 @@ export class LuminusDialogBox {
      * @type { number | Array<number> }
      * @default
      *   */
-    this.nineSliceOffsets = 23;
+    this.nineSliceOffsets = this.dialogBoxConfig.nineSliceOffsets; // 23
     /**
      * Safe area of the scaling areas..
      * @type { number }
      * @default
      *   */
-    this.nineSliceSafeArea = 14;
+    this.nineSliceSafeArea = this.dialogBoxConfig.nineSliceSafeArea; // 14
+    this.nineSliceTopArea = this.dialogBoxConfig.nineSliceTopArea; // 10
+    this.nineSliceBottomArea = this.dialogBoxConfig.nineSliceBottomArea; // 10
+    this.nineSliceLeftArea = this.dialogBoxConfig.nineSliceLeftArea; // 10
+    this.nineSliceRightArea = this.dialogBoxConfig.nineSliceRightArea; // 10
     /**
      * Sacele of the action button sprite.
      * @type { number }
      * @default
      *   */
-    this.actionSpriteScale = 0.5;
+    this.actionSpriteScale = this.dialogBoxConfig.actionSpriteScale; // 0.5
     /**
      * Spelling speed of the text in the dialog box. Bigger is faster.
      * @type { number }
      * @default
      *  */
-    this.dialogSpeed = 20;
+    this.dialogSpeed = this.dialogBoxConfig.dialogSpeed; // 20
     /**
      * Dialog font size.
      * @type { number }
      * @default
      *  */
-    this.fontSize = 20;
+    this.fontSize = this.dialogBoxConfig.fontSize; // 20
     /**
      * Current dialog page.
      * @type { number }
@@ -129,63 +136,69 @@ export class LuminusDialogBox {
      * @type { number }
      * @default
      *   */
-    this.fontWidth = this.fontSize - 5;
+    this.fontWidth = this.fontSize - this.dialogBoxConfig.fontWidthMargin; // 5
     /**
      * Maximum number of lines.
      * @type { number }
      * @default
      *  */
-    this.dialogMaxLines = 3;
+    this.dialogMaxLines = this.dialogBoxConfig.dialogMaxLines; // 3
     /**
      * Space between lines of the dialog text.
      * @type { number }
      * @default
      *  */
-    this.letterSpacing = 0;
+    this.letterSpacing = this.dialogBoxConfig.letterSpacing; // 0
     /**
      * Width of the camera view port.
      * @type { number }
      */
-    this.cameraWidth = this.scene.cameras.main.displayWidth;
+    this.cameraWidth =
+      this.scene.cameras.main.displayWidth +
+      this.dialogBoxConfig.cameraWidthMargin; // this.scene.cameras.main.displayWidth + this.margin * 2;
     /**
      * Height of the camera view port.
      * @type { number }
      */
-    this.cameraHeight = this.scene.cameras.main.displayHeight;
+    this.cameraHeight =
+      this.scene.cameras.main.displayHeight +
+      this.dialogBoxConfig.cameraHeightMargin; // this.scene.cameras.main.displayHeight - this.margin * 2;
     /**
      * Max width of the text inside the dialog.
      * @type { number }  */
-    this.textWidth = this.cameraWidth - this.margin * 3; // Defines the text Width.
+    this.textWidth =
+      this.cameraWidth - this.margin * 3 + this.dialogBoxConfig.textWidthMargin; // this.cameraWidth - this.margin * 3;
     /**
      * Rather it can show de dialog of not.
      * @type { boolean }
      * @default
      *  */
-    this.canShowDialog = true;
+    this.canShowDialog = this.dialogBoxConfig.canShowDialog; // true
     /**
      * Defines if the player is overlapping the text zone.
      * @type { boolean }
      * @default
      *  */
-    this.isOverlapingChat = false;
+    this.isOverlapingChat = this.dialogBoxConfig.isOverlapingChat; // false
     /**
      * Defines if the text is in spelling/typping animation.
      * @type { boolean }
      * @default
      *  */
-    this.isAnimatingText = false;
+    this.isAnimatingText = this.dialogBoxConfig.isAnimatingText; // false
 
     /**
      * @type { number }
      */
-    this.cameraZoom = this.scene.cameras.main.zoom;
+    this.cameraZoom =
+      this.scene.cameras.main.zoom + this.dialogBoxConfig.cameraZoomMargin; // this.scene.cameras.main.zoom + this.margin * 2;
 
     /**
      * Color of the font.
      * @type { Phaser.Display.Color }
      * @default
      */
-    this.fontColor = new Phaser.Display.Color(61, 61, 61, 1);
+    this.fontColor = this.dialogBoxConfig.fontColor; // new Phaser.Display.Color(61, 61, 61, 1);
 
     /**
      * Button A
@@ -339,10 +352,11 @@ export class LuminusDialogBox {
     this.leftPortraitImage.visible = false;
 
     this.leftName = "Game Master";
+    console.log(this.dialog.width, "-----------------------");
     this.leftNameText = this.scene.add
       .text(
-        this.dialog.x + this.margin,
-        this.dialog.y + this.dialog.scaleY * 20,
+        this.dialog.width / 2 - this.dialog.x + this.margin * 3,
+        this.dialog.y - this.dialogHeight / 2,
         ` ${this.leftName}: `,
         {
           fontSize: this.fontSize,
@@ -465,8 +479,10 @@ export class LuminusDialogBox {
       0,
       this.cameraWidth - this.margin * 2,
       this.dialogHeight,
-      //this.nineSliceOffsets,
-      //this.nineSliceSafeArea, // (optional) pixels to offset when computing the safe usage area
+      this.nineSliceLeftArea,
+      this.nineSliceRightArea,
+      this.nineSliceTopArea,
+      this.nineSliceBottomArea,
     );
     console.log(this.dialog);
 

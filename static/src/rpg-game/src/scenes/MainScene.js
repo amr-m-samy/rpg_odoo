@@ -2,10 +2,11 @@ import Phaser from "phaser";
 import { LuminusWarp } from "../plugins/LuminusWarp";
 import { LuminusObjectMarker } from "../plugins/LuminusObjectMarker";
 import AnimatedTiles from "../plugins/AnimatedTiles";
-import { LuminusEnvironmentParticles } from "../plugins/LuminusEnvironmentParticles";
+import { EnvironmentParticles } from "../plugins/EnvironmentParticles";
 import { LuminusOutlineEffect } from "../plugins/LuminusOutlineEffect";
 import { LuminusEnemyZones } from "../plugins/LuminusEnemyZones";
 import { LuminusMapCreator } from "../plugins/LuminusMapCreator";
+import InfoScene from "../consts/SceneInfo";
 import { Item } from "../entities/Item";
 
 export class MainScene extends Phaser.Scene {
@@ -34,9 +35,19 @@ export class MainScene extends Phaser.Scene {
     //     this.scale.startFullscreen();
     // }
 
-    this.cameras.main.setZoom(2.5);
+    const searchParams = new URLSearchParams(window.location.search);
+    const activity = searchParams.get("activity");
+
+    const sceneInfo = InfoScene(activity || "mainscene");
+    this.cameras.main.setZoom(sceneInfo.zoom);
 
     this.mapCreator = new LuminusMapCreator(this);
+
+    if (sceneInfo.tileImages) {
+      this.mapCreator.mapName = sceneInfo.mapName;
+      this.mapCreator.tilesetImages = sceneInfo.tileImages;
+    }
+
     this.mapCreator.create();
 
     const camera = this.cameras.main;
@@ -61,21 +72,25 @@ export class MainScene extends Phaser.Scene {
     this.scene.launch("HUDScene", { player: this.player });
 
     this.sys.animatedTiles.init(this.mapCreator.map);
-    this.particles = new LuminusEnvironmentParticles(this, this.mapCreator.map);
-    this.particles.create();
-
+    if (sceneInfo.isParticles) {
+      this.particles = new EnvironmentParticles(this, this.mapCreator.map);
+      this.particles.create();
+    }
     // this.outlineEffect = new LuminusOutlineEffect(this);
 
-    this.sound.volume = 0.35;
-    this.themeSound = this.sound.add("path_to_lake_land", {
-      loop: true,
-    });
-    this.themeSound.play();
+    if (sceneInfo.isSound) {
+      this.sound.volume = sceneInfo.volume;
+      this.themeSound = this.sound.add(sceneInfo.soundAssetKey, {
+        loop: sceneInfo.isSoundLoop,
+      });
+      this.themeSound.play();
+    }
 
     this.enemies = [];
-
-    this.luminusEnemyZones = new LuminusEnemyZones(this, this.mapCreator.map);
-    this.luminusEnemyZones.create();
+    if (sceneInfo.isEnemyZone) {
+      this.luminusEnemyZones = new LuminusEnemyZones(this, this.mapCreator.map);
+      this.luminusEnemyZones.create();
+    }
 
     // new Item(this, this.player.container.x, this.player.container.y - 40, 2);
     // new Item(this, this.player.container.x, this.player.container.y - 50, 2);

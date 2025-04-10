@@ -134,19 +134,19 @@ export const Skeleton_one = [
 ];
 
 export const Skeleton_oneConfig = {
-  id: 10,
+  id: 111,
   name: "Skeleton_one",
   texture: "skeleton_one",
   baseHealth: 10,
   atack: 5,
   defense: 5,
   speed: 10,
-  flee: 3,
-  hit: 5,
+  flee: 0.5,
+  hit: 10,
   exp: 150,
   healthBarOffsetX: -5,
   healthBarOffsetY: 16,
-  scale: 0.3,
+  scale: 0.7,
   drops: [
     new EntityDrops(
       2,

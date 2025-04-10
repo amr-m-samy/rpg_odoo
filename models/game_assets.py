@@ -4,6 +4,9 @@ from odoo import models, fields, api
 import json
 import base64
 import os
+import shutil
+
+from odoo.exceptions import ValidationError
 
 
 class AtlasConfig(models.Model):
@@ -80,6 +83,11 @@ class GameAsset(models.Model):
     _rec_name = "name_key"
 
     name_key = fields.Char(string="Name", required=True)
+    # id = fields.Integer(
+    #     string="Asset ID",
+    #     readonly=True,
+    #     help="ID of the entity the set on the tiled map",
+    # )
     active = fields.Boolean(string="Active", default=True)
     asset_type = fields.Selection(
         [
@@ -114,21 +122,24 @@ class GameAsset(models.Model):
     )  # For atlas and aseprite
     file = fields.Binary(string="File")
     json_file = fields.Binary(string="JSON File")
+    tiled_source = fields.Binary(
+        string="Tiled Source",
+        help="Tiled source for future updates. It is a tsx or tmx file.",
+    )
     atlas_config_ids = fields.One2many(
         "game.atlas.config", "game_asset_id", string="Atlas"
     )
-
-    # Entity Config Fields
-    entity_config_id = fields.Integer(
-        string="ID", help="ID of the entity the set on the tiled map"
-    )
+    # # Entity Config Fields
+    # entity_config_id = fields.Integer(
+    #     string="ID", help="ID of the entity the set on the tiled map"
+    # )
     base_health = fields.Integer(string="Base Health", default=10)
-    attack = fields.Integer(string="Attack")
-    defense = fields.Integer(string="Defense")
-    speed = fields.Integer(string="Speed")
-    flee = fields.Integer(string="Flee")
-    hit = fields.Integer(string="Hit")
-    exp = fields.Integer(string="Exp")
+    attack = fields.Integer(string="Attack", default=1)
+    defense = fields.Integer(string="Defense", default=1)
+    speed = fields.Integer(string="Speed", default=20)
+    flee = fields.Float(string="Flee", default=0)
+    hit = fields.Integer(string="Hit", default=3)
+    exp = fields.Integer(string="Exp", default=50)
     health_bar_offset_x = fields.Integer(string="Health Bar Offset X")
     health_bar_offset_y = fields.Integer(string="Health Bar Offset Y")
     scale = fields.Float(string="Scale", default=1.0)
@@ -139,10 +150,10 @@ class GameAsset(models.Model):
         "A name must be unique!",
     )
 
-    _entity_config_id_unique = models.Constraint(
-        "UNIQUE(entity_config_id)",
-        "A entity_config_id must be unique!",
-    )
+    # _entity_config_id_unique = models.Constraint(
+    #     "UNIQUE(entity_config_id)",
+    #     "A entity_config_id must be unique!",
+    # )
 
     def upload_binary_to_file_field(self):
         """
@@ -160,43 +171,27 @@ class GameAsset(models.Model):
                 with open(json_file_path, "rb") as f:
                     record.json_file = base64.b64encode(f.read())
 
-    def _get_assets_directory(self):
-        this_directory = os.path.dirname(os.path.abspath(__file__))
-        module_directory = os.path.dirname(this_directory)
-        assets_directory = os.path.join(
-            module_directory, "static/src/rpg-game/src/assets/"
-        )
-        if not os.path.exists(assets_directory):
-            raise Exception(f"Assets directory not found: {assets_directory}")
-        return assets_directory
-
     def _remove_characters_from_aesprite_json_filename(self, jsonObj):
         """
         Remove the character from the aseprite json filename.
         """
         for frame in jsonObj["frames"]:
-            frame["filename"] = "".join(filter(str.isdigit, frame["filename"]))
+            if type(frame) != str:
+                frame["filename"] = "".join(filter(str.isdigit, frame["filename"]))
         return jsonObj
 
-    def _add_asset(self):
+    def _add_asset_json_file(self):
         """
         Add a new asset to the assets folder.
         """
         for record in self:
-            assets_directory = self._get_assets_directory()
-            file_path = ""
-            json_file_path = ""
-            if record.file_path:
-                file_path = os.path.join(assets_directory, str(record.file_path))
-            if record.json_file_path:
+            if record.json_file:
+                assets_directory = self.env[
+                    "rpg.game.utils"
+                ].get_rpg_game_src_directory("assets/")
                 json_file_path = os.path.join(
                     assets_directory, str(record.json_file_path)
                 )
-            if file_path and record.file:
-                with open(file_path, "wb") as f:
-                    file_data = base64.b64decode(record.file)
-                    f.write(file_data)
-            if json_file_path and record.json_file:
                 json_data = base64.b64decode(record.json_file).decode(
                     "utf-8"
                 )  # Decode from base64 and convert to string
@@ -208,15 +203,134 @@ class GameAsset(models.Model):
                 with open(json_file_path, "w", encoding="utf-8") as f:
                     json.dump(json_obj, f, indent=4)  # Save it as a readable JSON file
 
+    def _add_asset_file(self):
+        """
+        Add a new asset to the assets folder.
+        """
+        for record in self:
+            if record.file and record.file_path:
+                assets_directory = self.env[
+                    "rpg.game.utils"
+                ].get_rpg_game_src_directory("assets/")
+                file_path = os.path.join(assets_directory, str(record.file_path))
+                with open(file_path, "wb") as f:
+                    file_data = base64.b64decode(record.file)
+                    f.write(file_data)
+
+    def _add_asset_tileset_config(self):
+        """
+        Add a new asset to the assets folder.
+        """
+        for record in self:
+            if record.tiled_source:
+                maps_directory = self.env["rpg.game.utils"].get_rpg_game_src_directory(
+                    f"assets/maps/{record.name_key}/"
+                )
+                try:
+                    os.makedirs(maps_directory)
+                    print("Directory created successfully")
+                    if record.tiled_source:
+                        with open(
+                            os.path.join(maps_directory, f"{record.name_key}.tsx"),
+                            "wb",
+                        ) as f:
+                            tiled_data = base64.b64decode(record.tiled_source)
+                            f.write(tiled_data)
+                    if record.json_file:
+                        with open(
+                            os.path.join(maps_directory, f"{record.name_key}.json"),
+                            "wb",
+                        ) as f:
+                            json_data = base64.b64decode(record.json_file)
+                            f.write(json_data)
+                except FileExistsError:
+                    print("Directory already exists")
+
+    # def _add_asset(self, file_type="new"):
+    #     """
+    #     Add a new asset to the assets folder.
+    #     """
+    #     for record in self:
+    #         assets_directory = self.env["rpg.game.utils"].get_rpg_game_src_directory(
+    #             "assets/"
+    #         )
+    #         file_path = ""
+    #         json_file_path = ""
+    #         if record.file_path:
+    #             file_path = os.path.join(assets_directory, str(record.file_path))
+    #         if record.json_file_path:
+    #             json_file_path = os.path.join(
+    #                 assets_directory, str(record.json_file_path)
+    #             )
+    #         if file_path and record.file and file_type in ["file", "new", "update"]:
+    #             with open(file_path, "wb") as f:
+    #                 file_data = base64.b64decode(record.file)
+    #                 f.write(file_data)
+    #         if (
+    #             json_file_path
+    #             and record.json_file
+    #             and file_type in ["json_file", "new"]
+    #             and record.asset_type != "tilemapconfig"
+    #         ):
+    #             json_data = base64.b64decode(record.json_file).decode(
+    #                 "utf-8"
+    #             )  # Decode from base64 and convert to string
+    #             json_obj = json.loads(json_data)  # Parse JSON to validate it
+    #             if record.asset_type == "asepriteconfig":
+    #                 json_obj = self._remove_characters_from_aesprite_json_filename(
+    #                     json_obj
+    #                 )
+    #             with open(json_file_path, "w", encoding="utf-8") as f:
+    #                 json.dump(json_obj, f, indent=4)  # Save it as a readable JSON file
+    #         if (
+    #             record.json_file
+    #             and file_type in ["json_file", "new"]
+    #             and record.asset_type == "tilemapconfig"
+    #         ):
+    #
+    #             maps_directory = self.env["rpg.game.utils"].get_rpg_game_src_directory(
+    #                 f"assets/maps/{record.name_key}/"
+    #             )
+    #             try:
+    #                 os.makedirs(maps_directory)
+    #                 print("Directory created successfully")
+    #                 if record.tiled_source:
+    #                     with open(
+    #                         os.path.join(maps_directory, f"{record.name_key}.tsx"),
+    #                         "wb",
+    #                     ) as f:
+    #                         tiled_data = base64.b64decode(record.tiled_source)
+    #                         f.write(tiled_data)
+    #                 if record.json_file:
+    #                     with open(
+    #                         os.path.join(maps_directory, f"{record.name_key}.json"),
+    #                         "wb",
+    #                     ) as f:
+    #                         json_data = base64.b64decode(record.json_file)
+    #                         f.write(json_data)
+    #
+    #             except FileExistsError:
+    #                 print("Directory already exists")
+
     def _remove_asset(self):
         """
         Remove an asset from the assets folder.
         """
         for record in self:
-            assets_directory = self._get_assets_directory()
+            assets_directory = self.env["rpg.game.utils"].get_rpg_game_src_directory(
+                "assets/"
+            )
 
             file_path = ""
             json_file_path = ""
+
+            if record.asset_type == "tilemapconfig":
+                maps_directory = self.env["rpg.game.utils"].get_rpg_game_src_directory(
+                    f"assets/maps/{record.name_key}/"
+                )
+                if os.path.exists(maps_directory):
+                    shutil.rmtree(maps_directory)
+
             if record.file_path:
                 file_path = os.path.join(assets_directory, str(record.file_path))
             if record.json_file_path:
@@ -228,6 +342,19 @@ class GameAsset(models.Model):
                 os.remove(file_path)
             if json_file_path and os.path.exists(json_file_path):
                 os.remove(json_file_path)
+
+    def _remove_enemy_js_file(self, enemy_name):
+        """
+        Remove the javascript file.
+        """
+        assets_path = self.env["rpg.game.utils"].get_rpg_game_src_directory(
+            f"consts/enemies/{enemy_name}.js"
+        )
+        if os.path.exists(assets_path):
+            os.remove(assets_path)
+            logging.info(f"File {assets_path} removed successfully.")
+        else:
+            logging.warning(f"File {assets_path} does not exist.")
 
     def _atlas_json_frame_collector(self):
         """
@@ -363,7 +490,7 @@ class GameAsset(models.Model):
                     )
         return collect_frames_keys
 
-    def _save_enemy_atla_config_to_file(self, enemy_name, code):
+    def _save_enemy_atla_and_aseprite_config_to_file(self, enemy_name, code):
         """
         Save the enemy atlas config code to a file.
         """
@@ -373,7 +500,7 @@ class GameAsset(models.Model):
         with open(assets_path, "w", encoding="utf-8") as f:
             f.write(code)
 
-    def generate_enemy_atlas_config_code(self):
+    def _generate_enemy_atlas_and_aseprite_config_code(self):
         """
         Generate the atlas config javascript file.
 
@@ -457,7 +584,7 @@ class GameAsset(models.Model):
             if atlas_config.animation_type == "enemy":
                 atlas_config_code += (
                     f"export const {atlas_config.name_key.capitalize()}Config = {{\n"
-                    f"  id: {atlas_config.entity_config_id},\n"
+                    f"  id: {atlas_config.id},\n"
                     f'  name: "{atlas_config.name_key.capitalize()}",\n'
                     f'  texture: "{atlas_config.name_key}",\n'
                     f"  baseHealth: {atlas_config.base_health},\n"
@@ -482,7 +609,7 @@ class GameAsset(models.Model):
                 atlas_config_code += "  ],\n};\n\n"
             all_enemies_atlas_configs_code.append(atlas_config_code)
 
-            self._save_enemy_atla_config_to_file(
+            self._save_enemy_atla_and_aseprite_config_to_file(
                 atlas_config.name_key, atlas_config_code
             )
             atlas_config_code = ""
@@ -523,6 +650,30 @@ class GameAsset(models.Model):
         self._save_misc_atla_config_to_file(atlas_config_code)
         return atlas_config_code
 
+    def generate_player_config_code(self):
+        """
+        Generate the player config javascript file.
+
+        export const PlayerConfig = {
+          texture: "minotaur",
+          variableName: "player",
+          scale: 1.0,
+        };
+        """
+        player_config_code = (
+            "export const PlayerConfig = {\n"
+            f"  texture: '{self.name_key}',\n"
+            '  variableName: "player",\n'
+            f"  scale: {self.scale},\n"
+            "};\n"
+        )
+        assets_path = self.env["rpg.game.utils"].get_rpg_game_src_directory(
+            "consts/player/PlayerConfig.js"
+        )
+        with open(assets_path, "w", encoding="utf-8") as f:
+            f.write(player_config_code)
+        return player_config_code
+
     def _generate_Animation_code(self):
         """
                 Generate the Animation javascript file.
@@ -537,7 +688,7 @@ class GameAsset(models.Model):
           ...Bat,
           ...Rat,
           ...Ogre,
-          ...Player[PlayerConfig.texture],
+          // ...Player[PlayerConfig.texture],
           ...Misc,
         ];
         """
@@ -547,13 +698,14 @@ class GameAsset(models.Model):
             .game_asset_id
         )
 
-        animation_code = 'import { Player } from "./player/Player";\n'
-        animation_code += 'import { PlayerConfig } from "./player/PlayerConfig"\n'
+        animation_code = ""
+        # animation_code = 'import { Player } from "./player/Player";\n'
+        # animation_code += 'import { PlayerConfig } from "./player/PlayerConfig"\n'
         animation_code += 'import { Misc } from "./misc/Misc";'
         for atlas_config in atlas_enemy_configs_asset_ids:
             animation_code += f'import {{ {atlas_config.name_key.capitalize()} }} from "./enemies/{atlas_config.name_key}";\n'
         animation_code += "export const Animations = [\n"
-        animation_code += "  ...Player[PlayerConfig.texture],\n"
+        # animation_code += "  ...Player[PlayerConfig.texture],\n"
         animation_code += "  ...Misc,\n"
         for atlas_config in atlas_enemy_configs_asset_ids:
             animation_code += f"  ...{atlas_config.name_key.capitalize()},\n"
@@ -684,7 +836,10 @@ class GameAsset(models.Model):
             import_json_path = f"{json_path}"
 
             if asset_type == "tilemapconfig":
-                import_name = f"tile_{name}"
+                import_name = f"tile_{name}_json"
+                import_statements.append(
+                    f'import {import_name} from "../assets/maps/{name}/{name}.json";'
+                )
 
             if asset_type == "atlasconfig":
                 import_name = f"atlas_{name}_image"
@@ -797,7 +952,9 @@ class GameAsset(models.Model):
 
         code = f"{import_statements}\n\nexport const Images = {export_image};\n\nexport const Audios = {export_audio};\n\nexport const AtlasConfig = {export_atlas_config};\n\nexport const ASEPRITE_CONFIG = {export_asprite_config};\n\nexport const TilemapConfig = {export_tilemap_config};"
 
-        const_directory = self._get_assets_directory().replace("/assets/", "/consts/")
+        const_directory = self.env["rpg.game.utils"].get_rpg_game_src_directory(
+            "consts/"
+        )
         file_path = os.path.join(const_directory, "GameAssets.js")
         with open(file_path, "w", encoding="utf-8") as f:
             f.write(code)
@@ -810,20 +967,44 @@ class GameAsset(models.Model):
     @api.model_create_multi
     def create(self, vals_list):
         records = super(GameAsset, self).create(vals_list)
-        records._add_asset()
+        for record in records:
+            if record.json_file:
+                record._add_asset_json_file()
+            if record.file:
+                record._add_asset_file()
+
+            if records.asset_type == "tilemapconfig":
+                record._add_asset_tileset_config()
+
+        records._generate_enemy_atlas_and_aseprite_config_code()
+        records.create_atlas_config_records()
         records.generate_game_assets_import_and_export()
         return records
 
     def write(self, vals):
-        self._remove_asset()
         res = super(GameAsset, self).write(vals)
-        self._add_asset()
+        if self.asset_type == "tilemapconfig":
+            self._remove_asset()
+            self._add_asset_tileset_config()
+        elif vals.get("file"):
+            self._add_asset_file()
+        elif vals.get("json_file"):
+            self._add_asset_json_file()
+
+        if vals.get("animation_type"):
+            raise ValidationError("You cannot change the animation type.")
+        if vals.get("asset_type"):
+            raise ValidationError("You cannot change the asset type.")
+
         self.generate_game_assets_import_and_export()
         return res
 
     def unlink(self):
         for record in self:
             record._remove_asset()
-
+            record._remove_enemy_js_file(record.name_key)
+        res = super(GameAsset, self).unlink()
+        self._generate_enemies_seed_config_code()
+        self._generate_Animation_code()
         self.generate_game_assets_import_and_export()
-        return super(GameAsset, self).unlink()
+        return res

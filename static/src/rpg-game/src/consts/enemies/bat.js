@@ -94,14 +94,14 @@ export const Bat = [
 ];
 
 export const BatConfig = {
-  id: 2,
+  id: 65,
   name: "Bat",
   texture: "bat",
   baseHealth: 10,
   atack: 7,
   defense: 1,
   speed: 30,
-  flee: 3,
+  flee: 3.0,
   hit: 5,
   exp: 50,
   healthBarOffsetX: -6,

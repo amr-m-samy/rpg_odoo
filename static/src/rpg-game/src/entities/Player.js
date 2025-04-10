@@ -171,10 +171,10 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
      * @type { Phaser.GameObjects.Container }
      */
     this.container = new Phaser.GameObjects.Container(this.scene, x, y, [
-      this,
-      this.healthBar,
-      this.hitZone,
-    ]).setScale(1);
+      this.setScale(PlayerConfig.scale),
+      this.healthBar.setScale(PlayerConfig.scale),
+      this.hitZone.setScale(PlayerConfig.scale),
+    ]);
     this.container.setDepth(1);
 
     // Initializes the physics.

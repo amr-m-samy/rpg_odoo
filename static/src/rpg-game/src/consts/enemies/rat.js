@@ -104,14 +104,14 @@ export const Rat = [
 ];
 
 export const RatConfig = {
-  id: 4,
+  id: 67,
   name: "Rat",
   texture: "rat",
   baseHealth: 10,
   atack: 30,
   defense: 1,
   speed: 25,
-  flee: 2,
+  flee: 2.0,
   hit: 5,
   exp: 25,
   healthBarOffsetX: -5,

@@ -3,3 +3,4 @@ from . import ui_components
 from . import game_assets
 from . import rpg_game_utils
 from . import consts
+from . import scenes

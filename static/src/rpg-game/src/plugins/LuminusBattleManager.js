@@ -7,6 +7,7 @@ import { ENTITIES } from "../consts/Entities";
 import { LuminusEntityTextDisplay } from "./LuminusEntityTextDisplay";
 import { CRITICAL_MULTIPLIER } from "../consts/Battle";
 import { ExpManager } from "./attributes/ExpManager";
+import { values } from "lodash";
 
 /**
  * @class
@@ -280,13 +281,16 @@ export class LuminusBattleManager extends AnimationNames {
               `${target.texture.key}-${target.deathAnimationName}`,
             )
           ) {
+            console.log("Animation found");
             target.anims.play(
               `${target.texture.key}-${target.deathAnimationName}`,
             );
             target.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
+              target.anims.stop();
               target.destroyAll();
             });
           } else {
+            console.log("Animation not found");
             target.destroyAll();
           }
         }, 100);

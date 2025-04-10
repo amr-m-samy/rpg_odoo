@@ -94,14 +94,14 @@ export const Ogre = [
 ];
 
 export const OgreConfig = {
-  id: 3,
+  id: 108,
   name: "Ogre",
   texture: "ogre",
   baseHealth: 20,
   atack: 8,
   defense: 4,
   speed: 25,
-  flee: 3,
+  flee: 3.0,
   hit: 5,
   exp: 100,
   healthBarOffsetX: -5,

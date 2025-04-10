@@ -88,6 +88,7 @@ export class LuminusMapCreator {
   }
 
   create() {
+    console.log("Creating Map...", this.mapName);
     this.map = this.scene.make.tilemap({ key: this.mapName });
     this.tilesetImages.forEach((tilesetImage) => {
       this.map.addTilesetImage(

@@ -1,4 +1,5 @@
 export const PlayerConfig = {
-  texture: "character",
+  texture: 'alex',
   variableName: "player",
+  scale: 2.0,
 };

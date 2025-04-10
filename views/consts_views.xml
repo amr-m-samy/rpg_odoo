@@ -1,46 +1,41 @@
 <odoo>
   <data>
-
-
     <record id="view_buff_type_list" model="ir.ui.view">
       <field name="name">buff.type.list</field>
       <field name="model">buff.type</field>
       <field name="arch" type="xml">
         <list string="Buff Types">
-          <field name="name"/>
-          <field name="buff_id"/>
-          <field name="key"/>
+          <field name="name"></field>
+          <field name="buff_id"></field>
+          <field name="key"></field>
         </list>
       </field>
     </record>
-
     <record id="view_game_items_list" model="ir.ui.view">
       <field name="name">game.items.list</field>
       <field name="model">game.items</field>
       <field name="arch" type="xml">
         <list string="Game Items">
-           <header>
-             <button name="item_code_generator" string="Generate Game items" type="object" display="always" class="oe_highlight"/>
-            </header>  
-          <field name="name"/>
-          <field name="item_type" widget="selection"/>
-          <field name="texture_image" widget="image"/>
-          <field name="sfx"/>
+          <header>
+            <button class="oe_highlight" display="always" name="item_code_generator" string="Generate Game items" type="object"></button>
+          </header>
+          <field name="name"></field>
+          <field name="item_type" widget="selection"></field>
+          <field name="texture_image" widget="image"></field>
+          <field name="sfx"></field>
         </list>
       </field>
     </record>
-
     <record id="view_item_type_list" model="ir.ui.view">
       <field name="name">item.type.list</field>
       <field name="model">item.type</field>
       <field name="arch" type="xml">
         <list string="Item Types">
-          <field name="name"/>
-          <field name="key"/>
+          <field name="name"></field>
+          <field name="key"></field>
         </list>
       </field>
     </record>
-
     <record id="view_buff_type_form" model="ir.ui.view">
       <field name="name">buff.type.form</field>
       <field name="model">buff.type</field>
@@ -48,15 +43,14 @@
         <form string="Buff Type">
           <sheet>
             <group>
-              <field name="name"/>
-              <field name="buff_id"/>
-              <field name="key"/>
+              <field name="name"></field>
+              <field name="buff_id"></field>
+              <field name="key"></field>
             </group>
           </sheet>
         </form>
       </field>
     </record>
-
     <record id="view_item_type_form" model="ir.ui.view">
       <field name="name">item.type.form</field>
       <field name="model">item.type</field>
@@ -64,14 +58,13 @@
         <form string="Item Type">
           <sheet>
             <group>
-              <field name="name"/>
-              <field name="key"/>
+              <field name="name"></field>
+              <field name="key"></field>
             </group>
           </sheet>
         </form>
       </field>
     </record>
-
     <record id="view_game_items_form" model="ir.ui.view">
       <field name="name">game.items.form</field>
       <field name="model">game.items</field>
@@ -79,47 +72,93 @@
         <form string="Game Items">
           <sheet>
             <group>
-              <field name="name"/>
-              <field name="item_type"/>
-              <field name="buff_type"/>
-              <field name="description"/>
-              <field name="script"/>
-              <field name="texture"/>
-              <field name="texture_image" widget="image" class="game-assets-image" options='{"zoom": true}'/>
-              <field name="sfx"/>
-              <field name="stackable"/>
-              <field name="inventory_scale"/>
+              <field name="name"></field>
+              <field name="item_type"></field>
+              <field name="buff_type"></field>
+              <field name="description"></field>
+              <field name="script"></field>
+              <field name="texture"></field>
+              <field class="game-assets-image" name="texture_image" options="{&quot;zoom&quot;: true}" widget="image"></field>
+              <field name="sfx"></field>
+              <field name="stackable"></field>
+              <field name="inventory_scale"></field>
             </group>
           </sheet>
         </form>
       </field>
     </record>
-
+    <!--_name = "rpg.base.entity"-->
+    <!--_description = "RPG Base Enteity"-->
+    <!---->
+    <!--name = fields.Char(string="Name", required=True)-->
+    <!--entity_id = fields.Char(string="ID", default="null")-->
+    <!--is_atacking = fields.Boolean(string="Is Atacking", default=False)-->
+    <!--can_atack = fields.Boolean(string="Can Atack", default=True)-->
+    <!--can_move = fields.Boolean(string="Can Move", default=True)-->
+    <!--can_take_damage = fields.Boolean(string="Can Take Damage", default=True)-->
+    <!--show_hit_box = fields.Boolean(string="Show Hit Box", default=False)-->
+    <!--perception_range = fields.Float(string="Perception Range", default=75)-->
+    <!---->
+    <record id="view_rpg_base_entity_form" model="ir.ui.view">
+      <field name="name">rpg.base.entity.form</field>
+      <field name="model">rpg.base.entity</field>
+      <field name="arch" type="xml">
+        <form string="RPG Base Entity">
+          <sheet>
+            <group>
+              <field name="name"></field>
+              <field name="entity_id"></field>
+              <field name="is_atacking"></field>
+              <field name="can_atack"></field>
+              <field name="can_move"></field>
+              <field name="can_take_damage"></field>
+              <field name="show_hit_box"></field>
+              <field name="perception_range"></field>
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+    <record id="view_rpg_base_entity_list" model="ir.ui.view">
+      <field name="name">rpg.base.entity.list</field>
+      <field name="model">rpg.base.entity</field>
+      <field name="arch" type="xml">
+        <list string="RPG Base Entity">
+          <field name="name"></field>
+          <field name="entity_id"></field>
+          <field name="is_atacking"></field>
+          <field name="can_atack"></field>
+          <field name="can_move"></field>
+          <field name="can_take_damage"></field>
+          <field name="show_hit_box"></field>
+          <field name="perception_range"></field>
+        </list>
+      </field>
+    </record>
     <record id="action_buff_type" model="ir.actions.act_window">
       <field name="name">Buff Types</field>
       <field name="res_model">buff.type</field>
       <field name="view_mode">list,form</field>
     </record>
-
     <record id="action_item_type" model="ir.actions.act_window">
       <field name="name">Item Types</field>
       <field name="res_model">item.type</field>
       <field name="view_mode">list,form</field>
     </record>
-
     <record id="action_game_items" model="ir.actions.act_window">
       <field name="name">Game Items</field>
       <field name="res_model">game.items</field>
       <field name="view_mode">list,form</field>
     </record>
-
-     
-    <menuitem name="Consts" id="rpg_game.consts" parent="menu_root"/>
-    <menuitem name="Buff Types" id="buff_type" parent="rpg_game.consts"
-              action="action_buff_type"/>
-    <menuitem name="Item Types" id="item_type" parent="rpg_game.consts"
-              action="action_item_type"/>
-    <menuitem name="Game Items" id="game_items" parent="rpg_game.consts"
-              action="action_game_items"/>
+    <record id="action_rpg_base_entity" model="ir.actions.act_window">
+      <field name="name">RPG Base Entity</field>
+      <field name="res_model">rpg.base.entity</field>
+      <field name="view_mode">list,form</field>
+    </record>
+    <menuitem id="rpg_game.consts" name="Consts" parent="menu_root"></menuitem>
+    <menuitem action="action_buff_type" id="buff_type" name="Buff Types" parent="rpg_game.consts"></menuitem>
+    <menuitem action="action_item_type" id="item_type" name="Item Types" parent="rpg_game.consts"></menuitem>
+    <menuitem action="action_game_items" id="game_items" name="Game Items" parent="rpg_game.consts"></menuitem>
+    <menuitem action="action_rpg_base_entity" id="rpg_base_entity" name="RPG Base Entity" parent="rpg_game.consts"></menuitem>
   </data>
 </odoo>

@@ -16,12 +16,13 @@ Long description of module's purpose
     "depends": ["base"],
     # always loaded
     "data": [
-        # 'security/ir.model.access.csv',
+        "security/ir.model.access.csv",
         "views/ui_components_views.xml",
         "views/game_assets_views.xml",
         "views/views.xml",
         "views/templates.xml",
         "views/consts_views.xml",
+        "views/scenes_viwes.xml",
         "data/game_assets_data.xml",
         "data/ui_components_data.xml",
         "data/consts_data.xml",

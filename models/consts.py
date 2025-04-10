@@ -219,3 +219,154 @@ class Items(models.Model):
         res = super(Items, self).unlink()
         self.item_code_generator()
         return res
+
+
+class RPGBaseEnity(models.Model):
+    _name = "rpg.base.entity"
+    _description = "RPG Base Enteity"
+
+    name = fields.Char(string="Name", required=True)
+    entity_id = fields.Char(string="ID", default="null")
+    is_atacking = fields.Boolean(string="Is Atacking", default=False)
+    can_atack = fields.Boolean(string="Can Atack", default=True)
+    can_move = fields.Boolean(string="Can Move", default=True)
+    can_take_damage = fields.Boolean(string="Can Take Damage", default=True)
+    show_hit_box = fields.Boolean(string="Show Hit Box", default=False)
+    perception_range = fields.Float(string="Perception Range", default=75)
+
+    def rpg_base_entity_code_generator(self):
+        """
+        Generate a new RPG Base Entity code
+
+        export const BaseEntity = {
+          /**
+           * A Unique ID to identify the Entity.
+           * @type { string }
+           * @default
+           */
+          id: null,
+          /**
+           * Controls if the entity is atacking.
+           * @type { boolean }
+           * @default
+           */
+          isAtacking: false,
+
+          /**
+           * Controls if the player can atack.
+           * @type { boolean }
+           * @default
+           */
+          canAtack: true,
+
+          /**
+           * Controls if the player can move.
+           * @type { boolean }
+           * @default
+           */
+          canMove: true,
+
+          /**
+           * Controls if the entity can take damage.
+           * @type { boolean }
+           * @default
+           */
+          canTakeDamage: true,
+
+          /**
+           * This variable controls when the atack hitbox will appear.
+           * @type { boolean }
+           * @default
+           */
+          showHitBox: false,
+
+          /**
+           * The perception range of the entity. Usualy the field of view. For enemies it should be used to atack the player onde it's inside the perception radius.
+           * @type { number }
+           * @default
+           */
+          perceptionRange: 75,
+        };
+        """
+        rpg_base_entity_code = "export const BaseEntity = {\n"
+        rpg_base_entity_code += "  /**\n"
+        rpg_base_entity_code += "   * A Unique ID to identify the Entity.\n"
+        rpg_base_entity_code += "   * @type { string }\n"
+        rpg_base_entity_code += "   * @default\n"
+        rpg_base_entity_code += f"   * {self.entity_id}\n"
+        rpg_base_entity_code += "   */\n"
+        rpg_base_entity_code += f"  id: {self.entity_id},\n"
+        rpg_base_entity_code += "  /**\n"
+        rpg_base_entity_code += "   * Controls if the entity is atacking.\n"
+        rpg_base_entity_code += "   * @type { boolean }\n"
+        rpg_base_entity_code += "   * @default\n"
+        rpg_base_entity_code += f"   * {self.is_atacking}\n"
+        rpg_base_entity_code += "   */\n"
+        rpg_base_entity_code += f"  isAtacking: {str(self.is_atacking).lower()},\n"
+        rpg_base_entity_code += "  /**\n"
+        rpg_base_entity_code += "   * Controls if the player can atack.\n"
+        rpg_base_entity_code += "   * @type { boolean }\n"
+        rpg_base_entity_code += "   * @default\n"
+        rpg_base_entity_code += f"   * {self.can_atack}\n"
+        rpg_base_entity_code += "   */\n"
+        rpg_base_entity_code += f"  canAtack: {str(self.can_atack).lower()},\n"
+        rpg_base_entity_code += "  /**\n"
+        rpg_base_entity_code += "   * Controls if the player can move.\n"
+        rpg_base_entity_code += "   * @type { boolean }\n"
+        rpg_base_entity_code += "   * @default\n"
+        rpg_base_entity_code += f"   * {self.can_move}\n"
+        rpg_base_entity_code += "   */\n"
+        rpg_base_entity_code += f"  canMove: {str(self.can_move).lower()},\n"
+        rpg_base_entity_code += "  /**\n"
+        rpg_base_entity_code += "   * Controls if the entity can take damage.\n"
+        rpg_base_entity_code += "   * @type { boolean }\n"
+        rpg_base_entity_code += "   * @default\n"
+        rpg_base_entity_code += f"   * {self.can_take_damage}\n"
+        rpg_base_entity_code += "   */\n"
+        rpg_base_entity_code += (
+            f"  canTakeDamage: {str(self.can_take_damage).lower()},\n"
+        )
+        rpg_base_entity_code += "  /**\n"
+        rpg_base_entity_code += (
+            "   * This variable controls when the atack hitbox will appear.\n"
+        )
+        rpg_base_entity_code += "   * @type { boolean }\n"
+        rpg_base_entity_code += "   * @default\n"
+        rpg_base_entity_code += f"   * {self.show_hit_box}\n"
+        rpg_base_entity_code += "   */\n"
+        rpg_base_entity_code += f"  showHitBox: {str(self.show_hit_box).lower()},\n"
+        rpg_base_entity_code += "  /**\n"
+        rpg_base_entity_code += "   * The perception range of the entity. Usualy the field of view. For enemies it should be used to atack the player onde it's inside the perception radius.\n"
+        rpg_base_entity_code += "   * @type { number }\n"
+        rpg_base_entity_code += "   * @default\n"
+        rpg_base_entity_code += f"   * {self.perception_range}\n"
+        rpg_base_entity_code += "   */\n"
+        rpg_base_entity_code += f"  perceptionRange: {self.perception_range},\n"
+        rpg_base_entity_code += "};"
+        rpg_base_entity_code += "\n"
+
+        utils_model = self.env["rpg.game.utils"]
+        rpg_base_entity_const_path = utils_model.get_rpg_game_src_directory(
+            "entities/BaseEntity.js"
+        )
+        # Check if the file exists
+        with open(rpg_base_entity_const_path, "w") as f:
+            f.write(rpg_base_entity_code)
+
+        return rpg_base_entity_code
+
+    @api.model
+    def create(self, vals):
+        existing_entities = self.search([], limit=1)
+        if existing_entities:
+            raise ValueError("There can be only one RPG Base Entity.")
+
+        res = super(RPGBaseEnity, self).create(vals)
+        res.rpg_base_entity_code_generator()
+        return res
+
+    @api.model
+    def write(self, vals):
+        res = super(RPGBaseEnity, self).write(vals)
+        self.rpg_base_entity_code_generator()
+        return res
