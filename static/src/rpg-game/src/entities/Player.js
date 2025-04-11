@@ -54,42 +54,42 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
      * @type { number }
      * @default
      */
-    this.speed = 70;
+    this.speed = PlayerConfig.speed;
 
     /**
      * Defines the hitzone width.
      * @type { number }
      * @default
      */
-    this.hitZoneWidth = 12;
+    this.hitZoneWidth = PlayerConfig.hitZoneWidth * PlayerConfig.scale;
 
     /**
      * Defines the hitzone height.
      * @type { number }
      * @default
      */
-    this.hitZoneHeigth = 21;
+    this.hitZoneHeigth = PlayerConfig.hitZoneHeight * PlayerConfig.scale;
 
     /**
      * Defines the body width. This will be used to check for collisions while moving.
      * @type { number }
      * @default
      */
-    this.bodyWidth = 12;
+    this.bodyWidth = PlayerConfig.playerBodyWidth * PlayerConfig.scale;
 
     /**
      * Defines the body width. This will be used to check for collisions while moving.
      * @type { number }
      * @default
      */
-    this.bodyHeight = 8;
+    this.bodyHeight = PlayerConfig.playerBodyHeight * PlayerConfig.scale;
 
     /**
      * Checks the body offset Y. Should be changed acconrdinglly to your sprite size.
      * @type { number }
      * @default
      */
-    this.bodyOffsetY = 2;
+    this.bodyOffsetY = PlayerConfig.playerBodyOffsetY * PlayerConfig.scale;
 
     // TODO - Should get the player's items when he starts the game.
     /**
@@ -173,7 +173,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     this.container = new Phaser.GameObjects.Container(this.scene, x, y, [
       this.setScale(PlayerConfig.scale),
       this.healthBar.setScale(PlayerConfig.scale),
-      this.hitZone.setScale(PlayerConfig.scale),
+      this.hitZone,
     ]);
     this.container.setDepth(1);
 

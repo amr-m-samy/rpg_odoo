@@ -49,12 +49,12 @@ export default function SceneInfo(sceneName) {
     },
     demo48x48test: {
       mapName: 'demo48x48',
-      zoom: 1.5,
+      zoom: 1.2,
       isSound: false,
       tileImages: [
         new TilesetImageConfig('interior_free_ext48x48_ext', 'interior_free_ext48x48_ext', 48, 48, 1, 2),
         new TilesetImageConfig('room_builder_ext48x48_ext', 'room_builder_ext48x48_ext', 48, 48, 1, 2),
-        new TilesetImageConfig('room_builder_ext48x48_ext', 'room_builder_ext48x48_ext', 48, 48, 1, 2),
+        new TilesetImageConfig('collision48x48_ext', 'collision48x48', 48, 48, 0, 0),
       ],
       isEnemyZone: false,
     },

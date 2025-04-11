@@ -7,7 +7,7 @@ import { ENTITIES } from "../consts/Entities";
 import { LuminusEntityTextDisplay } from "./LuminusEntityTextDisplay";
 import { CRITICAL_MULTIPLIER } from "../consts/Battle";
 import { ExpManager } from "./attributes/ExpManager";
-import { values } from "lodash";
+import { isNaN, values } from "lodash";
 
 /**
  * @class
@@ -145,18 +145,33 @@ export class LuminusBattleManager extends AnimationNames {
       playerX = atacker.container.x;
       playerY = atacker.container.y;
     }
-    const hitbox = atacker.scene.physics.add.sprite(
-      playerX,
-      playerY,
-      this.hitboxSpriteName,
-      0,
-    );
+    const hitbox = atacker.scene.physics.add
+      .sprite(playerX, playerY, this.hitboxSpriteName, 0)
+      .setScale(atacker.bodyWidth / 16);
 
     hitbox.body.debugBodyColor = 0xff00ff;
 
     hitbox.alpha = 0.3;
     hitbox.depth = 50;
-    if (atacker.frame.name.includes(this.atackDirectionFrameName.up)) {
+
+    // Because of we use _remove_characters_from_aesprite_json_filename() on game.assets.manager model, we need to detect the frame name to get the correct hitbox rotation.
+    const asepriteFrameNumber = Number(atacker.frame.name);
+    let asepriteFrameName = "";
+    if (asepriteFrameNumber >= 0) {
+      for (const frame of atacker.frame.texture.customData.meta.frameTags) {
+        if (
+          asepriteFrameNumber >= frame.from &&
+          asepriteFrameNumber <= frame.to
+        ) {
+          asepriteFrameName = frame.name;
+          break;
+        }
+      }
+    }
+    if (
+      atacker.frame.name.includes(this.atackDirectionFrameName.up) ||
+      asepriteFrameName.includes(this.atackDirectionFrameName.up)
+    ) {
       hitbox.body.setOffset(0, 4);
       const rotation = -1.57;
       this.setHitboxRotation(
@@ -171,8 +186,9 @@ export class LuminusBattleManager extends AnimationNames {
         atacker,
       );
     } else if (
-      atacker.frame.name.includes(this.atackDirectionFrameName.right) &&
-      !atacker.flipX
+      atacker.frame.name.includes(this.atackDirectionFrameName.right) ||
+      (asepriteFrameName.includes(this.atackDirectionFrameName.right) &&
+        !atacker.flipX)
     ) {
       hitbox.body.setOffset(-4, 0);
       const rotation = 0;
@@ -185,7 +201,10 @@ export class LuminusBattleManager extends AnimationNames {
         },
         atacker,
       );
-    } else if (atacker.frame.name.includes(this.atackDirectionFrameName.down)) {
+    } else if (
+      atacker.frame.name.includes(this.atackDirectionFrameName.down) ||
+      asepriteFrameName.includes(this.atackDirectionFrameName.down)
+    ) {
       hitbox.body.setOffset(0, -4);
       const rotation = 1.57;
       this.setHitboxRotation(
@@ -201,6 +220,7 @@ export class LuminusBattleManager extends AnimationNames {
       );
     } else if (
       atacker.frame.name.includes(this.atackDirectionFrameName.left) ||
+      asepriteFrameName.includes(this.atackDirectionFrameName.left) ||
       atacker.flipX
     ) {
       hitbox.body.setOffset(4, 0);

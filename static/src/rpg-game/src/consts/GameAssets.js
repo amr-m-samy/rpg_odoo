@@ -120,8 +120,6 @@ import demo_interior from "../assets/sprites/demo_interior.png";
 import demo_room from "../assets/sprites/demo_room.png";
 import minotaur from "../assets/sprites/minotaur.png";
 import minotaur_json from "../assets/sprites/minotaur.json";
-import alex from "../assets/sprites/alex.png";
-import alex_json from "../assets/sprites/alex.json";
 import adam_tile from "../assets/sprites/adam_tile.png";
 import bob_tile from "../assets/sprites/bob_tile.png";
 import tile_demo48x48_json from "../assets/maps/demo48x48/demo48x48.json";
@@ -129,6 +127,10 @@ import interior_free_ext48x48_ext from "../assets/sprites/interior_free_ext48x48
 import room_builder_ext48x48_ext from "../assets/sprites/room_builder_ext48x48_ext.png";
 import collision48x48 from "../assets/sprites/collision48x48.png";
 import dialog_box from "../assets/sprites/UI/dialog_box.png";
+import olivechar from "../assets/sprites/olivechar.png";
+import olivechar_json from "../assets/sprites/olivechar.json";
+import adam from "../assets/sprites/adam.png";
+import adam_json from "../assets/sprites/adam.json";
 
 export const Images = [
     {name: "tiles", image: tiles},
@@ -251,7 +253,8 @@ export const ASEPRITE_CONFIG = [
     {name: "minus_small_button", image: minus_small_button, json: minus_small_button_json},
     {name: "monika", image: monika, json: monika_json},
     {name: "minotaur", image: minotaur, json: minotaur_json},
-    {name: "alex", image: alex, json: alex_json}
+    {name: "olivechar", image: olivechar, json: olivechar_json},
+    {name: "adam", image: adam, json: adam_json}
 ];;
 
 export const TilemapConfig = [

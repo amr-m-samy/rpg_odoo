@@ -13,7 +13,7 @@ export const dialogBoxConfig = {
   nineSliceLeftArea: 10,
   nineSliceRightArea: 10,
   actionSpriteScale: 0.5,
-  dialogSpeed: 20,
+  dialogSpeed: 60,
   fontSize: 20,
   fontWidthMargin: 5,
   dialogMaxLines: 3,
@@ -25,5 +25,5 @@ export const dialogBoxConfig = {
   isOverlapingChat: false,
   isAnimatingText: false,
   cameraZoomMargin: 0,
-  fontColor: new Phaser.Display.Color(61, 61, 61, 1),
+  fontColor: "#6f493d",
 };

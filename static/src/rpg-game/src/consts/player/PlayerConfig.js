@@ -1,5 +1,12 @@
 export const PlayerConfig = {
-  texture: 'alex',
+  texture: 'adam',
   variableName: "player",
-  scale: 2.0,
+  scale: 1.0,
+  playerBodyWidth: 48,
+  playerBodyHeight: 34.5,
+  playerBodyOffsetX: 0,
+  playerBodyOffsetY: 0,
+  speed: 200,
+  hitZoneWidth: 48,
+  hitZoneHeight: 69,
 };

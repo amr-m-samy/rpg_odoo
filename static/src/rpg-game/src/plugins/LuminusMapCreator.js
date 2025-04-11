@@ -62,7 +62,7 @@ export class LuminusMapCreator {
      * @type { number }
      * @default
      */
-    this.collisionLayerAlpha = 0;
+    this.collisionLayerAlpha = 0.5;
 
     /**
      * The Tilemap itself
@@ -88,7 +88,6 @@ export class LuminusMapCreator {
   }
 
   create() {
-    console.log("Creating Map...", this.mapName);
     this.map = this.scene.make.tilemap({ key: this.mapName });
     this.tilesetImages.forEach((tilesetImage) => {
       this.map.addTilesetImage(
@@ -117,6 +116,7 @@ export class LuminusMapCreator {
 
         currentLayer.setCollisionByProperty({ collides: true });
         this.collisionLayer = currentLayer;
+        console.log("Collision Layer: ", this.collisionLayer);
       }
     });
 

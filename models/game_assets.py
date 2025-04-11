@@ -83,11 +83,6 @@ class GameAsset(models.Model):
     _rec_name = "name_key"
 
     name_key = fields.Char(string="Name", required=True)
-    # id = fields.Integer(
-    #     string="Asset ID",
-    #     readonly=True,
-    #     help="ID of the entity the set on the tiled map",
-    # )
     active = fields.Boolean(string="Active", default=True)
     asset_type = fields.Selection(
         [
@@ -109,6 +104,11 @@ class GameAsset(models.Model):
             ("misc", "Misc"),
         ],
         string="Animation Type",
+    )
+    portrait_id = fields.Many2one(
+        "game.assets.manager",
+        string="Portrait",
+        help="Portrait for the character or friend. It is a image file or aseprite file.",
     )
     file_path = fields.Char(
         string="File Path",
@@ -658,13 +658,33 @@ class GameAsset(models.Model):
           texture: "minotaur",
           variableName: "player",
           scale: 1.0,
+          playerBodyWidth: 48,
+          playerBodyHeight: 48,
+          playerBodyOffsetX: 0,
+          playerBodyOffsetY: 48 / 4,
+          speed: 200,
+            hitZoneWidth: 48,
+            hitZoneHeight: 69,
         };
         """
+        decoded_json = base64.b64decode(self.json_file).decode("utf-8")
+        json_obj = json.loads(decoded_json)
+        if json_obj["frames"][0]:
+            player_body_width = json_obj["frames"][0]["spriteSourceSize"]["w"]
+            player_body_height = json_obj["frames"][0]["spriteSourceSize"]["h"]
+
         player_config_code = (
             "export const PlayerConfig = {\n"
             f"  texture: '{self.name_key}',\n"
             '  variableName: "player",\n'
             f"  scale: {self.scale},\n"
+            f"  playerBodyWidth: {player_body_width},\n"
+            f"  playerBodyHeight: {player_body_height/2},\n"
+            f"  playerBodyOffsetX: 0,\n"
+            f"  playerBodyOffsetY: 0,\n"
+            f"  speed: {self.speed},\n"
+            f"  hitZoneWidth: {player_body_width},\n"
+            f"  hitZoneHeight: {player_body_height},\n"
             "};\n"
         )
         assets_path = self.env["rpg.game.utils"].get_rpg_game_src_directory(
