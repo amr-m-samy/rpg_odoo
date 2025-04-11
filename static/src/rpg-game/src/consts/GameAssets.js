@@ -131,6 +131,11 @@ import olivechar from "../assets/sprites/olivechar.png";
 import olivechar_json from "../assets/sprites/olivechar.json";
 import adam from "../assets/sprites/adam.png";
 import adam_json from "../assets/sprites/adam.json";
+import Generic_Home_1_Layer_1_48x48 from "../assets/sprites/Generic_Home_1_Layer_1_48x48.png";
+import Generic_Home_1_Layer_2_48x48 from "../assets/sprites/Generic_Home_1_Layer_2_48x48.png";
+import tile_demo16x16_48_json from "../assets/maps/demo16x16_48/demo16x16_48.json";
+import Room_Builder_16x16_48_free_ext from "../assets/sprites/Room_Builder_16x16_48_free_ext.png";
+import generic_room_16x16_48 from "../assets/sprites/generic_room_16x16_48.png";
 
 export const Images = [
     {name: "tiles", image: tiles},
@@ -205,7 +210,11 @@ export const Images = [
     {name: "interior_free_ext48x48_ext", image: interior_free_ext48x48_ext},
     {name: "room_builder_ext48x48_ext", image: room_builder_ext48x48_ext},
     {name: "collision48x48", image: collision48x48},
-    {name: "dialog_box", image: dialog_box}
+    {name: "dialog_box", image: dialog_box},
+    {name: "Generic_Home_1_Layer_1_48x48", image: Generic_Home_1_Layer_1_48x48},
+    {name: "Generic_Home_1_Layer_2_48x48", image: Generic_Home_1_Layer_2_48x48},
+    {name: "Room_Builder_16x16_48_free_ext", image: Room_Builder_16x16_48_free_ext},
+    {name: "generic_room_16x16_48", image: generic_room_16x16_48}
 ];;
 
 export const Audios = [
@@ -261,5 +270,6 @@ export const TilemapConfig = [
     {name: "larus", json: tile_larus_json},
     {name: "tutorial", json: tile_tutorial_json},
     {name: "intro22", json: tile_intro22_json},
-    {name: "demo48x48", json: tile_demo48x48_json}
+    {name: "demo48x48", json: tile_demo48x48_json},
+    {name: "demo16x16_48", json: tile_demo16x16_48_json}
 ];;

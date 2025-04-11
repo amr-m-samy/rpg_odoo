@@ -6,7 +6,7 @@ export const PlayerConfig = {
   playerBodyHeight: 34.5,
   playerBodyOffsetX: 0,
   playerBodyOffsetY: 0,
-  speed: 200,
+  speed: 250,
   hitZoneWidth: 48,
   hitZoneHeight: 69,
 };

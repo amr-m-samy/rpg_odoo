@@ -62,7 +62,7 @@ export class LuminusMapCreator {
      * @type { number }
      * @default
      */
-    this.collisionLayerAlpha = 0.5;
+    this.collisionLayerAlpha = 0;
 
     /**
      * The Tilemap itself
@@ -116,7 +116,6 @@ export class LuminusMapCreator {
 
         currentLayer.setCollisionByProperty({ collides: true });
         this.collisionLayer = currentLayer;
-        console.log("Collision Layer: ", this.collisionLayer);
       }
     });
 

@@ -58,6 +58,17 @@ export default function SceneInfo(sceneName) {
       ],
       isEnemyZone: false,
     },
+    demo16x16_48test: {
+      mapName: 'demo16x16_48',
+      zoom: 0.8,
+      isSound: false,
+      tileImages: [
+        new TilesetImageConfig('collision', 'collision_tiles'),
+        new TilesetImageConfig('Room_Builder_48x48_free_ext', 'Room_Builder_16x16_48_free_ext'),
+        new TilesetImageConfig('generic_layer_1_ext', 'generic_room_16x16_48'),
+      ],
+      isEnemyZone: false,
+    },
   };
   return sceneInfo[sceneName] || sceneInfo.mainscene;
 }
