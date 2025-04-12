@@ -74,6 +74,7 @@ export class LuminusDialogBox {
      * @type { number }
      * @default
      *   */
+    this.dialogWidthMargin = 1.2;
     this.dialogHeight = this.dialogBoxConfig.dialogHeight; // 150; // Dialog Height
     /**
      * Margin of the dialog. Used to make spaces in the dialog.
@@ -301,6 +302,9 @@ export class LuminusDialogBox {
      * @type { Phaser.GameObjects.Image }
      */
     this.rightPortraitImage = null;
+    this.rightPortraitAnimation = null;
+    this.rightNameTextBox = null;
+    this.rightPortraitBoxImage = null;
 
     /**
      * The text object that displays the left side entity on the dialog.
@@ -312,7 +316,17 @@ export class LuminusDialogBox {
      * The left side Portrait image.
      * @type { Phaser.GameObjects.Image }
      */
-    this.leftPortraitImage = null;
+    this.leftPortraitAnimation = null;
+    this.leftNameTextBox = null;
+    this.leftPortraitBoxImage = null;
+
+    this.groupLeftSpeaker = null;
+    this.groupRightSpeaker = null;
+
+    this.speakerMarginX = 0;
+    this.speakerMarginY = 0;
+    this.portraitMarginX = 0;
+    this.portraitMarginY = 0;
   }
 
   create() {
@@ -338,80 +352,155 @@ export class LuminusDialogBox {
     });
   }
 
+  createNameText(whoTalks) {
+    if (whoTalks === "left") {
+      this.leftNameText = this.scene.add
+        .text(
+          this.dialog.x > this.dialog.width / 2
+            ? this.dialog.x - this.dialog.width / 2 + this.margin * 2
+            : this.dialog.width / 2 - this.dialog.x + this.margin * 3.5,
+          this.dialog.y - this.dialogHeight / 2 - this.margin / 4,
+          ` ${this.leftName} `,
+          {
+            fontSize: this.fontSize,
+            letterSpacing: this.letterSpacing,
+            fontFamily: this.fontFamily,
+            fontStyle: "bold",
+            color: this.fontColor,
+          },
+        )
+        .setScrollFactor(0, 0)
+        .setDepth(99999999999999999);
+    }
+    if (whoTalks === "right") {
+      this.rightNameText = this.scene.add
+        .text(
+          this.dialog.x + this.dialog.width / 2 - this.margin * 2,
+          this.dialog.y - this.dialogHeight / 2 - this.margin / 4,
+          ` ${this.rightName} `,
+          {
+            fontSize: this.fontSize,
+            letterSpacing: this.letterSpacing,
+            fontFamily: this.fontFamily,
+            fontStyle: "bold",
+            color: this.fontColor,
+          },
+        )
+        .setScrollFactor(0, 0)
+        .setDepth(99999999999999999);
+      this.rightNameText.setX(this.rightNameText.x - this.rightNameText.width);
+    }
+  }
+  createTextBox() {
+    return this.scene.add
+      .nineslice(
+        0,
+        0,
+        "dialog_box",
+        0,
+        this.leftNameText.width + this.margin,
+        this.leftNameText.height + this.margin,
+        10,
+        10,
+        10,
+        10,
+      )
+      .setScrollFactor(0, 0)
+      .setDepth(102)
+      .setVisible(false);
+  }
+  createNameTextBox(whoTalks) {
+    if (whoTalks === "left") {
+      this.leftNameTextBox = this.createTextBox().setPosition(
+        this.leftNameText.x + this.leftNameText.width / 2,
+        this.leftNameText.y + this.leftNameText.height / 2 - 2,
+      );
+    }
+    if (whoTalks === "right") {
+      this.rightNameTextBox = this.createTextBox().setPosition(
+        this.rightNameText.x + this.rightNameText.width / 2,
+        this.rightNameText.y + this.rightNameText.height / 2 - 2,
+      );
+    }
+  }
+
+  createPortraitAnimation(whoTalks) {
+    if (whoTalks === "left") {
+      this.leftPortraitAnimation = this.scene.add.sprite(
+        this.leftNameTextBox.x - this.margin,
+        this.leftNameTextBox.y - this.margin * 3,
+        "",
+      );
+      this.leftPortraitAnimation.depth = 999;
+      this.leftPortraitAnimation.flipX = false;
+    }
+    if (whoTalks === "right") {
+      this.rightPortraitAnimation = this.scene.add.sprite(
+        this.rightNameTextBox.x - this.margin,
+        this.rightNameTextBox.y - this.margin * 3,
+        "",
+      );
+      this.rightPortraitAnimation.depth = 999;
+      this.rightPortraitAnimation.flipX = true;
+    }
+  }
+
+  createPortraitBoxImage(whoTalks) {
+    if (whoTalks === "left") {
+      this.leftPortraitBoxImage = this.scene.add.image(
+        this.leftNameTextBox.x - this.margin,
+        this.leftNameTextBox.y - this.margin * 3,
+        "portrait_box",
+      );
+      this.leftPortraitBoxImage.depth = 101;
+    }
+    if (whoTalks === "right") {
+      this.rightPortraitBoxImage = this.scene.add.image(
+        this.rightNameTextBox.x - this.margin,
+        this.rightNameTextBox.y - this.margin * 3,
+        "portrait_box",
+      );
+      this.rightPortraitBoxImage.depth = 101;
+    }
+  }
+  groupSpeaker(whoTalks) {
+    if (whoTalks === "left") {
+      this.groupLeftSpeaker = this.scene.add.group();
+      this.groupLeftSpeaker.add(this.leftNameTextBox);
+      this.groupLeftSpeaker.add(this.leftNameText);
+      this.groupLeftSpeaker.add(this.leftPortraitAnimation);
+      this.groupLeftSpeaker.add(this.leftPortraitBoxImage);
+      this.groupLeftSpeaker.getChildren().forEach((child) => {
+        child.visible = false;
+      });
+    }
+    if (whoTalks === "right") {
+      this.groupRightSpeaker = this.scene.add.group();
+      this.groupRightSpeaker.add(this.rightNameTextBox);
+      this.groupRightSpeaker.add(this.rightNameText);
+      this.groupRightSpeaker.add(this.rightPortraitAnimation);
+      this.groupRightSpeaker.add(this.rightPortraitBoxImage);
+      this.groupRightSpeaker.getChildren().forEach((child) => {
+        child.visible = false;
+      });
+    }
+  }
   /**
    * @private
    * Creates the dialogue elements.
    * Left and Right side talkers. Boxes with names and portraits.
    */
   createDialogueElements() {
-    this.leftPortraitImage = this.scene.add.image(
-      this.dialog.x + this.dialog.scaleX * 100,
-      this.dialog.y - this.dialog.scaleY * 60,
-      "",
-    );
-    this.leftPortraitImage.visible = false;
-
-    this.leftName = "Game Master";
-
-    this.leftNameText = this.scene.add
-      .text(
-        this.dialog.width / 2 - this.dialog.x + this.margin * 3.5,
-        this.dialog.y - this.dialogHeight / 2 - this.margin / 4,
-        ` ${this.leftName} `,
-        {
-          fontSize: this.fontSize,
-          letterSpacing: this.letterSpacing,
-          fontFamily: this.fontFamily,
-          fontStyle: "bold",
-          color: this.fontColor,
-        },
-      )
-      .setScrollFactor(0, 0)
-      .setDepth(99999999999999999);
-
-    this.createLeftNameTextBox(
-      this.leftNameText.x + this.leftNameText.width / 2,
-      this.leftNameText.y + this.leftNameText.height / 2 - 2,
-      "dialog_box",
-      0,
-      this.leftNameText.width + this.margin,
-      this.leftNameText.height + this.margin,
-      10,
-    );
-
-    this.groupLeftSpeaker = this.scene.add.group();
-    this.groupLeftSpeaker.add(this.leftNameTextBox);
-    this.groupLeftSpeaker.add(this.leftNameText);
-    //this.leftNameText.visible = false;
-    this.groupLeftSpeaker.getChildren().forEach((child) => {
-      child.visible = false;
-    });
-
-    this.rightPortraitImage = this.scene.add.image(
-      this.dialog.x + this.dialog.width * this.dialog.scaleX - 100,
-      this.dialog.y - this.dialog.scaleY * 60,
-      "",
-    );
-    this.rightPortraitImage.flipX = true;
-    this.rightPortraitImage.visible = false;
-
-    this.rightNameText = this.scene.add
-      .text(
-        this.dialog.x + this.dialog.width * this.dialog.scaleX - this.margin,
-        this.dialog.y + this.dialog.scaleY * 20,
-        ``,
-        {
-          fontSize: this.fontSize,
-          letterSpacing: this.letterSpacing,
-          fontFamily: this.fontFamily,
-          color: "white",
-          backgroundColor: "black",
-        },
-      )
-      .setScrollFactor(0, 0)
-      .setDepth(99999999999999999)
-      .setOrigin(1, 0);
-    this.rightNameText.visible = false;
+    this.createNameText("left");
+    this.createNameTextBox("left");
+    this.createPortraitAnimation("left");
+    this.createPortraitBoxImage("left");
+    this.groupSpeaker("left");
+    this.createNameText("right");
+    this.createNameTextBox("right");
+    this.createPortraitAnimation("right");
+    this.createPortraitBoxImage("right");
+    this.groupSpeaker("right");
   }
 
   /**
@@ -490,11 +579,10 @@ export class LuminusDialogBox {
   createDialogueBox() {
     this.dialog = this.scene.add.nineslice(
       this.cameraWidth / 2,
-      //this.margin * 100,
       this.cameraHeight - this.dialogHeight,
       this.dialogSpriteName,
       0,
-      this.cameraWidth - this.margin * 2,
+      this.cameraWidth / this.dialogWidthMargin,
       this.dialogHeight,
       this.nineSliceLeftArea,
       this.nineSliceRightArea,
@@ -506,32 +594,6 @@ export class LuminusDialogBox {
     this.dialog.visible = false;
   }
 
-  createLeftNameTextBox(
-    x,
-    y,
-    texture,
-    frame = 0,
-    width,
-    height,
-    nineSliceArea = 10,
-  ) {
-    this.leftNameTextBox = this.scene.add.nineslice(
-      x,
-      y,
-      texture,
-      frame,
-      width,
-      height,
-      nineSliceArea,
-      nineSliceArea,
-      nineSliceArea,
-      nineSliceArea,
-    );
-
-    this.leftNameTextBox.setScrollFactor(0, 0);
-    this.leftNameTextBox.depth = 99;
-    this.leftNameTextBox.visible = true;
-  }
   /**
    * Sets the GamePad Textures.
    * If the gamepad is connected, it should use the gamepad textures.
@@ -544,15 +606,98 @@ export class LuminusDialogBox {
    * Resets the Dialogue Speakers alpha to the default value
    */
   resetSpeakersAlpha() {
-    //this.leftNameText.alpha = 0.5;
-    this.groupLeftSpeaker.alpha = 0.5;
-
     this.groupLeftSpeaker.getChildren().forEach((child) => {
       child.alpha = 0.5;
     });
-    this.leftPortraitImage.alpha = 0.5;
-    this.rightNameText.alpha = 0.5;
-    this.rightPortraitImage.alpha = 0.5;
+    this.groupRightSpeaker.getChildren().forEach((child) => {
+      child.alpha = 0.5;
+    });
+  }
+  updateLeftSpeaker() {
+    if (this.currentChat && this.currentChat.leftName) {
+      this.leftNameText.setPosition(
+        this.dialog.x > this.dialog.width / 2
+          ? this.dialog.x -
+              this.dialog.width / 2 +
+              this.margin * 2 +
+              this.speakerMarginX
+          : this.dialog.width / 2 -
+              this.dialog.x +
+              this.margin * 3.5 +
+              this.speakerMarginX,
+        this.dialog.y -
+          this.dialogHeight / 2 -
+          this.margin / 4 +
+          this.speakerMarginY,
+      );
+      this.leftNameTextBox.setPosition(
+        this.leftNameText.x + this.leftNameText.width / 2,
+        this.leftNameText.y + this.leftNameText.height / 2 - 2,
+      );
+      this.leftNameTextBox.setSize(
+        this.leftNameText.width + this.margin,
+        this.leftNameText.height + this.margin,
+      );
+      const leftNameTextBoxX = this.leftNameTextBox.x + this.portraitMarginX;
+      const leftNameTextBoxY =
+        this.leftNameTextBox.y - this.margin * 3 + this.portraitMarginY;
+      this.leftPortraitAnimation.setPosition(
+        leftNameTextBoxX,
+        leftNameTextBoxY,
+      );
+      this.leftPortraitBoxImage.setPosition(leftNameTextBoxX, leftNameTextBoxY);
+    } else {
+      this.groupLeftSpeaker.getChildren().forEach((child) => {
+        child.visible = false;
+      });
+    }
+    if (this.currentChat && this.currentChat.leftPortraitName) {
+      this.leftPortraitAnimation.play({
+        key: this.currentChat.leftPortraitName,
+        repeat: -1,
+      });
+    } else {
+      this.leftPortraitAnimation.visible = false;
+      this.leftPortraitBoxImage.visible = false;
+    }
+  }
+  updateRightSpeaker() {
+    this.rightNameText.setPosition(
+      this.dialog.x +
+        this.dialog.width / 2 -
+        this.margin * 2 -
+        this.rightNameText.width -
+        this.speakerMarginX,
+      this.dialog.y -
+        this.dialogHeight / 2 -
+        this.margin / 4 +
+        this.speakerMarginY,
+    );
+    this.rightNameTextBox.setPosition(
+      this.rightNameText.x + this.rightNameText.width / 2,
+      this.rightNameText.y + this.rightNameText.height / 2 - 2,
+    );
+    this.rightNameTextBox.setSize(
+      this.rightNameText.width + this.margin,
+      this.rightNameText.height + this.margin,
+    );
+    const rightNameTextBoxX = this.rightNameTextBox.x + this.portraitMarginX;
+    const rightNameTextBoxY =
+      this.rightNameTextBox.y - this.margin * 3 + this.portraitMarginY;
+    this.rightPortraitAnimation.setPosition(
+      rightNameTextBoxX,
+      rightNameTextBoxY,
+    );
+    this.rightPortraitBoxImage.setPosition(
+      rightNameTextBoxX,
+      rightNameTextBoxY,
+    );
+    if (this.currentChat && this.currentChat.rightPortraitName) {
+      this.rightPortraitAnimation.play({
+        key: this.currentChat.rightPortraitName,
+        repeat: -1,
+      });
+    }
   }
 
   /**
@@ -560,48 +705,23 @@ export class LuminusDialogBox {
    */
   checkSpeaker() {
     this.resetSpeakersAlpha();
+    this.groupLeftSpeaker.getChildren().forEach((child) => {
+      child.visible = true;
+    });
     if (this.currentChat.left) {
-      if (this.currentChat.leftName) {
-        //this.leftNameText.visible = true;
-
-        this.groupLeftSpeaker.getChildren().forEach((child) => {
-          child.visible = true;
-        });
-        this.leftNameText.setText(` ${this.currentChat.leftName} `);
-        this.leftNameTextBox.setPosition(
-          this.leftNameText.x + this.leftNameText.width / 2,
-          this.leftNameText.y + this.leftNameText.height / 2 - 2,
-        );
-        this.leftNameTextBox.setSize(
-          this.leftNameText.width + this.margin,
-          this.leftNameText.height + this.margin,
-        );
-      } else {
-        //this.leftNameText.visible = false;
-
-        this.groupLeftSpeaker.getChildren().forEach((child) => {
-          child.visible = false;
-        });
-      }
-      if (this.currentChat.leftPortraitName) {
-        this.leftPortraitImage.visible = true;
-        this.leftPortraitImage.setTexture(this.currentChat.leftPortraitName);
-      } else {
-        this.leftPortraitImage.visible = false;
-      }
-      //this.leftNameText.alpha = 1;
+      this.leftNameText.setText(` ${this.currentChat.leftName} `);
+      this.updateLeftSpeaker();
       this.groupLeftSpeaker.getChildren().forEach((child) => {
         child.alpha = 1;
       });
-      this.leftPortraitImage.alpha = 1;
     }
     if (this.currentChat.right) {
-      this.rightNameText.setText(` ${this.currentChat.rightName}: `);
-      this.rightPortraitImage.setTexture(this.currentChat.rightPortraitName);
-      this.rightNameText.visible = true;
-      this.rightPortraitImage.visible = true;
-      this.rightNameText.alpha = 1;
-      this.rightPortraitImage.alpha = 1;
+      this.rightNameText.setText(` ${this.currentChat.rightName} `);
+      this.updateRightSpeaker();
+      this.groupRightSpeaker.getChildren().forEach((child) => {
+        child.visible = true;
+        child.alpha = 1;
+      });
     }
     this.executeDialogueAnimations();
   }
@@ -620,34 +740,49 @@ export class LuminusDialogBox {
    */
   exitFromScene(orientation) {
     if (orientation === "right") {
-      this.scene.tweens.add({
-        targets: this.rightPortraitImage,
-        x: this.rightPortraitImage.x + 500,
-        duration: 1000,
-        onStart: () => {
-          this.rightNameText.visible = false;
-        },
-        onComplete: () => {
-          this.rightPortraitImage.visible = false;
-          this.rightPortraitImage.x = this.rightPortraitImage.x - 500;
-        },
+      this.groupRightSpeaker.getChildren().forEach((child) => {
+        if (
+          child === this.rightPortraitAnimation ||
+          child === this.rightPortraitBoxImage
+        ) {
+          this.scene.tweens.add({
+            targets: child,
+            x: child.x + 500,
+            duration: 1000,
+            onStart: () => {
+              child.visible = true;
+            },
+            onComplete: () => {
+              child.visible = false;
+              child.x = child.x - 500;
+            },
+          });
+        } else {
+          child.visible = false;
+        }
       });
     }
     if (orientation === "left") {
-      this.scene.tweens.add({
-        targets: this.leftPortraitImage,
-        x: this.leftPortraitImage.x - 500,
-        duration: 1000,
-        onStart: () => {
-          //this.leftNameText.visible = false;
-          this.groupLeftSpeaker.getChildren().forEach((child) => {
-            child.visible = false;
+      this.groupLeftSpeaker.getChildren().forEach((child) => {
+        if (
+          child === this.leftPortraitAnimation ||
+          child === this.leftPortraitBoxImage
+        ) {
+          this.scene.tweens.add({
+            targets: child,
+            x: child.x - 500,
+            duration: 1000,
+            onStart: () => {
+              child.visible = true;
+            },
+            onComplete: () => {
+              child.visible = false;
+              child.x = child.x + 500;
+            },
           });
-        },
-        onComplete: () => {
-          this.leftPortraitImage.visible = false;
-          this.leftPortraitImage.x = this.leftPortraitImage.x + 500;
-        },
+        } else {
+          child.visible = false;
+        }
       });
     }
   }
@@ -704,13 +839,12 @@ export class LuminusDialogBox {
       this.luminusVideoOpener.checkHasVideo(this.allProperties);
       this.dialog.visible = false;
       // this.exitFromScene('left');
-      this.leftPortraitImage.visible = false;
       //this.leftNameText.visible = false;
       this.groupLeftSpeaker.getChildren().forEach((child) => {
         child.visible = false;
       });
-      this.rightPortraitImage.visible = false;
-      this.rightNameText.visible = false;
+      //this.rightPortraitImage.visible = false;
+      //this.rightNameText.visible = false;
       // this.exitFromScene('right');
       this.canShowDialog = true;
       this.actionButton.visible = false;
@@ -814,7 +948,9 @@ export class LuminusDialogBox {
         loop: true,
       });
     } else {
-      if (this.timedEvent) this.timedEvent.remove();
+      if (this.timedEvent) {
+        this.timedEvent.remove();
+      }
       this.isAnimatingText = false;
       this.dialog.textMessage.text = text;
     }
@@ -835,6 +971,8 @@ export class LuminusDialogBox {
     if (this.eventCounter === this.animationText.length) {
       this.isAnimatingText = false;
       this.timedEvent.remove();
+      this.leftPortraitAnimation.stop();
+      this.rightPortraitAnimation.stop();
     }
   }
 
@@ -877,6 +1015,7 @@ export class LuminusDialogBox {
    * @param { number } width new Width.
    * @param { number } height new Height.
    */
+  //My ToDo
   resizeComponents(width, height) {
     if (width !== 0 && height !== 0 && this.player && this.player.active) {
       this.interactionIcon.setPosition(
@@ -887,47 +1026,27 @@ export class LuminusDialogBox {
       this.cameraWidth = width;
       this.cameraHeight = height;
       this.textWidth = this.cameraWidth - this.margin * 3;
-      this.dialog.x = this.margin;
+      this.dialog.x = this.cameraWidth / 2;
       this.dialog.y = this.cameraHeight - this.dialogHeight - this.margin; // this is the starting x/y location
       //this.dialog.resize(this.cameraWidth - this.margin * 2, this.dialogHeight);
       this.dialog.setSize(
-        this.cameraWidth - this.margin * 2,
+        this.cameraWidth / this.dialogWidthMargin,
         this.dialogHeight,
       );
 
       this.actionButton.x = this.cameraWidth - this.margin * 4;
       this.actionButton.y = this.cameraHeight - this.margin * 3;
 
-      this.leftPortraitImage.setPosition(
-        this.dialog.x + this.dialog.scaleX * 100,
-        this.dialog.y - this.dialog.scaleY * 60,
-      );
-      //this.leftNameText.setPosition(
-      //  this.dialog.x + this.margin,
-      //  this.dialog.y + this.dialog.scaleY * 20,
-      //);
-      this.leftNameText.setPosition(
-        this.dialog.x + this.margin * 3.5,
-        this.dialog.y - this.dialogHeight / 2 - this.margin / 4,
-      );
-
-      this.rightPortraitImage.setPosition(
-        this.dialog.x + this.dialog.width * this.dialog.scaleX - 100,
-        this.dialog.y - this.dialog.scaleY * 60,
-      );
-      this.rightNameText.setPosition(
-        this.dialog.x + this.dialog.width * this.dialog.scaleX - this.margin,
-        this.dialog.y + this.dialog.scaleY * 20,
-      );
+      this.updateLeftSpeaker();
+      this.updateRightSpeaker();
       if (this.dialog.textMessage && this.dialog.textMessage.visible) {
         this.dialog.textMessage.setPosition(
-          this.dialog.textMessage.x,
-          //this.leftNameText.y + 30,
-          this.groupLeftSpeaker.y + 30,
+          this.dialog.x - this.dialog.width / 2 + this.margin * 2,
+          this.dialog.y - this.dialogHeight / 2 + this.margin * 2.5,
         );
         this.dialog.textMessage.setStyle({
           wordWrap: {
-            width: this.textWidth,
+            width: this.dialog.width - this.margin * 2,
           },
           wordWrapUseAdvanced: false,
           fontSize: this.fontSize,
@@ -948,12 +1067,12 @@ export class LuminusDialogBox {
   createText() {
     this.dialog.textMessage = this.scene.add
       .text(
-        this.margin * 2,
-        this.cameraHeight + this.margin * 2.5 - this.dialogHeight,
+        this.dialog.x - this.dialog.width / 2 + this.margin * 2,
+        this.dialog.y - this.dialogHeight / 2 + this.margin * 2.5,
         "",
         {
           wordWrap: {
-            width: this.textWidth,
+            width: this.dialog.width - this.margin * 2,
           },
           fontSize: this.fontSize,
           maxLines: this.dialogMaxLines,
