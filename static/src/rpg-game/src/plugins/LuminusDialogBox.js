@@ -991,7 +991,7 @@ export class LuminusDialogBox {
     if (animate) {
       this.isAnimatingText = true;
       this.timedEvent = this.scene.time.addEvent({
-        delay: Math.floor(20),
+        delay: Math.floor(this.dialogSpeed),
 
         callback: this.animateText,
         callbackScope: this,
@@ -1004,7 +1004,7 @@ export class LuminusDialogBox {
       this.dialog.textMessage.setText("");
 
       this.timedEvent = this.scene.time.addEvent({
-        delay: Math.floor(1),
+        delay: 0.1,
 
         callback: this.animateText,
         callbackScope: this,
@@ -1012,7 +1012,6 @@ export class LuminusDialogBox {
       });
 
       this.isAnimatingText = false;
-      //this.dialog.textMessage.text = text;
     }
     this.interactiveDialog.interactionTextPositionCalculation();
   }

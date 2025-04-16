@@ -125,12 +125,22 @@ export class InteractiveDialog {
     //}
   }
   showTranslationBox(element, textObject) {
-    console.log("showTranslationBox");
+    this.graphics = this.dialogBox.scene.add.graphics();
+    this.graphics.lineStyle(2, 0xff0000, 1);
+    //console.log(element);
+    this.graphics
+      .strokeRect(
+        element.positionX,
+        element.positionY,
+        textObject.width,
+        textObject.height,
+      )
+      .setDepth(99999999999999999);
     const btn = textObject;
-    //btn.setInteractive({ useHandCursor: true });
-    //btn.on("pointerover", () => {
-    //  console.log(element);
-    //});
+    btn.setInteractive({ useHandCursor: true });
+    btn.on("pointerover", () => {
+      console.log(element);
+    });
   }
   createDictionaryBtn(element, textObject) {
     const btn = textObject.setStyle({
@@ -166,9 +176,13 @@ export class InteractiveDialog {
       this.interactionTextObjects.push(textObject);
       this.interactionTextObjects.push(rightTextObject);
       const tempText = this.createHiddentTextObject(0);
-      const interactiveTextWidth = tempText.setText(element.message).width;
+      const tempInteractiveText = tempText.setText(element.message);
+      //console.log(
+      //  tempInteractiveText.width + element.positionX,
+      //  this.dialogBox.dialog.width - this.dialogBox.margin * 2,
+      //);
       if (
-        interactiveTextWidth + element.positionX >=
+        tempInteractiveText.width + element.positionX >=
         this.dialogBox.dialog.width - this.dialogBox.margin * 2
       ) {
         const words = tempText.text.split(/\s+/);
@@ -178,29 +192,27 @@ export class InteractiveDialog {
           const rightPart = words.slice(splitIndex).join(" ");
           const leftWidth = tempText.setText(leftPart).width;
           if (
-            element.type !== "image" &&
-            element.type !== "video" &&
             leftWidth + element.positionX <=
-              this.dialogBox.startTextMessageX +
-                this.dialogBox.dialog.width -
-                this.dialogBox.margin * 2
+            this.dialogBox.startTextMessageX +
+              this.dialogBox.dialog.width -
+              this.dialogBox.margin * 2
           ) {
             textObject.setText(leftPart);
             rightTextObject.setText(rightPart);
             rightTextObject.setX(this.dialogBox.startTextMessageX);
-            rightTextObject.setY(
-              element.positionY +
-                this.dialogBox.fontSize +
-                this.dialogBox.Size / 4,
-            );
+            rightTextObject.setY(element.positionY + this.dialogBox.fontSize);
+
             break;
           }
         }
       } else {
-        element.type !== "image" &&
-          element.type !== "video" &&
-          textObject.setText(element.message);
+        textObject.setText(element.message);
       }
+      let tempTextObject = tempText.setText(element.message);
+      textObject.setFixedSize(tempTextObject.width, tempTextObject.height);
+      tempTextObject.destroy();
+
+      tempInteractiveText.destroy();
       if (element.type === "important") {
         const importStyle = {
           color: "#af7ac5",
@@ -210,6 +222,7 @@ export class InteractiveDialog {
         };
         textObject.setStyle(importStyle);
         if (rightTextObject.text !== "") {
+          console.log("888", rightTextObject.text);
           rightTextObject.setStyle(importStyle);
         }
       } else if (element.type === "dictionary") {

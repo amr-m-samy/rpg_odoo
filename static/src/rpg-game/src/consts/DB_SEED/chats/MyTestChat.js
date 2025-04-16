@@ -20,7 +20,7 @@ export default {
         {
           name: "Starred Agama Lizard",
           interactiveMessage:
-            "I found a type of lizard named **Starred Agama Lizard** that lives in [**desert**].",
+            "I found a type of lizard named **##Starred Agama Lizard##** that lives in [**desert**].",
           originalMessage:
             "I found a type of lizard named Starred Agama Lizard that lives in desert.",
           translatedMessage:
