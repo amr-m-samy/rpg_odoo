@@ -14,6 +14,8 @@ import { MainMenuScene } from "../scenes/MainMenuScene";
 import { AttributeScene } from "../scenes/AttributeScene";
 import { AnimationScene } from "../scenes/AnimationScene";
 import { ForTestScene } from "../scenes/ForTestScene";
+import { ImagePreviewScene } from "../scenes/ImagePreviewScene";
+import { DictionaryScene } from "../scenes/DictionaryScene";
 
 export default function PreloadScenes() {
   return [
@@ -27,6 +29,8 @@ export default function PreloadScenes() {
     MainMenuScene,
     AnimationScene,
     ForTestScene,
+    ImagePreviewScene,
+    DictionaryScene,
 
     // UI Scenes should be loaded after the game Scenes.
     JoystickScene,

@@ -137,6 +137,7 @@ import tile_demo16x16_48_json from "../assets/maps/demo16x16_48/demo16x16_48.jso
 import Room_Builder_16x16_48_free_ext from "../assets/sprites/Room_Builder_16x16_48_free_ext.png";
 import generic_room_16x16_48 from "../assets/sprites/generic_room_16x16_48.png";
 import portrait_box from "../assets/sprites/portrait_box.png";
+import agama from "../assets/sprites/agama.png";
 
 export const Images = [
     {name: "tiles", image: tiles},
@@ -216,7 +217,8 @@ export const Images = [
     {name: "Generic_Home_1_Layer_2_48x48", image: Generic_Home_1_Layer_2_48x48},
     {name: "Room_Builder_16x16_48_free_ext", image: Room_Builder_16x16_48_free_ext},
     {name: "generic_room_16x16_48", image: generic_room_16x16_48},
-    {name: "portrait_box", image: portrait_box}
+    {name: "portrait_box", image: portrait_box},
+    {name: "agama", image: agama}
 ];;
 
 export const Audios = [

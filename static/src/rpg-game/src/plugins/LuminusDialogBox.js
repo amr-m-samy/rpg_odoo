@@ -4,7 +4,7 @@ import { Player } from "../entities/Player";
 import { LuminusTypingSoundManager } from "./LuminusTypingSoundManager";
 import { LuminusVideoOpener } from "./LuminusVideoOpener";
 import { dialogBoxConfig } from "../consts/DialogBoxConfig";
-
+import { InteractiveDialog } from "./InteractiveDialog";
 /**
  * @class
  */
@@ -74,7 +74,8 @@ export class LuminusDialogBox {
      * @type { number }
      * @default
      *   */
-    this.dialogWidthMargin = 1.2;
+    this.dialogWidthFactor = 1.05;
+    this.dialogMobileFactor = 1;
     this.dialogHeight = this.dialogBoxConfig.dialogHeight; // 150; // Dialog Height
     /**
      * Margin of the dialog. Used to make spaces in the dialog.
@@ -327,6 +328,12 @@ export class LuminusDialogBox {
     this.speakerMarginY = 0;
     this.portraitMarginX = 0;
     this.portraitMarginY = 0;
+
+    this.startTextMessageX = 0;
+    this.startTextMessageY = 0;
+    this.interactiveDialog = new InteractiveDialog(this);
+
+    this.animationTextBuffer = [];
   }
 
   create() {
@@ -334,8 +341,34 @@ export class LuminusDialogBox {
     this.luminusTypingSoundManager.create();
     // First thing to do is to check if it's mobile.
     this.isMobile = !this.scene.sys.game.device.os.desktop ? true : false;
+    if (this.isMobile) {
+      this.dialogMobileFactor = 1.5;
+      this.dialogWidthFactor = 1.05;
+    } else {
+      this.dialogWidthFactor = 1.2;
+    }
+    if (this.cameraWidth < 1200 && !this.isMobile) {
+      this.fontSize = this.cameraWidth / 60;
+      this.fontWidth = this.fontSize - this.dialogBoxConfig.fontWidthMargin;
+      this.dialogWidthFactor = 1.05;
+    }
+    if (this.cameraWidth < 1000 && !this.isMobile) {
+      this.fontSize = this.cameraWidth / 50;
+      this.fontWidth = this.fontSize - this.dialogBoxConfig.fontWidthMargin;
+      this.dialogWidthFactor = 1.05;
+    }
+    if (this.cameraWidth < 500 && !this.isMobile) {
+      this.fontSize = this.cameraWidth / 40;
+      this.fontWidth = this.fontSize - this.dialogBoxConfig.fontWidthMargin;
+      this.dialogWidthFactor = 1.05;
+    }
 
     this.createDialogueBox();
+
+    this.startTextMessageX =
+      this.dialog.x - this.dialog.width / 2 + this.margin * 2;
+    this.startTextMessageY =
+      this.dialog.y - this.dialogHeight / 2 + this.margin * 2.5;
     this.createInteractionButtons();
     this.createDialogueElements();
 
@@ -357,7 +390,7 @@ export class LuminusDialogBox {
       this.leftNameText = this.scene.add
         .text(
           this.dialog.x > this.dialog.width / 2
-            ? this.dialog.x - this.dialog.width / 2 + this.margin * 2
+            ? this.startTextMessageX
             : this.dialog.width / 2 - this.dialog.x + this.margin * 3.5,
           this.dialog.y - this.dialogHeight / 2 - this.margin / 4,
           ` ${this.leftName} `,
@@ -533,7 +566,7 @@ export class LuminusDialogBox {
       .sprite(
         this.scene.cameras.main.midPoint.x,
         this.scene.cameras.main.midPoint.y -
-          this.player.container.body.height * 2.5,
+          this.player.container.body.height / 2,
         this.interactionSpriteName,
       )
       .setDepth(99999)
@@ -579,10 +612,10 @@ export class LuminusDialogBox {
   createDialogueBox() {
     this.dialog = this.scene.add.nineslice(
       this.cameraWidth / 2,
-      this.cameraHeight - this.dialogHeight,
+      this.cameraHeight - this.dialogHeight / this.dialogMobileFactor,
       this.dialogSpriteName,
       0,
-      this.cameraWidth / this.dialogWidthMargin,
+      this.cameraWidth / this.dialogWidthFactor,
       this.dialogHeight,
       this.nineSliceLeftArea,
       this.nineSliceRightArea,
@@ -805,7 +838,7 @@ export class LuminusDialogBox {
       this.player.container.body.maxSpeed = 0;
     } else if (this.isAnimatingText && this.checkButtonsPressed()) {
       // Skips the typping animation.
-      this.setText(this.pagesMessage[this.currentPage], false);
+      this.setText(this.pagesMessage[this.currentPage], false); // my change
     } else if (
       !this.isAnimatingText &&
       this.currentPage !== this.pagesNumber - 1 &&
@@ -838,14 +871,10 @@ export class LuminusDialogBox {
       this.dialog.textMessage.destroy();
       this.luminusVideoOpener.checkHasVideo(this.allProperties);
       this.dialog.visible = false;
-      // this.exitFromScene('left');
-      //this.leftNameText.visible = false;
       this.groupLeftSpeaker.getChildren().forEach((child) => {
         child.visible = false;
       });
-      //this.rightPortraitImage.visible = false;
-      //this.rightNameText.visible = false;
-      // this.exitFromScene('right');
+
       this.canShowDialog = true;
       this.actionButton.visible = false;
       this.interactionIcon.visible = false;
@@ -889,37 +918,33 @@ export class LuminusDialogBox {
     this.dialog.visible = true;
     this.canShowDialog = false;
     const maxLettersPage =
-      Math.floor(this.textWidth / this.fontWidth) * this.dialogMaxLines;
-    this.pagesNumber = Math.ceil(this.dialogMessage.length / maxLettersPage);
+      Math.floor(this.dialog.width / this.fontWidth) * this.dialogMaxLines;
     this.pagesMessage = [];
-    let lettersOffset = 0;
-    for (let i = 0; i < this.pagesNumber; i++) {
-      let localText = this.dialogMessage.substr(
-        i * maxLettersPage - lettersOffset,
-        maxLettersPage,
-      );
+    let sumMessagesLength = 0;
+    let pageMessage = "";
+    for (let i = 0; i < this.dialogMessage.length; i++) {
+      const message = this.dialogMessage[i];
+      const messageLength = message.originalMessageLength;
 
-      let localMaxLength = localText.length;
-      // Check for whole letter so it doesn't break final words.
-      let ready = true;
-      if (this.pagesNumber !== i + 1) {
-        for (let i = localText.length - 1; i === 0 || ready; i--) {
-          if (localText[i] === "" || localText[i] === " ") {
-            ready = false;
-            localMaxLength = i;
-            break;
-          }
-          lettersOffset++;
-        }
+      if (sumMessagesLength + messageLength <= maxLettersPage) {
+        sumMessagesLength += messageLength;
+        pageMessage += message.interactiveMessage + " ";
+      } else {
+        this.pagesMessage.push(pageMessage.trim());
+        pageMessage = message.interactiveMessage + " ";
+        sumMessagesLength = messageLength;
       }
-      let offset = 0;
-      if (i != 0) {
-        offset = lettersOffset;
+
+      if (i === this.dialogMessage.length - 1) {
+        this.pagesMessage.push(pageMessage.trim());
       }
-      this.pagesMessage.push(
-        this.dialogMessage.substr(i * maxLettersPage - offset, localMaxLength),
-      );
     }
+    // if this.dialogMessage.length =1 or if all the messages are in the same page
+    if (this.pagesMessage.length === 0) {
+      this.pagesMessage.push(pageMessage);
+    }
+
+    this.pagesNumber = this.pagesMessage.length;
     if (createText) this.createText();
     // Animates the text
     this.setText(this.pagesMessage[0], true);
@@ -931,18 +956,43 @@ export class LuminusDialogBox {
    * @param { boolean } animate Rather it should animate the text or not. If it's false, it will stop the animation text in process.
    */
   setText(text, animate = false) {
+    // in case of interaction text is separated in 2 dialog pages one is on the last word of the first page and the other is on the first of the second page
+    if (this.interactiveDialog.interactionText) {
+      const lastElement = this.interactiveDialog.interactionText.length - 1;
+      if (
+        lastElement >= 0 &&
+        !this.interactiveDialog.interactionText[lastElement].isEnd
+      ) {
+        text =
+          this.interactiveDialog.interactionText[lastElement].delimiter +
+          this.interactiveDialog.interactionText[lastElement].message +
+          " " +
+          text;
+      }
+    }
     // Reset the dialog
     this.eventCounter = 0;
+
+    this.animationTextTime = 1;
+    this.interactiveDialog.interactionText = [];
+
     this.animationText = text.split("");
+    if (this.animationTextBuffer.length > 0) {
+      this.animationText.splice(0, 0, ...this.animationTextBuffer);
+      this.animationTextBuffer = [];
+    }
     if (this.timedEvent) this.timedEvent.remove();
 
-    // var tempText = animate ? '' : text;
-    // this.setText(tempText);
+    this.interactiveDialog.interactionTextObjects &&
+      this.interactiveDialog.interactionTextObjects.forEach((element) => {
+        element.destroy();
+      });
 
     if (animate) {
       this.isAnimatingText = true;
       this.timedEvent = this.scene.time.addEvent({
-        delay: Math.floor(1000 / this.dialogSpeed),
+        delay: Math.floor(20),
+
         callback: this.animateText,
         callbackScope: this,
         loop: true,
@@ -951,9 +1001,20 @@ export class LuminusDialogBox {
       if (this.timedEvent) {
         this.timedEvent.remove();
       }
+      this.dialog.textMessage.setText("");
+
+      this.timedEvent = this.scene.time.addEvent({
+        delay: Math.floor(1),
+
+        callback: this.animateText,
+        callbackScope: this,
+        loop: true,
+      });
+
       this.isAnimatingText = false;
-      this.dialog.textMessage.text = text;
+      //this.dialog.textMessage.text = text;
     }
+    this.interactiveDialog.interactionTextPositionCalculation();
   }
 
   /**
@@ -961,18 +1022,41 @@ export class LuminusDialogBox {
    * */
   animateText() {
     this.eventCounter++;
-    this.dialog.textMessage.setText(
-      this.dialog.textMessage.text + this.animationText[this.eventCounter - 1],
+    const i = this.eventCounter - 1;
+    const message = this.animationText
+      .slice(i, this.animationText.length)
+      .join("");
+
+    const isInteractive = this.interactiveDialog.parseInteractiveMessage(
+      message,
+      i,
     );
-    this.luminusTypingSoundManager.type(
-      this.animationText[this.eventCounter - 1],
-    );
-    // Stops the text animation.
-    if (this.eventCounter === this.animationText.length) {
+    if (isInteractive) {
+      this.eventCounter--;
+      return;
+    }
+
+    if (this.animationText[this.eventCounter - 1]) {
+      this.dialog.textMessage.setText(
+        this.dialog.textMessage.text +
+          this.animationText[this.eventCounter - 1],
+      );
+    }
+
+    //// Stops the text animation.
+    if (this.eventCounter > this.animationText.length) {
       this.isAnimatingText = false;
       this.timedEvent.remove();
       this.leftPortraitAnimation.stop();
       this.rightPortraitAnimation.stop();
+
+      // because of fast delay don't destroy the interaction objects
+      this.interactiveDialog.interactionTextObjects &&
+        this.interactiveDialog.interactionTextObjects.forEach((element) => {
+          element.destroy();
+        });
+
+      this.interactiveDialog.interactionTextPositionCalculation();
     }
   }
 
@@ -1027,10 +1111,12 @@ export class LuminusDialogBox {
       this.cameraHeight = height;
       this.textWidth = this.cameraWidth - this.margin * 3;
       this.dialog.x = this.cameraWidth / 2;
-      this.dialog.y = this.cameraHeight - this.dialogHeight - this.margin; // this is the starting x/y location
+      this.dialog.y =
+        (this.cameraHeight - this.dialogHeight - this.margin) /
+        this.dialogMobileFactor; // this is the starting x/y location
       //this.dialog.resize(this.cameraWidth - this.margin * 2, this.dialogHeight);
       this.dialog.setSize(
-        this.cameraWidth / this.dialogWidthMargin,
+        this.cameraWidth / this.dialogWidthFactor,
         this.dialogHeight,
       );
 
@@ -1041,8 +1127,8 @@ export class LuminusDialogBox {
       this.updateRightSpeaker();
       if (this.dialog.textMessage && this.dialog.textMessage.visible) {
         this.dialog.textMessage.setPosition(
-          this.dialog.x - this.dialog.width / 2 + this.margin * 2,
-          this.dialog.y - this.dialogHeight / 2 + this.margin * 2.5,
+          this.startTextMessageX,
+          this.startTextMessageY,
         );
         this.dialog.textMessage.setStyle({
           wordWrap: {
@@ -1066,21 +1152,16 @@ export class LuminusDialogBox {
    */
   createText() {
     this.dialog.textMessage = this.scene.add
-      .text(
-        this.dialog.x - this.dialog.width / 2 + this.margin * 2,
-        this.dialog.y - this.dialogHeight / 2 + this.margin * 2.5,
-        "",
-        {
-          wordWrap: {
-            width: this.dialog.width - this.margin * 2,
-          },
-          fontSize: this.fontSize,
-          maxLines: this.dialogMaxLines,
-          letterSpacing: this.letterSpacing,
-          fontFamily: this.fontFamily,
-          color: this.fontColor,
+      .text(this.startTextMessageX, this.startTextMessageY, "", {
+        wordWrap: {
+          width: this.dialog.width - this.margin * 2,
         },
-      )
+        fontSize: this.fontSize,
+        maxLines: this.dialogMaxLines,
+        letterSpacing: this.letterSpacing,
+        fontFamily: this.fontFamily,
+        color: this.fontColor,
+      })
       .setScrollFactor(0, 0)
       .setDepth(99999999999999999)
       .setFixedSize(this.cameraWidth - this.margin * 3, this.dialogHeight);
