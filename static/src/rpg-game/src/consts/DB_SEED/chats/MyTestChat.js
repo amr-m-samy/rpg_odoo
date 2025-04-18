@@ -9,7 +9,7 @@ export default {
         {
           name: "Safari",
           interactiveMessage:
-            "In the the last [##weekend##] I was in safari in Siwa [Oasis],",
+            "In the the last weekend I was in safari in Siwa [Oasis],",
           originalMessage:
             "In the last weekend I was in safari in Siwa desert,",
           translatedMessage:
@@ -20,7 +20,7 @@ export default {
         {
           name: "Starred Agama Lizard",
           interactiveMessage:
-            "I found a type of lizard named **##Starred Agama Lizard##** that lives in [**desert**].",
+            "**I found a type of lizard** named [**Starred Agama Lizard**] that lives in [**desert**].",
           originalMessage:
             "I found a type of lizard named Starred Agama Lizard that lives in desert.",
           translatedMessage:
@@ -58,7 +58,7 @@ export default {
         {
           name: "Greating",
           interactiveMessage:
-            "Salamo Alaikom, **Mr Shiref**. Can I **ask** you some ##questions##?",
+            "Salamo Alaikom, **Mr Shiref**. Can I [**ask**] you some ##questions##?",
           originalMessage:
             "Salamo Alaikom, Mr Shiref. Can I ask you some questions?",
           translatedMessage:

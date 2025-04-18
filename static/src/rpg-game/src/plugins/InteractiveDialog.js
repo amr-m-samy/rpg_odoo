@@ -1,12 +1,24 @@
 import { words } from "lodash";
+import { InfoBox } from "../components/InfoBox";
 
 export class InteractiveDialog {
   constructor(dialogBox) {
     this.dialogBox = dialogBox;
     this.interactionText = null;
     this.interactionTextObjects = null;
+    this.translatePanel = null;
+    this.translateIcon = null;
+    this.hiddenText = null;
   }
 
+  dictionary(word) {
+    const dictionary = this.dialogBox.dictionary;
+    if (dictionary[word.toLowerCase()]) {
+      return dictionary[word.toLowerCase()];
+    } else {
+      return null;
+    }
+  }
   splitString(input) {
     // Regular expression to match **any characters** or ##any characters##
     const regex = /(\*\*.*?\*\*|##.*?##)/g;
@@ -29,6 +41,7 @@ export class InteractiveDialog {
   ) {
     let tempMessage = "";
     let startIndex = delimiter.length;
+
     let isEnd = true;
     let originalMessageLength = 0;
 
@@ -59,7 +72,6 @@ export class InteractiveDialog {
         true,
       ).message;
     }
-
     return {
       message: tempMessage,
       type: type,
@@ -124,24 +136,81 @@ export class InteractiveDialog {
     //  this.dialogBox.actionButton.on("down", (b) => this.dialogBox.image.destroy());
     //}
   }
+
+  createInfoBox(interactionDate, interactionObject) {
+    const dictionary = this.dictionary(interactionDate.message);
+    if (!dictionary) {
+      return;
+    }
+    const imageName = dictionary.image || "";
+    const translatedMessage = dictionary.translatedMessage || "";
+    this.translatePanel = new InfoBox(
+      this.dialogBox.scene,
+      interactionObject.x,
+      interactionObject.y - 200,
+      200,
+      200,
+      {
+        name: dictionary.name,
+        translate: translatedMessage,
+        description: dictionary.description,
+        image: imageName,
+        //description: interactionText.tem.description,
+      },
+    );
+  }
+
+  destroyTranslationPanel() {
+    if (this.translatePanel) {
+      this.translatePanel.backgroundSprite.destroy();
+      this.translatePanel.name.destroy();
+      if (this.translatePanel.description) {
+        this.translatePanel.description.destroy();
+      }
+      if (this.translatePanel.image) {
+        this.translatePanel.image.destroy();
+      }
+      if (this.translatePanel.translate) {
+        this.translatePanel.translate.destroy();
+      }
+      this.translatePanel = null;
+    }
+  }
   showTranslationBox(element, textObject) {
-    this.graphics = this.dialogBox.scene.add.graphics();
-    this.graphics.lineStyle(2, 0xff0000, 1);
-    //console.log(element);
-    this.graphics
-      .strokeRect(
-        element.positionX,
-        element.positionY,
-        textObject.width,
-        textObject.height,
+    //this.graphics = this.dialogBox.scene.add.graphics();
+    //this.graphics.lineStyle(2, 0xff0000, 1);
+    ////console.log(element);
+    //this.graphics
+    //  .strokeRect(
+    //    element.positionX,
+    //    element.positionY,
+    //    textObject.width,
+    //    textObject.height,
+    //  )
+    //  .setDepth(99999999999999999);
+    const translateIconX = element.rightTextObjectX || element.positionX;
+    const translateIconY = element.rightTextObjectY || element.positionY;
+    this.translateIcon = this.dialogBox.scene.add
+      .image(
+        translateIconX + textObject.width + 4,
+        translateIconY - 4,
+        "translate_icon",
       )
-      .setDepth(99999999999999999);
-    const btn = textObject;
+      .setScale(0.5)
+      .setDepth(999999999);
+    this.interactionTextObjects.push(this.translateIcon);
+    textObject.text = "";
+    const btn = this.translateIcon;
     btn.setInteractive({ useHandCursor: true });
     btn.on("pointerover", () => {
-      console.log(element);
+      this.createInfoBox(element, textObject);
+    });
+    btn.on("pointerout", () => {
+      this.destroyTranslationPanel();
+      //this.graphics.destroy();
     });
   }
+
   createDictionaryBtn(element, textObject) {
     const btn = textObject.setStyle({
       color: "#d35400",
@@ -175,42 +244,60 @@ export class InteractiveDialog {
       const rightTextObject = this.createTextObject();
       this.interactionTextObjects.push(textObject);
       this.interactionTextObjects.push(rightTextObject);
-      const tempText = this.createHiddentTextObject(0);
-      const tempInteractiveText = tempText.setText(element.message);
-      //console.log(
-      //  tempInteractiveText.width + element.positionX,
-      //  this.dialogBox.dialog.width - this.dialogBox.margin * 2,
-      //);
+
+      if (this.hiddenText) {
+        this.hiddenText.destroy();
+      }
+      this.hiddenText = this.createHiddentTextObject(0);
+      const tempInteractiveText = this.hiddenText.setText(element.message);
+      console.log(
+        element.message,
+        tempInteractiveText.width + element.positionX,
+        this.dialogBox.dialog.width +
+          this.dialogBox.startTextMessageX -
+          this.dialogBox.margin * 2,
+      );
       if (
         tempInteractiveText.width + element.positionX >=
-        this.dialogBox.dialog.width - this.dialogBox.margin * 2
+        this.dialogBox.cameraWidth - this.dialogBox.startTextMessageX
       ) {
-        const words = tempText.text.split(/\s+/);
+        const words = this.hiddenText.text.split(/\s+/);
         for (let i = 1; i <= words.length; i++) {
           const splitIndex = words.length - i;
           const leftPart = words.slice(0, splitIndex).join(" ");
           const rightPart = words.slice(splitIndex).join(" ");
-          const leftWidth = tempText.setText(leftPart).width;
+          const leftWidth = this.hiddenText.setText(leftPart).width;
           if (
             leftWidth + element.positionX <=
-            this.dialogBox.startTextMessageX +
-              this.dialogBox.dialog.width -
-              this.dialogBox.margin * 2
+            this.dialogBox.cameraWidth - this.dialogBox.startTextMessageX
           ) {
             textObject.setText(leftPart);
             rightTextObject.setText(rightPart);
             rightTextObject.setX(this.dialogBox.startTextMessageX);
-            rightTextObject.setY(element.positionY + this.dialogBox.fontSize);
-
+            rightTextObject.setY(
+              element.positionY +
+                this.dialogBox.fontSize +
+                this.dialogBox.lineSpacing,
+            );
             break;
           }
         }
       } else {
         textObject.setText(element.message);
       }
-      let tempTextObject = tempText.setText(element.message);
+      let tempTextObject = this.hiddenText.setText(textObject.text);
       textObject.setFixedSize(tempTextObject.width, tempTextObject.height);
+      if (rightTextObject.text !== "" && rightTextObject.text !== undefined) {
+        tempTextObject = this.hiddenText.setText(rightTextObject.text);
+        rightTextObject.setFixedSize(
+          tempTextObject.width,
+          tempTextObject.height,
+        );
+      }
+
       tempTextObject.destroy();
+      //tempTextObject = tempText.setText(rightTextObject.text);
+      ////rightTextObject.setFixedSize(tempTextObject.width, tempTextObject.height);
 
       tempInteractiveText.destroy();
       if (element.type === "important") {
@@ -222,7 +309,6 @@ export class InteractiveDialog {
         };
         textObject.setStyle(importStyle);
         if (rightTextObject.text !== "") {
-          console.log("888", rightTextObject.text);
           rightTextObject.setStyle(importStyle);
         }
       } else if (element.type === "dictionary") {
@@ -237,7 +323,14 @@ export class InteractiveDialog {
       } else if (element.type === "video") {
         this.showVideo(element.message);
       } else if (element.type === "translation") {
-        this.showTranslationBox(element, textObject);
+        //console.log(rightTextObject.text);
+        if (rightTextObject.text !== "") {
+          element.rightTextObjectX = this.dialogBox.startTextMessageX;
+          element.rightTextObjectY = rightTextObject.y;
+          this.showTranslationBox(element, rightTextObject);
+        } else {
+          this.showTranslationBox(element, textObject);
+        }
         //const translationStyle = {
         //  color: "#d35400",
         //  fontStyle: "bold",
@@ -249,9 +342,6 @@ export class InteractiveDialog {
         //  .strokeRectShape(textObject.getBounds())
         //  .setDepth(99999999999999999);
         //textObject.setStyle(translationStyle);
-        //if (rightTextObject.text !== "") {
-        //  rightTextObject.setStyle(translationStyle);
-        //}
       }
       textObject.setX(element.positionX);
       textObject.setY(element.positionY - 2);
@@ -288,14 +378,18 @@ export class InteractiveDialog {
 
     const wrappedTextLength =
       this.dialogBox.dialog.textMessage.getWrappedText().length;
-    let hiddenText = this.createHiddentTextObject(wrappedTextLength - 1);
-    hiddenText.setText(
+
+    if (this.hiddenText) {
+      this.hiddenText.destroy();
+    }
+    this.hiddenText = this.createHiddentTextObject(wrappedTextLength - 1);
+    this.hiddenText.setText(
       this.dialogBox.dialog.textMessage.getWrappedText()[wrappedTextLength - 1],
     );
 
     animationText.splice(i, delimiter.length);
-    const posX = hiddenText.x + hiddenText.width;
-    const posY = hiddenText.y;
+    const posX = this.hiddenText.x + this.hiddenText.width;
+    const posY = this.hiddenText.y;
     const result = this.extractText(
       message,
       delimiter,
@@ -334,8 +428,10 @@ export class InteractiveDialog {
         this.dialogBox.dialog.y -
           this.dialogBox.dialogHeight / 2 +
           this.dialogBox.margin * 2.5 +
-          (this.dialogBox.fontSize + this.dialogBox.fontSize / 4) * lineNumber,
-
+          (this.dialogBox.fontSize +
+            this.dialogBox.fontSize / 5 +
+            this.dialogBox.lineSpacing) *
+            lineNumber,
         "",
         {
           wordWrap: {
@@ -346,6 +442,7 @@ export class InteractiveDialog {
           letterSpacing: this.dialogBox.letterSpacing,
           fontFamily: this.dialogBox.fontFamily,
           color: "#0eefff",
+          lineSpacing: this.dialogBox.lineSpacing,
         },
       )
       .setDepth(999999999999999999)
@@ -370,6 +467,7 @@ export class InteractiveDialog {
           letterSpacing: this.dialogBox.letterSpacing,
           fontFamily: this.dialogBox.fontFamily,
           color: this.dialogBox.fontColor,
+          lineSpacing: this.dialogBox.lineSpacing,
         },
       )
       .setScrollFactor(0, 0)

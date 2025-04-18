@@ -60,7 +60,7 @@ export default function SceneInfo(sceneName) {
     },
     demo16x16_48test: {
       mapName: 'demo16x16_48',
-      zoom: 0.8,
+      zoom: 1.2,
       isSound: false,
       tileImages: [
         new TilesetImageConfig('collision', 'collision_tiles'),

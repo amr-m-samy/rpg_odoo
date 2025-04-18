@@ -138,6 +138,8 @@ import Room_Builder_16x16_48_free_ext from "../assets/sprites/Room_Builder_16x16
 import generic_room_16x16_48 from "../assets/sprites/generic_room_16x16_48.png";
 import portrait_box from "../assets/sprites/portrait_box.png";
 import agama from "../assets/sprites/agama.png";
+import translate_icon from "../assets/sprites/translate_icon.png";
+import agama_lizard_vector from "../assets/sprites/agama_lizard_vector.png";
 
 export const Images = [
     {name: "tiles", image: tiles},
@@ -218,7 +220,9 @@ export const Images = [
     {name: "Room_Builder_16x16_48_free_ext", image: Room_Builder_16x16_48_free_ext},
     {name: "generic_room_16x16_48", image: generic_room_16x16_48},
     {name: "portrait_box", image: portrait_box},
-    {name: "agama", image: agama}
+    {name: "agama", image: agama},
+    {name: "translate_icon", image: translate_icon},
+    {name: "agama_lizard_vector", image: agama_lizard_vector}
 ];;
 
 export const Audios = [

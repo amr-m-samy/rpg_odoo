@@ -1,8 +1,8 @@
 export const infoBoxConfig = {
 InfoBox: {
 backgroundTexture: 'infobox_background',
-titleTextFontSize: 13,
-titleFontFamily: 'Press Start 2P',
+titleTextFontSize: 11,
+titleFontFamily: '"Press Start 2P",Monospace',
 nineSliceOffset: 10,
 },
 };

@@ -7,7 +7,7 @@ export class InfoBox {
     y,
     width,
     height,
-    config = { name: "", description: "" },
+    config = { name: "", description: "", translate, image: "" },
   ) {
     /**
      * The phaser scene that this infobox belongs.
@@ -31,6 +31,13 @@ export class InfoBox {
      * @type { Phaser.GameObjects.Text }
      */
     this.description = null;
+    /**
+     * The image displayed on the info box.
+     * @type { Phaser.GameObjects.Image }
+     */
+    this.translate = null;
+
+    this.image = null;
 
     this.x = x;
     this.y = y;
@@ -75,7 +82,8 @@ export class InfoBox {
         this.nineSliceOffset, // (optional) pixels to offset when computing the safe usage area
       )
       .setScrollFactor(0, 0)
-      .setOrigin(0, 0);
+      .setOrigin(0, 0)
+      .setDepth(9999999);
     this.backgroundSprite.alpha = 0.7;
   }
 
@@ -89,17 +97,43 @@ export class InfoBox {
       wordWrap: { width: wrap },
     });
     this.name.setOrigin(0, 0.5);
-    this.name.setScrollFactor(0, 0);
+    this.name.setScrollFactor(0, 0).setDepth(9999999);
+    if (this.config.translate) {
+      this.translate = this.scene.add
+        .text(
+          baseX + this.backgroundSprite.width - 30,
+          this.name.y + this.name.height + 10,
+          this.config.translate,
+          {
+            fontSize: 18,
+            //fontFamily: `${this.titleFontFamily}`,
+            wordWrap: { width: wrap },
+            rtl: true,
+          },
+        )
+        .setDepth(9999999);
+    }
+
     this.description = this.scene.add.text(
       baseX,
-      this.name.y + this.name.height + 10,
+      this.translate.y + this.translate.height + 10,
       this.config.description,
       {
-        fontSize: this.titleTextFontSize,
+        fontSize: this.titleTextFontSize - 2,
         fontFamily: `${this.titleFontFamily}`,
         wordWrap: { width: wrap },
       },
     );
-    this.description.setScrollFactor(0, 0);
+    this.description.setScrollFactor(0, 0).setDepth(9999999);
+    if (this.config.image) {
+      this.image = this.scene.add
+        .image(
+          baseX + this.backgroundSprite.width / 2,
+          this.description.y + this.description.height + 30,
+          this.config.image,
+        )
+        .setDepth(9999999);
+      this.image.setScale(this.backgroundSprite.width / 2 / this.image.width);
+    }
   }
 }

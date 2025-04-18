@@ -5,6 +5,8 @@ import { LuminusTypingSoundManager } from "./LuminusTypingSoundManager";
 import { LuminusVideoOpener } from "./LuminusVideoOpener";
 import { dialogBoxConfig } from "../consts/DialogBoxConfig";
 import { InteractiveDialog } from "./InteractiveDialog";
+import { Dictionary } from "../consts/DB_SEED/dictionary/dictionary.js";
+
 /**
  * @class
  */
@@ -152,6 +154,12 @@ export class LuminusDialogBox {
      *  */
     this.letterSpacing = this.dialogBoxConfig.letterSpacing; // 0
     /**
+     * Space between lines of the dialog text.
+     * @type { number }
+     * @default
+     *  */
+    this.lineSpacing = this.dialogBoxConfig.lineSpacing; // 7
+    /**
      * Width of the camera view port.
      * @type { number }
      */
@@ -279,7 +287,7 @@ export class LuminusDialogBox {
      * @type { string }
      * @default
      */
-    this.fontFamily = 'Monospace, "Press Start 2P"';
+    this.fontFamily = '"Press Start 2P",Monospace';
 
     /**
      * The Current Chat Configuration that is being displayed.
@@ -334,13 +342,16 @@ export class LuminusDialogBox {
     this.interactiveDialog = new InteractiveDialog(this);
 
     this.animationTextBuffer = [];
+
+    this.dictionary = {};
   }
 
   create() {
+    this.extractDictionary();
     this.luminusTypingSoundManager = new LuminusTypingSoundManager(this.scene);
     this.luminusTypingSoundManager.create();
     // First thing to do is to check if it's mobile.
-    this.isMobile = !this.scene.sys.game.device.os.desktop ? true : false;
+    //this.isMobile = !this.scene.sys.game.device.os.desktop ? true : false;
     if (this.isMobile) {
       this.dialogMobileFactor = 1.5;
       this.dialogWidthFactor = 1.05;
@@ -348,17 +359,17 @@ export class LuminusDialogBox {
       this.dialogWidthFactor = 1.2;
     }
     if (this.cameraWidth < 1200 && !this.isMobile) {
-      this.fontSize = this.cameraWidth / 60;
+      this.fontSize = this.cameraWidth / 70;
       this.fontWidth = this.fontSize - this.dialogBoxConfig.fontWidthMargin;
       this.dialogWidthFactor = 1.05;
     }
     if (this.cameraWidth < 1000 && !this.isMobile) {
-      this.fontSize = this.cameraWidth / 50;
+      this.fontSize = this.cameraWidth / 60;
       this.fontWidth = this.fontSize - this.dialogBoxConfig.fontWidthMargin;
       this.dialogWidthFactor = 1.05;
     }
     if (this.cameraWidth < 500 && !this.isMobile) {
-      this.fontSize = this.cameraWidth / 40;
+      this.fontSize = this.cameraWidth / 50;
       this.fontWidth = this.fontSize - this.dialogBoxConfig.fontWidthMargin;
       this.dialogWidthFactor = 1.05;
     }
@@ -385,6 +396,26 @@ export class LuminusDialogBox {
     });
   }
 
+  extractDictionary(lesson = "all") {
+    const dictionaryData = Dictionary;
+    if (lesson !== "all") {
+      //dictionaryData.forEach((element) => {
+      //  const lessonName = element[lesson];
+      //  if (lessonName) {
+      //    dictionary.push(lessonName);
+      //  }
+      //});
+      //ToDo
+    } else {
+      dictionaryData.forEach((element) => {
+        //  dictionary.push(element);
+        for (let i = 0; i < Object.keys(element).length; i++) {
+          Object.assign(this.dictionary, Object.values(element)[i]);
+        }
+      });
+    }
+    return;
+  }
   createNameText(whoTalks) {
     if (whoTalks === "left") {
       this.leftNameText = this.scene.add
@@ -1160,6 +1191,7 @@ export class LuminusDialogBox {
         letterSpacing: this.letterSpacing,
         fontFamily: this.fontFamily,
         color: this.fontColor,
+        lineSpacing: this.lineSpacing,
       })
       .setScrollFactor(0, 0)
       .setDepth(99999999999999999)
